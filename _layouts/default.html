@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+    
+    {%- if page.title == nil -%}
+      <section class="page-banner">
+        <div class="page-banner-img">
+          <div style="background-image: url(https://jeffreytse.github.io/jekyll-theme-yat/assets/images/banners/home.jpeg)"></div>
+        </div>
+        <div class="wrapper">
+          <div class="page-banner-live">
+            <div class="card">
+              <img class="card-img" src="https://www.sketchappsources.com/resources/source-image/movie-badges-jurajjurik.png" alt="The Movies Project">
+              <div class="card-body">
+                <h4>서든어택 월핵탐지기</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>
+                  <span>#ObjectDetection</span>
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img" src="https://www.sketchappsources.com/resources/source-image/movie-badges-jurajjurik.png" alt="The Movies Project">
+              <div class="card-body">
+                <h4>실시간 감정추론</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>
+                  <span>#ComputerVision</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tags-list">
+        <div class="wrapper">
+          <ul>
+            {% for tag in site.tags %}
+              <li>
+                <a href="/">{{ tag[0] }}</a>
+              </li>
+            {% endfor %}       
+          </ul>
+        </div>
+      </section>
+
+    {%- endif -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>
