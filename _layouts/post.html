@@ -3,31 +3,34 @@ layout: default
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}</p>
+  <header class="blog-header" style="background-image: url(https://www.vactualpapers.com/web/wallpapers/modern-material-design-full-hd-wallpaper-no-333/1920x1920.png)">
+    <div class="wrapper">
+        <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+        <p class="post-meta">
+          <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+            {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+            <i class="fa fa-calendar"></i>
+            {{ page.date | date: date_format }}
+          </time>
+          <ul class="post-tags">
+            {% for tag in page.tags %}
+              {% capture tag_name %}{{ tag }}{% endcapture %}
+              <li>
+                <a href="/tags/#{{ tag_name }}">
+                  <span>#{{ tag_name }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+          {%- include authors.html -%}
+    </div>
+
   </header>
 
-  <span>
-    {% for tag in page.tags %}
-      {% capture tag_name %}{{ tag }}{% endcapture %}
-      <a href="/tag/{{ tag_name }}">
-        <code class="highligher-rouge">
-          <nobr>#{{ tag_name }}</nobr>
-        </code>&nbsp;
-      </a>
-    {% endfor %}
-  </span>
-
-  <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
+  <div class="wrapper">
+    <div class="post-content e-content" itemprop="articleBody">
+      {{ content }}
+    </div>
   </div>
 
   {%- if site.disqus.shortname -%}

@@ -1,5 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-05-13T12:04:58+09:00</updated><id>/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle>1년 간 머신러닝 서비스 운영 노하우와 분석 기술자료를 모았습니다.</subtitle><entry><title type="html">머신러닝 서비스를 위한 MLOps</title><link href="/jekyll/update/2021/05/12/CV.html" rel="alternate" type="text/html" title="머신러닝 서비스를 위한 MLOps" /><published>2021-05-12T18:45:10+09:00</published><updated>2021-05-12T18:45:10+09:00</updated><id>/jekyll/update/2021/05/12/CV</id><content type="html" xml:base="/jekyll/update/2021/05/12/CV.html">&lt;p&gt;머신러닝 서비스를 위해 해야 할 첫번째 과제.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-05-13T23:17:40+09:00</updated><id>/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle>1년 간 머신러닝 서비스 운영 노하우와 분석 기술자료를 모았습니다.</subtitle><entry><title type="html">테스트 제목</title><link href="/2021/05/12/Test-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="테스트 제목" /><published>2021-05-12T18:45:10+09:00</published><updated>2021-05-12T18:45:10+09:00</updated><id>/2021/05/12/Test-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="/2021/05/12/Test-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MLOps&lt;/code&gt;&lt;/p&gt;</content><author><name>권승진</name></author><category term="jekyll" /><category term="update" /><category term="ComputerVision" /><category term="ComputerVision1" /><category term="ComputerVision2" /><category term="ComputerVision3" /><category term="ComputerVision4" /><category term="ComputerVision5" /><summary type="html">머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.</summary></entry><entry><title type="html">머신러닝 서비스를 위한 MLOps</title><link href="/jekyll/update/2021/05/12/MLOps.html" rel="alternate" type="text/html" title="머신러닝 서비스를 위한 MLOps" /><published>2021-05-12T18:45:10+09:00</published><updated>2021-05-12T18:45:10+09:00</updated><id>/jekyll/update/2021/05/12/MLOps</id><content type="html" xml:base="/jekyll/update/2021/05/12/MLOps.html">&lt;p&gt;머신러닝 서비스를 위해 해야 할 첫번째 과제.&lt;/p&gt;
+&lt;p&gt;머신러닝&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MLOps&lt;/code&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="jekyll" /><category term="update" /><category term="MLOps" /><category term="AWS" /><category term="Kubenetes" /><summary type="html">머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.머신러닝 서비스를 위해 해야 할 첫번째 과제.</summary></entry></feed>
+&lt;p&gt;’’’
+머신러닝
+‘’’&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;머신러닝&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;머신러닝&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">테스트 제목</title><link href="/2021/05/12/Test-%EA%B9%80%EB%8F%84%EC%98%81.html" rel="alternate" type="text/html" title="테스트 제목" /><published>2021-05-12T18:45:10+09:00</published><updated>2021-05-12T18:45:10+09:00</updated><id>/2021/05/12/Test-%EA%B9%80%EB%8F%84%EC%98%81</id><content type="html" xml:base="/2021/05/12/Test-%EA%B9%80%EB%8F%84%EC%98%81.html">&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;머신러닝&lt;/p&gt;
+
+&lt;p&gt;’’’
+머신러닝
+‘’’&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;머신러닝&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;머신러닝&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>김도영</name></author><category term="eda" /><category term="analysis" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">테스트 제목</title><link href="/2021/05/12/Test-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="테스트 제목" /><published>2021-05-12T18:45:10+09:00</published><updated>2021-05-12T18:45:10+09:00</updated><id>/2021/05/12/Test-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="/2021/05/12/Test-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;머신러닝&lt;/p&gt;
+
+&lt;p&gt;’’’
+머신러닝
+‘’’&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;머신러닝&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;머신러닝&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>전지호</name></author><category term="mlops" /><category term="aws" /><category term="kubenetes" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">테스트 제목</title><link href="/2021/05/12/Test-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="테스트 제목" /><published>2021-05-12T18:45:10+09:00</published><updated>2021-05-12T18:45:10+09:00</updated><id>/2021/05/12/Test-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="/2021/05/12/Test-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;머신러닝&lt;/p&gt;
+
+&lt;p&gt;’’’
+머신러닝
+‘’’&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;머신러닝&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;머신러닝&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;머신러닝&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>최혁근</name></author><category term="mnist" /><category term="computervision" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry></feed>
