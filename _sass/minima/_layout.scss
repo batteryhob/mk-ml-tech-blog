@@ -11,7 +11,7 @@
 }
 
 .site-title {
-  @include relative-font-size(1.625);
+  @include relative-font-size(1.4);
   font-weight: 300;
   line-height: $base-line-height * $base-font-size * 2.25;
   letter-spacing: -1px;
@@ -205,6 +205,11 @@
     .page-banner-live-title{
       color: #fdfdfd;
       text-shadow: 1px 1px 2px #33333355;
+      svg{
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+      }
     }
     .page-banner-live-list {
       display: flex;
@@ -224,20 +229,35 @@
           }
         }
         .card-img{
-          border-radius: 0 0 0 0;
+          width: 100%;
           height: 180px;
+          border-radius: .25rem .25rem 0 0;
         }
         .card-body{
-          padding: .75rem 1.25rem;
+          padding: 1.25rem;
           background-color: #fff;
-          border-radius: 0 0 0 0;
+          border-radius: 0 0 .25rem .25rem;
+          h4 {
+            color: $brand-color;
+            margin-bottom: 5px;
+          }
+          p{
+            font-size: 85%;
+          }
           span{
             display: inline-block;
-            padding: .25em .4em;
-            font-size: 75%;
+            padding: .4em .4em;
+            font-size: 80%;
             line-height: 1;
-            border-radius: 10rem;
-            border: 1px solid #dee2e6 !important;
+            border: 1px solid $blue-color !important;
+            border-radius: .1rem;
+            color: $blue-color;
+            transition: background-color .3s ease-out;
+            &:hover{
+              color: $background-color;
+              background-color: $blue-color;
+              border-color: $background-color;
+            }
           }
         }
       }
@@ -246,26 +266,6 @@
 
 }
 
-.tags-content{
-  .tags-list {
-    display: flex;
-    flex-wrap: wrap;
-    list-style-type: none;
-    margin-top: 30px;
-    margin-left: 0px;
-    li{
-      margin-right: 5px;
-      span{
-        display: inline-block;
-        padding: .25em .4em;
-        font-size: 100%;
-        line-height: 1;
-        border-radius: 10rem;
-        border: 1px solid #dee2e6 !important;
-      }
-    }
-  }
-}
 
 @include media-query($on-laptop) {
   .page-banner {
@@ -282,6 +282,10 @@
 .page-content {
   padding: $spacing-unit 0;
   flex: 1;
+
+  .home {
+    margin-top: 50px;
+  }
 }
 
 .page-heading {
@@ -290,6 +294,13 @@
 
 .post-list-heading {
   @include relative-font-size(1.75);
+  color: $brand-color;
+
+  svg{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+  }
 }
 
 .post-list {
@@ -311,6 +322,33 @@
     > p {
       margin-top: 15px;
     }
+
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      margin-left: 0px;
+      li{
+        margin-right: 5px;
+        margin-bottom: 5px;
+        span{
+          display: inline-block;
+          padding: .4em .4em;
+          font-size: 80%;
+          line-height: 1;
+          border: 1px solid $blue-color !important;
+          border-radius: .1rem;
+          color: $blue-color;
+          transition: background-color .3s ease-out;
+          &:hover{
+            color: $background-color;
+            background-color: $blue-color;
+            border-color: $background-color;
+          }
+        }
+      }
+    }
+
   }
 
 

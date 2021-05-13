@@ -15,16 +15,17 @@
         <div class="wrapper">
           
           <div class="page-banner-live">
-            <h2 class="page-banner-live-title">Live Services</h2>
+            <h2 class="page-banner-live-title">
+              {% include icon-nexon.svg %}
+              Live Services
+            </h2>
             <div class="page-banner-live-list">
               <div class="card">
                 <img class="card-img" src="https://gblobscdn.gitbook.com/assets%2F-M7oaOV5Oia2AcGMSRiD%2F-M7uoBdV5OZfCDIemttL%2F-M7uoNr-si66G_w7yQ-7%2Fsawh3.gif?alt=media&token=9a8b9f25-fce1-43e3-a4ed-ce6197049f74" alt="The Movies Project">
                 <div class="card-body">
                   <h4>서든어택 월핵탐지기<i class="fas fa-external-link-alt" style="margin-left: 5px;"></i></h4>
                   <p>ObjectDetection을 사용해 월핵을 탐지합니다</p>
-                  <p>
-                    <span>#ObjectDetection</span>
-                  </p>
+                  <span>#ObjectDetection</span>
                 </div>
               </div>
               <div class="card">
@@ -32,28 +33,12 @@
                 <div class="card-body">
                   <h4>실시간 감정추론<i class="fas fa-external-link-alt" style="margin-left: 5px;"></i></h4>
                   <p>ObjectDetection을 사용해 월핵을 탐지합니다</p>
-                  <p>
-                    <span>#ComputerVision</span>
-                  </p>
+                  <span>#ComputerVision</span>
                 </div>
               </div>
             </div>
           </div>
 
-        </div>
-      </section>
-
-      <section class="tags-content">
-        <div class="wrapper">
-          <ul class="tags-list">
-            {% for tag in site.tags %}
-              <li>
-                <a href="/">
-                  <span>#{{ tag[0] }}</span>  
-                </a>
-              </li>
-            {% endfor %}       
-          </ul>
         </div>
       </section>
 
