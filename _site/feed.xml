@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-05-14T10:52:29+09:00</updated><id>/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">머신러닝 서비스를 만들기 위한 MLOps</title><link href="/2021/05/14/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-05-14T00:00:00+09:00</published><updated>2021-05-14T00:00:00+09:00</updated><id>/2021/05/14/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="/2021/05/14/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h2 id=&quot;머신러닝-서비스를-만들고-싶은-분들에게&quot;&gt;머신러닝 서비스를 만들고 싶은 분들에게&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-14T00:50:46-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MonthlyReport</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html">&lt;h2 id=&quot;6월-머신러닝파트-월간-리뷰&quot;&gt;6월 머신러닝파트 월간 리뷰&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;개요를 쓰고&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h3&gt;
+
+&lt;p&gt;과금넛지 내용을 넣고&lt;/p&gt;
+
+&lt;h3 id=&quot;디지털사이니지&quot;&gt;디지털사이니지&lt;/h3&gt;
+
+&lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
+
+&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 더해서 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">머신러닝 서비스를 만들기 위한 MLOps</title><link href="http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;p&gt;$Y = X + b$&lt;/p&gt;
+
+&lt;h2 id=&quot;머신러닝-서비스를-만들고-싶은-분들에게&quot;&gt;머신러닝 서비스를 만들고 싶은 분들에게&lt;/h2&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -167,18 +183,178 @@
 
 &lt;blockquote&gt;
   &lt;p&gt;머신러닝&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>전지호</name></author><category term="mlops" /><category term="aws" /><category term="kubenetes" /><summary type="html">머신러닝 실험 모델을 프로덕션 레벨로 사용하기 위한 필수적인 프로세스입니다. 로컬 컴퓨터, 제플린, 데이터브릭스에서만 사용해보았던 머신러닝 모델을 어떻게 해야 상용 서비스로 만들 수 있을까요? 머신러닝 엔지니어와 분석가가 개발자와의 업무 의존성을 줄이기 위한 머신러닝 인프라에 대해 설명합니다.</summary></entry><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="/2021/05/14/MonthlyReport.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-14T00:00:00+09:00</published><updated>2021-05-14T00:00:00+09:00</updated><id>/2021/05/14/MonthlyReport</id><content type="html" xml:base="/2021/05/14/MonthlyReport.html">&lt;h2 id=&quot;6월-머신러닝파트-월간-리뷰&quot;&gt;6월 머신러닝파트 월간 리뷰&lt;/h2&gt;
+&lt;/blockquote&gt;</content><author><name>전지호</name></author><category term="mlops" /><category term="aws" /><category term="kubenetes" /><summary type="html">머신러닝 실험 모델을 프로덕션 레벨로 사용하기 위한 필수적인 프로세스입니다. 로컬 컴퓨터, 제플린, 데이터브릭스에서만 사용해보았던 머신러닝 모델을 어떻게 해야 상용 서비스로 만들 수 있을까요? 머신러닝 엔지니어와 분석가가 개발자와의 업무 의존성을 줄이기 위한 머신러닝 인프라에 대해 설명합니다.</summary></entry><entry><title type="html">아이덴티피케이션 논문 리뷰</title><link href="http://0.0.0.0:4000/2021/05/12/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="아이덴티피케이션 논문 리뷰" /><published>2021-05-12T10:00:00-05:00</published><updated>2021-05-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/12/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/12/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;object-detection-survey&quot;&gt;Object Detection: Survey&lt;/h1&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;개요를 쓰고&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;디지털 사이니지 프로젝트에는 여러가지 Deep Learning Task들이 존재한다.
+그 중 가장 기초가 되는 Object Detection 관련 연구상황을 정리하고 Tensorflow를 이용한 실제 코드 구현을 실습하는 방법을 기록한다.&lt;/p&gt;
 
-&lt;h3 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Introduction&lt;/li&gt;
+  &lt;li&gt;Problem Definition&lt;/li&gt;
+  &lt;li&gt;Performence Measure&lt;/li&gt;
+  &lt;li&gt;Dataset &amp;amp; Examples&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;과금넛지 내용을 넣고&lt;/p&gt;
+&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Representative tasks in computer vision&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h3 id=&quot;디지털사이니지&quot;&gt;디지털사이니지&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;./figures/task.png&quot; alt=&quot;Object detection and other tasks&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Object Detection은 Image Classification task에 사물의 위치를 Bounding Box로 예측하는 Regression task가 추가된 문제이다.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 더해서 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">데이터 분석에 관하여..,</title><link href="/2021/05/13/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81.html" rel="alternate" type="text/html" title="데이터 분석에 관하여..," /><published>2021-05-13T00:00:00+09:00</published><updated>2021-05-13T00:00:00+09:00</updated><id>/2021/05/13/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81</id><content type="html" xml:base="/2021/05/13/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81.html"></content><author><name>김도영</name></author><category term="eda" /><category term="analysis" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">컴퓨터 비전과 이모션 디텍팅에 관하여…</title><link href="/2021/05/13/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="컴퓨터 비전과 이모션 디텍팅에 관하여…" /><published>2021-05-13T00:00:00+09:00</published><updated>2021-05-13T00:00:00+09:00</updated><id>/2021/05/13/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="/2021/05/13/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84.html"></content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">아이덴티피케이션 논문 리뷰</title><link href="/2021/05/13/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="아이덴티피케이션 논문 리뷰" /><published>2021-05-13T00:00:00+09:00</published><updated>2021-05-13T00:00:00+09:00</updated><id>/2021/05/13/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="/2021/05/13/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC.html"></content><author><name>최혁근</name></author><category term="mnist" /><category term="computervision" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig2_classification_example.PNG&quot; alt=&quot;image classification&quot; /&gt;
+&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig2_classification_example.PNG&quot; alt=&quot;object detection&quot; /&gt;
+&lt;strong&gt;Object Detection = Multi-labeled classification + Bounding regression&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;현재 연구 진행상황
+&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig4_paper_trend_2019.PNG&quot; alt=&quot;Research history&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;적용분야&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig1.PNG&quot; alt=&quot;ADAS&quot; /&gt;
+  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig2.PNG&quot; alt=&quot;CCTV&quot; /&gt;
+  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig3.PNG&quot; alt=&quot;OCR&quot; /&gt;
+  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig4.PNG&quot; alt=&quot;Aerial Image&quot; /&gt;
+  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig5.PNG&quot; alt=&quot;Body Detection&quot; /&gt;
+  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig7.PNG&quot; alt=&quot;Sport Analysis&quot; /&gt;
+  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig8.PNG&quot; alt=&quot;Amazon Go&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-problem-definition&quot;&gt;2. Problem Definition&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;DATASET
+    &lt;ul&gt;
+      &lt;li&gt;$I$ - an image&lt;/li&gt;
+      &lt;li&gt;$O(I)$ - objects with descriptions in the image $I$
+        &lt;ul&gt;
+          &lt;li&gt;$O(I) = { (Y_1^&lt;em&gt;, Z_1^&lt;/em&gt;), \ldots, (Y_i^&lt;em&gt;, Z_i^&lt;/em&gt;), \ldots, (Y_{N_i^&lt;em&gt;}^&lt;/em&gt;, Z_{N_i^&lt;em&gt;}^&lt;/em&gt;)}$&lt;/li&gt;
+          &lt;li&gt;$Y_i^* \in \mathcal{Y}$ - the category of the $i$th object&lt;/li&gt;
+          &lt;li&gt;$Z_{N_i^&lt;em&gt;}^&lt;/em&gt; \in \mathcal{Z}$ - the bounding box information of $i$th object, ex. $(x, y, w, h)$&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Object Detection $D(I, \lambda)$
+    &lt;ul&gt;
+      &lt;li&gt;이미지 $I$에 Objects $O(I)$를 찾아내는 함수 $D$를 구하기&lt;/li&gt;
+      &lt;li&gt;$D(I, \lambda) = { (Y_1, Z_1), \ldots, (Y_i, Z_i),\ldots, (Y_{N_i(\lambda)}, Z_{N_i(\lambda)})}$&lt;/li&gt;
+      &lt;li&gt;$\lambda$로 false alarm과 missed detection 조절&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3-performance-measure&quot;&gt;3. Performance Measure&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ground Truth $O(I)$와 Prediction $D(I, \lambda)$를 비교
+    &lt;ul&gt;
+      &lt;li&gt;classification : 각각의 class를 정확하게 예측했는가?&lt;/li&gt;
+      &lt;li&gt;regression : 정확하게 Bounding Box의 위치와 크기를 지정했는가?
+        &lt;ul&gt;
+          &lt;li&gt;Intersection Over Union(IoU)
+            &lt;ul&gt;
+              &lt;li&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_fourth/fig1.PNG&quot; alt=&quot;IOU&quot; /&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_fourth/fig2.PNG&quot; alt=&quot;IOU Example&quot; /&gt;&lt;/li&gt;
+              &lt;li&gt;IoU값이 일정이상일 경우 정답으로 간주
+                &lt;ul&gt;
+                  &lt;li&gt;PASCAL VOC : 0.5&lt;/li&gt;
+                  &lt;li&gt;ImageNet : min(0.5, wh / (w+10)(h+10))&lt;/li&gt;
+                  &lt;li&gt;MS COCO : 0.5, 0.55, $\ldots$, 0.95&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mean Average Precision(mAP)
+    &lt;ul&gt;
+      &lt;li&gt;Average Precision
+        &lt;ul&gt;
+          &lt;li&gt;&lt;img src=&quot;https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&amp;amp;fname=http%3A%2F%2Fcfile2.uf.tistory.com%2Fimage%2F220E10365869F5CA344843&quot; alt=&quot;AP&quot; /&gt;&lt;/li&gt;
+          &lt;li&gt;Recall을 0부터 1까지 0.1단위로 증가시키면서 얻은 precision값을 평균내어 계산&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;mAP
+        &lt;ul&gt;
+          &lt;li&gt;전체 Class에 대해서 AP를 계산하여 평균낸 값&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Frame Per Second
+    &lt;ul&gt;
+      &lt;li&gt;초당 처리가능한 이미지의 수 (이미지 종류와 하드웨어에 따라 상대적인 값)&lt;/li&gt;
+      &lt;li&gt;최근 논문은 정확도 뿐만 아니라 속도에도 집중하는 경향&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-miscellanea&quot;&gt;4. miscellanea&lt;/h2&gt;
+&lt;h3 id=&quot;techniques-before-deep-learning&quot;&gt;Techniques before deep learning&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Sliding Windows
+&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig6_sliding_window.PNG&quot; alt=&quot;sw1&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Selective Search
+&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig7_selective_search.PNG&quot; alt=&quot;ss&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;stages&quot;&gt;Stages&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;1-stage object detector
+&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_second/fig6_1stage.PNG&quot; alt=&quot;1-stage object detector&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;2-stage object detector
+&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_second/fig5_2stage.PNG&quot; alt=&quot;2-stage object detector&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://host.robots.ox.ac.uk/pascal/VOC/&quot;&gt;PASCAL VOC&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Pattern Analysis, Statistical Modeling and Computational Learning&lt;/li&gt;
+      &lt;li&gt;20 Object types
+        &lt;ul&gt;
+          &lt;li&gt;사람: 사람&lt;/li&gt;
+          &lt;li&gt;동물: 새, 고양이, 소, 개, 말, 양&lt;/li&gt;
+          &lt;li&gt;탈것: 비행기, 자전거, 보트, 버스, 승용차, 오토바이, 기차&lt;/li&gt;
+          &lt;li&gt;사물: 병, 의자, 식탁, 화초, 소파, 모니터&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;대표적으로 VOC05, VOC12 가 많이 사용됨&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_01_thumb.jpg&quot; alt=&quot;vocex1&quot; /&gt;
+&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_02_thumb.jpg&quot; alt=&quot;vocex2&quot; /&gt;
+&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_03_thumb.jpg&quot; alt=&quot;vocex3&quot; /&gt;
+&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_04_thumb.jpg&quot; alt=&quot;vocex4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_01_thumb.jpg&quot; alt=&quot;vocex5&quot; /&gt;
+&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_02_thumb.jpg&quot; alt=&quot;vocex6&quot; /&gt;
+&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_03_thumb.jpg&quot; alt=&quot;vocex7&quot; /&gt;
+&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_04_thumb.jpg&quot; alt=&quot;vocex8&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cocodataset.org/#home&quot;&gt;MS COCO&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;91 Object types, 328k images, 2.5m labeled instance&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.researchgate.net/profile/Minkesh_Asati/publication/334867305/figure/fig1/AS:787322064875522@1564723616547/Samples-of-annotated-images-in-the-MS-COCO-dataset-from-12.jpg&quot; alt=&quot;cocoex&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/walton-wang929/Object_Detection&quot;&gt;Object Detection Survey by walton-wang929&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1809.03193&quot;&gt;Recent Advances in Object Detection in the Age of Deep Convolutional Neural Networks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hoya012.github.io/blog/Tutorials-of-Object-Detection-Using-Deep-Learning-what-is-object-detection/&quot;&gt;HOYA012’s Research Blog - Tutorial of Object Detection using Deep Learning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="mnist" /><category term="computervision" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">컴퓨터 비전과 이모션 디텍팅에 관하여…</title><link href="http://0.0.0.0:4000/2021/05/12/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="컴퓨터 비전과 이모션 디텍팅에 관하여…" /><published>2021-05-12T10:00:00-05:00</published><updated>2021-05-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/12/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/12/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84.html"></content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">데이터 분석에 관하여..,</title><link href="http://0.0.0.0:4000/2021/05/12/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81.html" rel="alternate" type="text/html" title="데이터 분석에 관하여..," /><published>2021-05-12T10:00:00-05:00</published><updated>2021-05-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/12/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/12/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81.html">&lt;h1 id=&quot;제목테스트&quot;&gt;제목테스트&lt;/h1&gt;
+&lt;h1 id=&quot;테스트테스트테스트&quot;&gt;테스트테스트테스트&lt;/h1&gt;</content><author><name>김도영</name></author><category term="eda" /><category term="analysis" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry></feed>

@@ -1,18 +1,6 @@
-FROM nginx:1.16.1
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM jekyll/jekyll:latest
+COPY . /srv/jekyll
 
-RUN apt-get clean
-RUN apt-get update
-RUN apt-get install -y ruby-full \
-    build-essential \
-    zlib1g-dev
+EXPOSE 4000
 
-RUN gem install jekyll bundler
-
-RUN mkdir -p /app
-
-WORKDIR /app
-
-COPY . /app
-
-RUN jekyll build
+ENTRYPOINT [ "jekyll", "serve", "--force_polling", "--drafts", "--livereload", "--trace" ]

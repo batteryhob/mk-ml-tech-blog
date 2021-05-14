@@ -1,11 +1,10 @@
-version: '3'
+version: "3.3"
 
 services:
-  nginx: 
-    build:
-      context: .
-      dockerfile: Dockerfile
+  blog:
+    image: jekyll/jekyll:latest
+    command: jekyll serve --force_polling --drafts --livereload --trace
     ports:
-      - "8715:80"
+      - "4000:4000"
     volumes:
-      - ./app:/app
+      - ".:/srv/jekyll"
