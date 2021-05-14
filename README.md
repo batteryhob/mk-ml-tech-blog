@@ -1,1 +1,10 @@
-mk-ml-tech-blog
+# 머신러닝파트 기술블로그
+
+## 1. 기술블로그 로컬에서 띄우기
+
+``` shell
+docker-compose up
+```
+
+## 2. 포스트 올리기
+_posts 폴더에 마크다운 파일을 추가
