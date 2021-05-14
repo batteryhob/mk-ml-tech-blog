@@ -26,8 +26,11 @@ layout: default
               </a>
           </h3>
           <span class="post-meta">
-            <i class="fa fa-calendar"></i>
-            {{ post.date | date: date_format }} | {{ post.author | escape }}
+            <i class="fa fa-calendar" style="margin-right: 10px;"></i>
+            {{ post.date | date: date_format }}
+            <span style="margin-left: 10px; margin-right: 10px;">|</span>
+            <i class="fas fa-user" style="margin-right: 10px;"></i>
+            {{ post.author | escape }}
           </span>
           <p class="post-desc">
             {{ post.excerpt }}

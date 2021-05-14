@@ -21,7 +21,7 @@
 title: 머신러닝파트 기술블로그
 email: batteryho@nexon.co.kr
 description: >- # this means to ignore newlines until "baseurl:"
-  1년 간 머신러닝 서비스 운영 노하우와 분석 기술자료를 모았습니다.
+
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
