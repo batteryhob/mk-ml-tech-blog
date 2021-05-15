@@ -457,6 +457,7 @@
 
 .post-link {
   display: block;
+  font-weight: 500;
   @include relative-font-size(1.5);
 }
 
@@ -575,7 +576,7 @@
 
   h1 {
     @include relative-font-size(2.25);
-
+    font-weight: 700;
     @include media-query($on-laptop) {
       @include relative-font-size(2);
     }
@@ -583,6 +584,7 @@
 
   h2 {
     @include relative-font-size(2);
+    font-weight: 700;
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.75);
@@ -591,6 +593,7 @@
 
   h3 {
     @include relative-font-size(1.625);
+    font-weight: 700;
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.375);
@@ -599,6 +602,7 @@
 
   h4 {
     @include relative-font-size(1.25);
+    font-weight: 700;
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.125);

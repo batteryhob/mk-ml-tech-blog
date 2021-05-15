@@ -218,7 +218,7 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-desc { font-weight: 300; display: -webkit-box; word-wrap: break-word; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; height: 66px; }
 
-.post-link { display: block; font-size: 21px; }
+.post-link { display: block; font-weight: 500; font-size: 21px; }
 
 /** Blog */
 .blog-header { margin-bottom: 30px; padding-top: 120px; padding-bottom: 120px; background-color: #000; }
@@ -260,19 +260,19 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-content { margin-bottom: 30px; }
 
-.post-content h1 { font-size: 31.5px; }
+.post-content h1 { font-size: 31.5px; font-weight: 700; }
 
 @media screen and (max-width: 920px) { .post-content h1 { font-size: 28px; } }
 
-.post-content h2 { font-size: 28px; }
+.post-content h2 { font-size: 28px; font-weight: 700; }
 
 @media screen and (max-width: 920px) { .post-content h2 { font-size: 24.5px; } }
 
-.post-content h3 { font-size: 22.75px; }
+.post-content h3 { font-size: 22.75px; font-weight: 700; }
 
 @media screen and (max-width: 920px) { .post-content h3 { font-size: 19.25px; } }
 
-.post-content h4 { font-size: 17.5px; }
+.post-content h4 { font-size: 17.5px; font-weight: 700; }
 
 @media screen and (max-width: 920px) { .post-content h4 { font-size: 15.75px; } }
 
