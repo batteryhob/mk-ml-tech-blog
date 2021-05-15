@@ -13,7 +13,7 @@ layout: default
   {%- if page.title == "Tags" -%}
     {% assign tags = site.tags | sort %}
     <div class="framework">
-      <section class="tags">
+      <section class="main">
         <div class="post-preview">
           {% for tag in tags %} 
             <h2 id="{{ tag[0] | slugify }}">#{{ tag[0] }}</h2>

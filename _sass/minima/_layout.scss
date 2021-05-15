@@ -319,23 +319,6 @@
   .main {
     flex: 1;
   }
-  .tags {
-    flex: 1;
-    .post-preview {
-      h2  {
-        color: $brand-color;
-      }
-      ul {
-        list-style: none;
-        margin: 0;
-        margin-bottom: 30px;
-        font-size: 90%;
-        li {
-          margin-bottom: 5px;
-        }
-      }
-    }
-  }
   .side-bar {
     margin-left: 15px;
     padding-left: 8px;
@@ -351,8 +334,10 @@
         list-style: none;
         margin: 0;
         li {
-          border-bottom: 1px solid $grey-color-light;
           transition: background-color .3s ease-out;
+          &:not(:last-child) {
+            border-bottom: 1px solid $grey-color-light;
+          }
           &:hover{
             background-color: $grey-color-light;
           }
@@ -383,6 +368,52 @@
   .framework {
     .side-bar {
       display: none;
+    }
+  }
+}
+
+.post-preview {
+  h2  {
+    color: $brand-color;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 90%;
+    li {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+/**
+ * Side bar | Custom
+ */
+#toc {
+  width: 200px;
+  max-width: 200px;
+  font-size: 14px;
+  list-style: none;
+  ul {
+    list-style: none;
+  }
+  .toc-entry {
+    transition: all .3s ease-out;
+    &:not(:last-child) {
+      border-bottom: 1px solid $grey-color-light;
+    }
+    &:hover{
+      background-color: rgba(0, 119, 255, 0.8);
+      a{
+        color: $background-color !important;
+      }
+    }
+    a {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      text-decoration: none;
     }
   }
 }
@@ -575,37 +606,37 @@
   margin-bottom: $spacing-unit;
 
   h1 {
-    @include relative-font-size(2.25);
-    font-weight: 700;
-    @include media-query($on-laptop) {
-      @include relative-font-size(2);
-    }
-  }
-
-  h2 {
     @include relative-font-size(2);
-    font-weight: 700;
-
+    font-weight: 500;
     @include media-query($on-laptop) {
       @include relative-font-size(1.75);
     }
   }
 
-  h3 {
+  h2 {
     @include relative-font-size(1.625);
-    font-weight: 700;
+    font-weight: 500;
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.375);
     }
   }
 
-  h4 {
+  h3 {
     @include relative-font-size(1.25);
-    font-weight: 700;
+    font-weight: 500;
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.125);
+    }
+  }
+
+  h4 {
+    @include relative-font-size(1);
+    font-weight: 500;
+
+    @include media-query($on-laptop) {
+      @include relative-font-size(0.75);
     }
   }
 }

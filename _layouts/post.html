@@ -24,12 +24,18 @@ layout: default
           </ul>
           {%- include authors.html -%}
     </div>
-
   </header>
 
   <div class="wrapper">
-    <div class="post-content e-content" itemprop="articleBody">
-      {{ content }}
+    <div class="framework">
+      <div class="main">
+        <div class="post-content e-content" itemprop="articleBody">
+          {{ content }}
+        </div>
+      </div>
+      <div class="side-bar">
+        {{ content | toc_only }}
+      </div>
     </div>
   </div>
 

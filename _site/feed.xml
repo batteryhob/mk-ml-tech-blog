@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-15T05:01:40-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MonthlyReport</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html">&lt;h2 id=&quot;6월-머신러닝파트-월간-리뷰&quot;&gt;6월 머신러닝파트 월간 리뷰&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-15T12:06:11-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MonthlyReport</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html">&lt;h1 id=&quot;6월-머신러닝파트-월간-리뷰&quot;&gt;6월 머신러닝파트 월간 리뷰&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;전임 파트장 부재로 인해, 파트 재정비와 업무 Role 변경으로 인해 한달 늦게 보고합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h3&gt;
+&lt;h2 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h2&gt;
 
 &lt;p&gt;과금넛지 내용을 넣고&lt;/p&gt;
 
-&lt;h3 id=&quot;디지털사이니지&quot;&gt;디지털사이니지&lt;/h3&gt;
+&lt;h2 id=&quot;디지털사이니지&quot;&gt;디지털사이니지&lt;/h2&gt;
 
 &lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
 
-&lt;h3 id=&quot;옥외광고-지역-선정&quot;&gt;옥외광고 지역 선정&lt;/h3&gt;
+&lt;h2 id=&quot;옥외광고-지역-선정&quot;&gt;옥외광고 지역 선정&lt;/h2&gt;
 
 &lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
 
-&lt;h3 id=&quot;상시-업무&quot;&gt;상시 업무&lt;/h3&gt;
+&lt;h2 id=&quot;상시-업무&quot;&gt;상시 업무&lt;/h2&gt;
 
-&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 더해서 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">머신러닝 서비스를 만들기 위한 MLOps</title><link href="http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h2 id=&quot;머신러닝-서비스를-만들고-싶은-분들에게-&quot;&gt;머신러닝 서비스를 만들고 싶은 분들에게 🤲&lt;/h2&gt;
+&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 더해서 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">머신러닝 서비스를 만들기 위한 MLOps</title><link href="http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MLOps-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;머신러닝-서비스를-만들고-싶은-분들에게-&quot;&gt;머신러닝 서비스를 만들고 싶은 분들에게 🤲&lt;/h1&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -44,9 +44,9 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;위와-같은-방법들은-많은-문제를-포함합니다&quot;&gt;위와 같은 방법들은 많은 문제를 포함합니다.&lt;/h3&gt;
+&lt;h2 id=&quot;위와-같은-방법들은-많은-문제를-포함합니다&quot;&gt;위와 같은 방법들은 많은 문제를 포함합니다.&lt;/h2&gt;
 
-&lt;h4 id=&quot;첫째-모든-cctv의-컴퓨팅-사양이-같지-않습니다&quot;&gt;첫째, 모든 CCTV의 컴퓨팅 사양이 같지 않습니다.&lt;/h4&gt;
+&lt;h3 id=&quot;첫째-모든-cctv의-컴퓨팅-사양이-같지-않습니다&quot;&gt;첫째, 모든 CCTV의 컴퓨팅 사양이 같지 않습니다.&lt;/h3&gt;
 
 &lt;p&gt;내가 필요로 하는 프레임워크나 라이브러리가 설치가 안될 수 있습니다.&lt;/p&gt;
 
@@ -54,13 +54,13 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;둘째-수동-작업은-너무-힘듭니다&quot;&gt;둘째, 수동 작업은 너무 힘듭니다.&lt;/h4&gt;
+&lt;h3 id=&quot;둘째-수동-작업은-너무-힘듭니다&quot;&gt;둘째, 수동 작업은 너무 힘듭니다.&lt;/h3&gt;
 
 &lt;p&gt;프로덕션 레벨에서의 반복적인 작업들은 연구 개발에 들어가야할 시간들을 뺏어갑니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;셋째-실험-환경과-프로덕션-환경이-분리되어-있지-못합니다&quot;&gt;셋째, 실험 환경과 프로덕션 환경이 분리되어 있지 못합니다.&lt;/h4&gt;
+&lt;h3 id=&quot;셋째-실험-환경과-프로덕션-환경이-분리되어-있지-못합니다&quot;&gt;셋째, 실험 환경과 프로덕션 환경이 분리되어 있지 못합니다.&lt;/h3&gt;
 
 &lt;p&gt;작업 환경에 cronjob이나 airflow를 사용하여 배치를 돌릴 수 있습니다.&lt;/p&gt;
 
@@ -68,7 +68,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;넷째-위-문제가-해결되었다-해도-모델을-업데이트할-때-마다-같은-작업을-반복해야-합니다&quot;&gt;넷째, 위 문제가 해결되었다 해도 모델을 업데이트할 때 마다 같은 작업을 반복해야 합니다.&lt;/h4&gt;
+&lt;h3 id=&quot;넷째-위-문제가-해결되었다-해도-모델을-업데이트할-때-마다-같은-작업을-반복해야-합니다&quot;&gt;넷째, 위 문제가 해결되었다 해도 모델을 업데이트할 때 마다 같은 작업을 반복해야 합니다.&lt;/h3&gt;
 
 &lt;p&gt;힘들게 배포한 모델에 오류가 숨어있었습니다.&lt;/p&gt;
 
@@ -84,13 +84,13 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;이제-mlops&quot;&gt;이제, MLOps&lt;/h3&gt;
+&lt;h2 id=&quot;이제-mlops&quot;&gt;이제, MLOps&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://www.freecodecamp.org/news/content/images/2021/03/Screenshot-2021-03-23-at-4.39.30-AM.png&quot; alt=&quot;MlOps 구글트랜드&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;mlops로-불리는-머신러닝-파이프라인은-전-세계-모든-조직들이-공통적으로-고민하는-문제입니다&quot;&gt;MLOps로 불리는 머신러닝 파이프라인은 &lt;u&gt;전 세계 모든 조직들이 공통적으로 고민하는 문제&lt;/u&gt;입니다.&lt;/h4&gt;
+&lt;h3 id=&quot;mlops로-불리는-머신러닝-파이프라인은전-세계-모든-조직들이-공통적으로-고민하는-문제입니다&quot;&gt;MLOps로 불리는 머신러닝 파이프라인은&lt;br /&gt;전 세계 모든 조직들이 공통적으로 고민하는 문제입니다.&lt;/h3&gt;
 
 &lt;p&gt;분석가와 머신러닝 엔지니어에 대한 관심이 지금보다 조금 적었을 때,&lt;/p&gt;
 
@@ -110,7 +110,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;devops와-mlops는-뭣이-같고-뭣이-다른데&quot;&gt;DevOps와 MLOps는 뭣이 같고, 뭣이 다른데??&lt;/h4&gt;
+&lt;h3 id=&quot;devops와-mlops는-뭣이-같고-뭣이-다른데&quot;&gt;DevOps와 MLOps는 뭣이 같고, 뭣이 다른데??&lt;/h3&gt;
 
 &lt;p&gt;일반적으로 웹 서비스를 구축할 때,&lt;/p&gt;
 
@@ -136,7 +136,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;주피터-설치하는-법-아나콘다-설치하는-법-텐서플로-설치하는-법&quot;&gt;주피터 설치하는 법, 아나콘다 설치하는 법, 텐서플로 설치하는 법&lt;/h4&gt;
+&lt;h3 id=&quot;주피터-설치하는-법-아나콘다-설치하는-법-텐서플로-설치하는-법&quot;&gt;주피터 설치하는 법, 아나콘다 설치하는 법, 텐서플로 설치하는 법&lt;/h3&gt;
 
 &lt;p&gt;네이버에 검색하면서 다들 고생 한 번씩 해보셨을 겁니다.&lt;/p&gt;
 
@@ -148,7 +148,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;도커&quot;&gt;도커&lt;/h3&gt;
+&lt;h2 id=&quot;도커&quot;&gt;도커&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;도커를 사용하는 것이 텐서플로를 사용하는 가장 쉬운 방법입니다.&lt;/p&gt;
@@ -200,7 +200,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;결국-문제는-분리&quot;&gt;결국, 문제는 &lt;strong&gt;분리&lt;/strong&gt;&lt;/h4&gt;
+&lt;h3 id=&quot;결국-문제는-분리&quot;&gt;결국, 문제는 &lt;strong&gt;분리&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -216,7 +216,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;도커는-작업-환경의-분리와-이식이-가능한-이-세상이-허락한-유일한-마약&quot;&gt;도커는 작업 환경의 분리와 이식이 가능한, 이 세상이 허락한 유일한 마약.&lt;/h4&gt;
+&lt;h3 id=&quot;도커는-작업-환경의-분리와-이식이-가능한-이-세상이-허락한-유일한-마약&quot;&gt;도커는 작업 환경의 분리와 이식이 가능한, 이 세상이 허락한 유일한 마약.&lt;/h3&gt;
 
 &lt;p&gt;왜냐면, 단 한번만 익숙해지면 알아서 쓰게됩니다.&lt;/p&gt;
 
@@ -224,7 +224,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;쿠버네티스&quot;&gt;쿠버네티스&lt;/h3&gt;
+&lt;h2 id=&quot;쿠버네티스&quot;&gt;쿠버네티스&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;어렵지만, 자세히 알지 못해도 됩니다.&lt;/p&gt;
@@ -232,12 +232,15 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;도커파일로 만든 컨테이너들의 생성(=코드의 실행)과 삭제(=리소스 부족으로 인한 폭파)와 스케줄링(=배치 작업)을 대신해주는 친절한 녀석입니다.&lt;/p&gt;
+&lt;p&gt;도커 파일로 만든 컨테이너들의 생성(=코드의 실행)과 삭제(=리소스 부족으로 인한 폭파)와 스케줄링(=배치 작업)을 대신해주는 친절한 도구입니다.&lt;/p&gt;
+
+&lt;p&gt;머신러닝 엔지니어와 분석가가 도커 파일만 작성할 줄 안다면,&lt;/p&gt;
+
+&lt;p&gt;MLOps 개발자가 이 도구를 이용해 모델과 분석 코드의 배포, 스케줄링이 가능하게 해줄 겁니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;이-발표는-첫-번째-발표로-아주-아주-아주-낮은-수준의-머신러닝-파이프라인을-다룹니다&quot;&gt;이 발표는 첫 번째 발표로 아주 아주 아주 낮은 수준의 머신러닝 파이프라인을 다룹니다.&lt;/h3&gt;
-&lt;h4 id=&quot;그런데도-양이-적지-않습니다-&quot;&gt;그런데도, 양이 적지 않습니다. 😹&lt;/h4&gt;
+&lt;h2 id=&quot;이-발표는-첫-번째-발표로아주-아주-아주-낮은-수준의-머신러닝-파이프라인을-다룹니다그런데도-양이-적지-않습니다-&quot;&gt;이 발표는 첫 번째 발표로&lt;br /&gt;아주 아주 아주 낮은 수준의 머신러닝 파이프라인을 다룹니다.&lt;br /&gt;그런데도, 양이 적지 않습니다. 😹&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://www.freecodecamp.org/news/content/images/2021/03/Screenshot-2021-03-23-at-4.39.30-AM.png&quot; alt=&quot;MlOps 구글트랜드&quot; /&gt;&lt;/p&gt;
 
@@ -259,7 +262,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;앞으로는-이렇게-말하세요&quot;&gt;앞으로는 이렇게 말하세요!&lt;/h3&gt;
+&lt;h2 id=&quot;같이-일하는-개발자에게-앞으로는-이렇게-말하세요&quot;&gt;같이 일하는 개발자에게 앞으로는 이렇게 말하세요!&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;MLOps 구축해주세요!&lt;/p&gt;
@@ -271,8 +274,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;다시-처음으로-돌아가서-머신러닝-모델을-상용화하는-방법은-아주-간단합니다&quot;&gt;다시 처음으로 돌아가서, 머신러닝 모델을 상용화하는 방법은 아주 간단합니다.&lt;/h4&gt;
-&lt;h3 id=&quot;mlops가-구축되어-있다면요&quot;&gt;MLOps가 구축되어 있다면요.&lt;/h3&gt;
+&lt;h3 id=&quot;다시-처음으로-돌아가서머신러닝-모델을-상용화하는-방법은-아주-간단합니다mlops가-구축되어-있다면요&quot;&gt;다시 처음으로 돌아가서,&lt;br /&gt;머신러닝 모델을 상용화하는 방법은 아주 간단합니다.&lt;br /&gt;&lt;u&gt;MLOps가 구축&lt;/u&gt;되어 있다면요&lt;/h3&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
