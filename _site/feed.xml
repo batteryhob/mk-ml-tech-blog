@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-16T04:54:52-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-15T10:00:00-05:00</published><updated>2021-05-15T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;6월-리뷰&quot;&gt;6월 리뷰&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-16T04:58:53-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-15T10:00:00-05:00</published><updated>2021-05-15T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;6월-리뷰&quot;&gt;6월 리뷰&lt;/h1&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -37,7 +37,7 @@
 
 &lt;h2 id=&quot;상시-업무&quot;&gt;상시 업무&lt;/h2&gt;
 
-&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 더해서 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">2편 | 머신러닝 서비스를 만들기 위한 MLOps</title><link href="http://0.0.0.0:4000/2021/05/13/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="2편 | 머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-05-13T11:00:00-05:00</published><updated>2021-05-13T11:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;랩스에서-아주-간단한-mlops-만들기-&quot;&gt;랩스에서 아주 간단한 MLOps 만들기 🤲&lt;/h1&gt;
+&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">2편 | 머신러닝 서비스를 만들기 위한 MLOps</title><link href="http://0.0.0.0:4000/2021/05/13/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="2편 | 머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-05-13T11:00:00-05:00</published><updated>2021-05-13T11:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;랩스에서-아주-간단한-mlops-만들기-&quot;&gt;랩스에서 아주 간단한 MLOps 만들기 🤲&lt;/h1&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -305,8 +305,9 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;다음 포스트에서는 파이프라인 뒷부분에 해당하는 모델 배포 자동화 파이프라인을 소개합니다.
-머신러닝파트가 운영하는 서비스에 구축되어 있는 환경입니다.&lt;/p&gt;
+&lt;p&gt;다음 포스트에서는 파이프라인 뒷부분에 해당하는 모델 배포 자동화 파이프라인을 소개합니다.&lt;/p&gt;
+
+&lt;p&gt;머신러닝파트가 운영하는 서비스에 구축되어 있는 환경입니다.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;

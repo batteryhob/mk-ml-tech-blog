@@ -4,7 +4,7 @@ title:  6월 머신러닝파트 월간 리뷰
 date:   2021-05-16 00:00:00 +0900
 author: 전지호
 tags: monthlyreport
-excerpt: 과금넛지와 디지털사이니지, 더해서 오프라인 광고지역 선정에 대한 리뷰입니다.
+excerpt: 과금넛지와 디지털사이니지, 오프라인 광고지역 선정에 대한 리뷰입니다.
 use_math: false
 toc: true
 # tags: 자동 수집되는 태그 띄어쓰기로 구분, 반드시 소문자로 사용
