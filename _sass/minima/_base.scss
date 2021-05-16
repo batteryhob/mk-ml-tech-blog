@@ -129,11 +129,15 @@ a {
  * Blockquotes
  */
 blockquote {
-  color: $grey-color;
-  border-left: 4px solid $grey-color-light;
+
+  color: $grey-color-dark;
+  border-left: 4px solid $blue-color;
   padding-left: $spacing-unit / 2;
+  padding-top: $spacing-unit / 4;
+  padding-bottom: $spacing-unit / 4;
   @include relative-font-size(1.125);
   letter-spacing: -1px;
+  //background-color: $grey-color-light;
   font-style: italic;
 
   > :last-child {
@@ -141,6 +145,17 @@ blockquote {
   }
 }
 
+/**
+ * Line
+ */
+ hr { 
+   display: block; 
+   height: 1px;
+   border: 0; 
+   border-top: 1px solid $grey-color-light;;
+   margin: 1em 0; 
+   padding: 0; 
+}
 
 
 /**

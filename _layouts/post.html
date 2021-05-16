@@ -22,7 +22,7 @@ layout: default
               </li>
             {% endfor %}
           </ul>
-          {%- include authors.html -%}
+          {%- include author.html -%}
     </div>
   </header>
 
@@ -30,13 +30,14 @@ layout: default
     <div class="framework">
       <div class="main">
         <div class="post-content e-content" itemprop="articleBody">
-          {{ content }}
+          {{ content }}          
         </div>
       </div>
       <div class="side-bar">
         {{ content | toc_only }}
       </div>
     </div>
+    {%- include author.html -%}
   </div>
 
   {%- if site.disqus.shortname -%}

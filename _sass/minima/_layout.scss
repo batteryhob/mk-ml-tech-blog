@@ -203,6 +203,7 @@
     bottom: 3rem;
     .page-banner-live-title{
       color: #fdfdfd;
+      font-weight: 500;
       text-shadow: 1px 1px 2px #33333355;
       svg{
         width: 30px;
@@ -297,11 +298,13 @@
 
 .page-heading {
   @include relative-font-size(2);
+  font-weight: 500;
 }
 
 .post-list-heading {
   @include relative-font-size(1.75);
   color: $brand-color;
+  font-weight: 500;
 
   svg{
     width: 30px;
@@ -432,7 +435,18 @@
     }
 
     > h3 {
+      display: flex;
       margin-bottom: 0px !important;
+      .badge {
+        font-size: 70%;
+        display: inline-block;
+        border-radius: 10px;
+        align-self: center;
+        background: #2be283;
+        padding: 0px 5px;
+        margin-left: 10px;
+        color: $background-color;
+      }
     }
 
     > p {
@@ -476,8 +490,7 @@
 }
 
 .post-desc {
-  font-weight: 300;
-  display:-webkit-box; 
+  display:-webkit-box;
   word-wrap:break-word; 
   -webkit-line-clamp:3; 
   -webkit-box-orient:vertical; 
@@ -504,6 +517,7 @@
 
   .post-title {
     color: $background-color;
+    font-weight: 500;
     text-shadow: 1px 1px 2px #33333355;
   }
 
@@ -537,42 +551,109 @@
     color: $background-color !important;
     text-shadow: 1px 1px 2px #33333355;
   }
-  .post-author{
-    display: flex;
+
+  .post-member{
+    margin-top: 0px;
+    margin-bottom: 0px;
     .thumbnail{
       flex: 1;
-      margin: auto;
       > img {
         width: 80px;
-        border-radius: 40px;
+        border: none;
       }
     }
-    .author{
-      flex: 9;  
-      display: table;
-      overflow: hidden;
+    .desc{
+      flex: 9;
       height: 80px;
-      padding: 10px 10px;
-      table-layout: fixed;
       color: $background-color;
       .inner-cell{
-        display: table-cell;
-        vertical-align: middle;
-        .author-name {
-          display: block;
-          padding-top: 1px;
-          font-size: 1.1rem;
-          letter-spacing: 0;
+        .name {
           color: $background-color;
           text-shadow: 1px 1px 2px #33333355;
         }
-        .author-desc {
-          display: block;
-          padding-top: 1px;
-          font-size: 90%;
-          letter-spacing: 0;
+        .introduce {
           color: $background-color;
           text-shadow: 1px 1px 2px #33333355;
+        }
+        .skill { 
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+
+/**
+ * Our Team
+ */
+.post-member{
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  .thumbnail{
+    flex: 2;
+    margin: auto;
+    text-align: center;
+    > img {
+      width: 100px;
+      border-radius: 50%;
+      border: 2px solid $grey-color-light;
+    }
+  }
+  .desc{
+    flex: 8;  
+    display: table;
+    overflow: hidden;
+    height: 100px;
+    padding: 10px 10px;
+    table-layout: fixed;
+    color: $brand-color;
+    .inner-cell{
+      display: table-cell;
+      vertical-align: middle;
+      .name {
+        display: block;
+        padding-top: 1px;
+        font-size: 1.1rem;
+        letter-spacing: 0;
+        color: $brand-color;
+      }
+      .introduce {
+        display: block;
+        padding-top: 1px;
+        font-size: 90%;
+        letter-spacing: 0;
+        color: $brand-color;
+      }
+      .skill {
+        margin-top: 10px;
+        .skill-list {
+          display: flex;
+          flex-wrap: wrap;
+          list-style-type: none;
+          margin-left: 0px;
+          margin-bottom: 0px;
+          li{
+            margin-right: 5px;
+            margin-bottom: 5px;
+            a{
+              display: inline-block;
+              padding: .4em .4em;
+              font-size: 80%;
+              line-height: 1;
+              border: 1px solid $blue-color !important;
+              border-radius: .1rem;
+              color: $blue-color;
+              transition: background-color .3s ease-out;
+              &:hover{
+                color: $background-color;
+                background-color: $blue-color;
+                border-color: $background-color;
+              }
+            }
+          }
         }
       }
     }
@@ -592,6 +673,7 @@
   @include relative-font-size(2.625);
   letter-spacing: -1px;
   line-height: 1;
+  font-weight: 500;
 
   @include media-query($on-laptop) {
     @include relative-font-size(2.25);
@@ -606,16 +688,17 @@
   margin-bottom: $spacing-unit;
 
   h1 {
-    @include relative-font-size(2);
     font-weight: 500;
+    @include relative-font-size(2);    
+
     @include media-query($on-laptop) {
       @include relative-font-size(1.75);
     }
   }
 
   h2 {
-    @include relative-font-size(1.625);
     font-weight: 500;
+    @include relative-font-size(1.625);    
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.375);
@@ -623,8 +706,8 @@
   }
 
   h3 {
-    @include relative-font-size(1.25);
     font-weight: 500;
+    @include relative-font-size(1.25);    
 
     @include media-query($on-laptop) {
       @include relative-font-size(1.125);
@@ -632,9 +715,9 @@
   }
 
   h4 {
-    @include relative-font-size(1);
     font-weight: 500;
-
+    @include relative-font-size(1);
+    
     @include media-query($on-laptop) {
       @include relative-font-size(0.75);
     }

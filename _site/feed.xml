@@ -1,20 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-15T12:06:11-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MonthlyReport</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MonthlyReport.html">&lt;h1 id=&quot;6월-머신러닝파트-월간-리뷰&quot;&gt;6월 머신러닝파트 월간 리뷰&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-16T04:43:27-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-15T10:00:00-05:00</published><updated>2021-05-15T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;6월-리뷰&quot;&gt;6월 리뷰&lt;/h1&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;전임 파트장 부재로 인해, 파트 재정비와 업무 Role 변경으로 인해 한달 늦게 보고합니다.&lt;/p&gt;
+  &lt;p&gt;For McKinsey&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h2&gt;
 
 &lt;p&gt;과금넛지 내용을 넣고&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;디지털사이니지&quot;&gt;디지털사이니지&lt;/h2&gt;
 
 &lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;옥외광고-지역-선정&quot;&gt;옥외광고 지역 선정&lt;/h2&gt;
 
 &lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;상시-업무&quot;&gt;상시 업무&lt;/h2&gt;
 
@@ -94,9 +113,15 @@
 
 &lt;p&gt;분석가와 머신러닝 엔지니어에 대한 관심이 지금보다 조금 적었을 때,&lt;/p&gt;
 
-&lt;p&gt;저와 같은 웹 개발자들은 비슷한 문제를 오랜기간 고민했습니다.&lt;/p&gt;
+&lt;p&gt;SW 개발자들은 비슷한 문제를 오랜기간 고민했습니다.&lt;/p&gt;
 
-&lt;p&gt;Git, 젠킨스, 트레비스, 팀시티&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://teckangaroo.com/wp-content/uploads/2019/08/Screenshot_85411.png&quot; alt=&quot;수 많은 CI/CD&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Git, Jenkins, Travis CI, TeamCity, Circle CI&lt;/p&gt;
 
 &lt;p&gt;한 번쯤 들어보신 적 있는 위의 이름들은 로컬 컴퓨터의 작업 코드를 원격지 서버의 코드와 동일하게 보장하기 위한 도구들입니다.&lt;/p&gt;
 
@@ -242,7 +267,9 @@
 
 &lt;h2 id=&quot;이-발표는-첫-번째-발표로아주-아주-아주-낮은-수준의-머신러닝-파이프라인을-다룹니다그런데도-양이-적지-않습니다-&quot;&gt;이 발표는 첫 번째 발표로&lt;br /&gt;아주 아주 아주 낮은 수준의 머신러닝 파이프라인을 다룹니다.&lt;br /&gt;그런데도, 양이 적지 않습니다. 😹&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://www.freecodecamp.org/news/content/images/2021/03/Screenshot-2021-03-23-at-4.39.30-AM.png&quot; alt=&quot;MlOps 구글트랜드&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/MLOPS%20featured%20image.png&quot; alt=&quot;Azure MLOps&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -278,15 +305,19 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;소스 짜기&lt;/p&gt;
+&lt;p&gt;첫째, 코드 작성하기&lt;/p&gt;
+
+&lt;p&gt;둘째, 도커파일 작성하기&lt;/p&gt;
+
+&lt;p&gt;셋째, 푸쉬!&lt;/p&gt;</content><author><name>전지호</name></author><category term="mlops" /><category term="aws" /><category term="kubenetes" /><summary type="html">머신러닝 실험 모델을 프로덕션 레벨로 사용하기 위한 필수적인 프로세스입니다. 로컬 컴퓨터, 제플린, 데이터브릭스에서만 사용해보았던 머신러닝 모델을 어떻게 해야 상용 서비스로 만들 수 있을까요? 머신러닝 엔지니어와 분석가가 개발자와의 업무 의존성을 줄이기 위한 머신러닝 인프라에 대해 설명합니다.</summary></entry><entry><title type="html">데이터 분석가를 위한 Docker</title><link href="http://0.0.0.0:4000/2021/05/13/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="데이터 분석가를 위한 Docker" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;요망한-고래이야기&quot;&gt;요망한 고래이야기&lt;/h1&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;도커파일 작성하기&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;주피터 설치가 귀찮다면… 🚬&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;푸쉬!&lt;/p&gt;</content><author><name>전지호</name></author><category term="mlops" /><category term="aws" /><category term="kubenetes" /><summary type="html">머신러닝 실험 모델을 프로덕션 레벨로 사용하기 위한 필수적인 프로세스입니다. 로컬 컴퓨터, 제플린, 데이터브릭스에서만 사용해보았던 머신러닝 모델을 어떻게 해야 상용 서비스로 만들 수 있을까요? 머신러닝 엔지니어와 분석가가 개발자와의 업무 의존성을 줄이기 위한 머신러닝 인프라에 대해 설명합니다.</summary></entry><entry><title type="html">데이터 분석가를 위한 Docker</title><link href="http://0.0.0.0:4000/2021/05/13/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="데이터 분석가를 위한 Docker" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h2 id=&quot;같이-일하는-데이터-분석가를-위해-&quot;&gt;같이 일하는 데이터 분석가를 위해 🤲&lt;/h2&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubenetes" /><summary type="html">도커는 개발자만을 위한 도구가 아닙니다. 데이터 분석가와 머신러닝 엔지니어 하물며 내 컴퓨터를 깨끗이 쓰고 싶은 사람에게도 적합합니다.</summary></entry><entry><title type="html">아이덴티피케이션 논문 리뷰</title><link href="http://0.0.0.0:4000/2021/05/12/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="아이덴티피케이션 논문 리뷰" /><published>2021-05-12T10:00:00-05:00</published><updated>2021-05-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/12/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/12/Identification-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;object-detection-survey&quot;&gt;Object Detection: Survey&lt;/h1&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubenetes" /><summary type="html">도커는 개발자만을 위한 도구가 아닙니다. 데이터 분석가와 머신러닝 엔지니어 하물며 내 컴퓨터를 깨끗이 쓰고 싶은 사람에게도 적합합니다.</summary></entry><entry><title type="html">백상현 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EB%B0%B1%EC%83%81%ED%98%84.html" rel="alternate" type="text/html" title="백상현 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EB%B0%B1%EC%83%81%ED%98%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EB%B0%B1%EC%83%81%ED%98%84.html"></content><author><name>백상현</name></author><category term="python" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">최혁근 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="최혁근 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;object-detection-survey&quot;&gt;Object Detection: Survey&lt;/h1&gt;
 
 &lt;p&gt;디지털 사이니지 프로젝트에는 여러가지 Deep Learning Task들이 존재한다.
 그 중 가장 기초가 되는 Object Detection 관련 연구상황을 정리하고 Tensorflow를 이용한 실제 코드 구현을 실습하는 방법을 기록한다.&lt;/p&gt;
@@ -459,5 +490,24 @@
   &lt;li&gt;&lt;a href=&quot;https://github.com/walton-wang929/Object_Detection&quot;&gt;Object Detection Survey by walton-wang929&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1809.03193&quot;&gt;Recent Advances in Object Detection in the Age of Deep Convolutional Neural Networks&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://hoya012.github.io/blog/Tutorials-of-Object-Detection-Using-Deep-Learning-what-is-object-detection/&quot;&gt;HOYA012’s Research Blog - Tutorial of Object Detection using Deep Learning&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="mnist" /><category term="computervision" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">컴퓨터 비전과 이모션 디텍팅에 관하여…</title><link href="http://0.0.0.0:4000/2021/05/12/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="컴퓨터 비전과 이모션 디텍팅에 관하여…" /><published>2021-05-12T10:00:00-05:00</published><updated>2021-05-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/12/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/12/Emotion-%EA%B6%8C%EC%8A%B9%EC%A7%84.html"></content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry><entry><title type="html">데이터 분석에 관하여..,</title><link href="http://0.0.0.0:4000/2021/05/12/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81.html" rel="alternate" type="text/html" title="데이터 분석에 관하여..," /><published>2021-05-12T10:00:00-05:00</published><updated>2021-05-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/12/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/12/DataAnalysis-%EA%B9%80%EB%8F%84%EC%98%81.html">&lt;h1 id=&quot;제목테스트&quot;&gt;제목테스트&lt;/h1&gt;
-&lt;h1 id=&quot;테스트테스트테스트&quot;&gt;테스트테스트테스트&lt;/h1&gt;</content><author><name>김도영</name></author><category term="eda" /><category term="analysis" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려강산. 대한사람 대한으로 길이 보전하세.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">김연수 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EC%97%B0%EC%88%98.html" rel="alternate" type="text/html" title="김연수 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EC%97%B0%EC%88%98</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EC%97%B0%EC%88%98.html"></content><author><name>김연수</name></author><category term="python" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">김도영 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EB%8F%84%EC%98%81.html" rel="alternate" type="text/html" title="김도영 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EB%8F%84%EC%98%81</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EB%8F%84%EC%98%81.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;인용구&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;작은-제목&quot;&gt;작은 제목&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;인용구&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;인용구&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>김도영</name></author><category term="eda" /><category term="analysis" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">권승진 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="권승진 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html"></content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry></feed>
