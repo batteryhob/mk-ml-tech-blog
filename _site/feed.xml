@@ -1,4 +1,109 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-16T10:56:14-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-15T10:00:00-05:00</published><updated>2021-05-15T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;6월-리뷰-&quot;&gt;6월 리뷰 📆&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-18T01:23:16-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">AWS DynamoDB 연동하기</title><link href="http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS DynamoDB 연동하기" /><published>2021-05-16T10:00:00-05:00</published><updated>2021-05-16T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;python으로-aws-dynamodb-연동하기-&quot;&gt;Python으로 AWS DynamoDB 연동하기 🤲&lt;/h1&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Python을 사용하여 AWS DynamoDB 데이터 쿼리&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;boto3-설치&quot;&gt;boto3 설치&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;설치된 python 패키지 매니저로 boto3를 설치합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;boto3client-사용&quot;&gt;boto3.client 사용&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dynamodb = boto3.client('dynamodb', aws_access_key_id='본인의 Access ID', aws_secret_access_key='본인의 Secret Access Key', region_name='리전 입력')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;boto3로 dynamoDB에 접근하는 방식은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.resource&lt;/code&gt; 와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.client&lt;/code&gt; 두 가지 방법이 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.resource&lt;/code&gt;의 방식이 AWS의 공식 문서에 샘플로 등장하지만, 사용이 좀 더 간편한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.client&lt;/code&gt; 방식을 소개하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;parameter-설정&quot;&gt;Parameter 설정&lt;/h2&gt;
+
+&lt;p&gt;dynamoDB를 사용할 때는 각 row의 column에 해당하는 type을 명시해야 데이터 조작이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;자주 사용하는 type은 다음과 같습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;S: 문자열
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;S&quot;: &quot;Hello&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;N: 문자열
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;N&quot;: &quot;11.0&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;SS: 문자열 리스트
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;SS&quot;: [ &quot;Hello&quot;, &quot;Jiho&quot; ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;NS: 숫자 문자열 리스트&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;NS&quot;: [ &quot;11.0&quot;, &quot;123.45&quot; ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;M: key-value 형태의 Map
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;M&quot;: {&quot;Name&quot;: {&quot;S&quot;: &quot;Joe&quot;}, &quot;Age&quot;: {&quot;N&quot;: &quot;35&quot;}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;L: 다양한 타입의 List
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;L&quot;: [ {&quot;S&quot;: &quot;Hello&quot;}, {&quot;S&quot;: &quot;Hello&quot;}, {&quot;S&quot;: &quot;Hello&quot;} ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;insert&quot;&gt;Insert&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;response = dynamodb.put_item(
+    TableName='테이블 명', 
+    Item={ 
+            'column1':{ 
+                'S': 'value1' 
+            }, 
+            'column2':{
+                'S': 'value2' 
+            }
+        }
+    )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;select&quot;&gt;Select&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;response = dynamodb.get_item(
+    TableName='string',
+    Key={
+            'column1':{ 
+                'S': 'value1'
+            }
+        }
+    )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>전지호</name></author><category term="aws" /><category term="python" /><summary type="html">AWS에서 사용하는 대표적인 NoSQL 데이터베이스인 DynamoDB의 데이터를 Python을 사용하여 가져오는 것을 알아봅시다.</summary></entry><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-15T10:00:00-05:00</published><updated>2021-05-15T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;6월-리뷰-&quot;&gt;6월 리뷰 📆&lt;/h1&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -334,7 +439,7 @@
   &lt;p&gt;주피터 설치가 귀찮다면… 🚬&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubenetes" /><summary type="html">도커는 개발자만을 위한 도구가 아닙니다. 데이터 분석가와 머신러닝 엔지니어 하물며 내 컴퓨터를 깨끗이 쓰고 싶은 사람에게도 적합합니다.</summary></entry><entry><title type="html">최혁근 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="최혁근 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;object-detection-survey&quot;&gt;Object Detection: Survey&lt;/h1&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubenetes" /><summary type="html">도커는 개발자만을 위한 도구가 아닙니다. 데이터 분석가와 머신러닝 엔지니어 하물며 내 컴퓨터를 깨끗이 쓰고 싶은 사람에게도 적합합니다.</summary></entry><entry><title type="html">최혁근 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="최혁근 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;object-detection-survey&quot;&gt;Object Detection: Survey!!!!!!!!!!!!&lt;/h1&gt;
 
 &lt;p&gt;디지털 사이니지 프로젝트에는 여러가지 Deep Learning Task들이 존재한다.
 그 중 가장 기초가 되는 Object Detection 관련 연구상황을 정리하고 Tensorflow를 이용한 실제 코드 구현을 실습하는 방법을 기록한다.&lt;/p&gt;
@@ -351,7 +456,7 @@
   &lt;li&gt;Representative tasks in computer vision&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;./figures/task.png&quot; alt=&quot;Object detection and other tasks&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/task.png&quot; alt=&quot;Object detection and other tasks&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Object Detection은 Image Classification task에 사물의 위치를 Bounding Box로 예측하는 Regression task가 추가된 문제이다.&lt;/li&gt;
@@ -466,7 +571,7 @@
 
 &lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://host.robots.ox.ac.uk/pascal/VOC/&quot;&gt;PASCAL VOC&lt;/a&gt;
+  &lt;li&gt;PASCAL VOC
     &lt;ul&gt;
       &lt;li&gt;Pattern Analysis, Statistical Modeling and Computational Learning&lt;/li&gt;
       &lt;li&gt;20 Object types
@@ -480,19 +585,6 @@
       &lt;li&gt;대표적으로 VOC05, VOC12 가 많이 사용됨&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_01_thumb.jpg&quot; alt=&quot;vocex1&quot; /&gt;
-&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_02_thumb.jpg&quot; alt=&quot;vocex2&quot; /&gt;
-&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_03_thumb.jpg&quot; alt=&quot;vocex3&quot; /&gt;
-&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/car_04_thumb.jpg&quot; alt=&quot;vocex4&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_01_thumb.jpg&quot; alt=&quot;vocex5&quot; /&gt;
-&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_02_thumb.jpg&quot; alt=&quot;vocex6&quot; /&gt;
-&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_03_thumb.jpg&quot; alt=&quot;vocex7&quot; /&gt;
-&lt;img src=&quot;http://host.robots.ox.ac.uk/pascal/VOC/voc2012/examples/images/bird_04_thumb.jpg&quot; alt=&quot;vocex8&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://cocodataset.org/#home&quot;&gt;MS COCO&lt;/a&gt;
     &lt;ul&gt;
       &lt;li&gt;91 Object types, 328k images, 2.5m labeled instance&lt;/li&gt;
@@ -507,7 +599,27 @@
   &lt;li&gt;&lt;a href=&quot;https://github.com/walton-wang929/Object_Detection&quot;&gt;Object Detection Survey by walton-wang929&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1809.03193&quot;&gt;Recent Advances in Object Detection in the Age of Deep Convolutional Neural Networks&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://hoya012.github.io/blog/Tutorials-of-Object-Detection-Using-Deep-Learning-what-is-object-detection/&quot;&gt;HOYA012’s Research Blog - Tutorial of Object Detection using Deep Learning&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">백상현 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EB%B0%B1%EC%83%81%ED%98%84.html" rel="alternate" type="text/html" title="백상현 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EB%B0%B1%EC%83%81%ED%98%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EB%B0%B1%EC%83%81%ED%98%84.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">디지털 사이니지 프로젝트에는 여러가지 Deep Learning Task들이 존재한다.그 중 가장 기초가 되는 Object Detection 관련 연구상황을 정리하고 실습한다.</summary></entry><entry><title type="html">권승진 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="권승진 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;인용구 😍
+야호야호야호
+&lt;br /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;작은-제목&quot;&gt;작은 제목&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;인용구 askldjlaskjdlkas;dlkalksjdasldkjlaskdasdasdasdasdasd&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;인용구&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">제목</title><link href="http://0.0.0.0:4000/1986/12/29/Sample.html" rel="alternate" type="text/html" title="제목" /><published>1986-12-29T09:00:00-06:00</published><updated>1986-12-29T09:00:00-06:00</updated><id>http://0.0.0.0:4000/1986/12/29/Sample</id><content type="html" xml:base="http://0.0.0.0:4000/1986/12/29/Sample.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
 &lt;blockquote&gt;
   &lt;p&gt;인용구&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -527,64 +639,4 @@
 &lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
 &lt;blockquote&gt;
   &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>백상현</name></author><category term="python" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">김연수 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EC%97%B0%EC%88%98.html" rel="alternate" type="text/html" title="김연수 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EC%97%B0%EC%88%98</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EC%97%B0%EC%88%98.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;작은-제목&quot;&gt;작은 제목&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>김연수</name></author><category term="python" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">김도영 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EB%8F%84%EC%98%81.html" rel="alternate" type="text/html" title="김도영 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EB%8F%84%EC%98%81</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B9%80%EB%8F%84%EC%98%81.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;작은-제목&quot;&gt;작은 제목&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>김도영</name></author><category term="eda" /><category term="analysis" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">권승진 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="권승진 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;작은-제목&quot;&gt;작은 제목&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name>작성자</name></author><category term="python" /><category term="aws" /><summary type="html">메인페이지 노출 description</summary></entry></feed>

@@ -2,8 +2,12 @@ version: "3.3"
 
 services:
   blog:
-    image: jekyll/jekyll:latest
-    command: jekyll serve --force_polling --drafts --trace
+    # build:
+    #     context: .
+    #     dockerfile: Dockerfile
+    # image: jekyll/jekyll:latest
+    image: batteryho/jekyll-custom:latest
+    command: jekyll serve --force_polling --drafts --trace --config _config_development.yml
     ports:
       - "4000:4000"
     volumes:
