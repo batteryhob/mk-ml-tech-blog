@@ -17,8 +17,6 @@ toc: true
 
 # 쿠버네티스에 JupyterHub 설치 👨‍💻
 
-<br/>
-
 > 쿠버네티스가 구축되어 있다면, helm 차트를 이용하여 간단하게 JupyterHub를 설치할 수 있습니다.
 
 <br/>
@@ -228,7 +226,7 @@ JupyterHub를 쿠버네티스 환경에 구축하므로서 생각했던 두 가�
 <br/>
 
 ## 참고문헌
-👉[zero-to-jupyterhub](https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/installation.html#install-jupyterhub)
+👉 [zero-to-jupyterhub](https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/installation.html#install-jupyterhub)
 
 
-👉[zero-to-jupyterhub-on-k8s](https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html)
+👉 [zero-to-jupyterhub-on-k8s](https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html)

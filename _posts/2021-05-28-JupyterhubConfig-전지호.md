@@ -25,7 +25,7 @@ toc: true
 
 <hr/>
 
-👉[첫번째포스트](/2021/05/27/JupyterhubForK8S-전지호.html)👈
+👉 [첫번째포스트](/2021/05/27/JupyterhubForK8S-전지호.html)
 
 위 포스트 처음에 만들었던 config.yaml를 확인합니다.
 
@@ -203,4 +203,4 @@ singleuser:
 
 ## 참고문헌
 
-👉[zero-to-jupyterhub-on-k8s](https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html)
+👉 [zero-to-jupyterhub-on-k8s](https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html)
