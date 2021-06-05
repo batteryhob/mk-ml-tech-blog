@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  1편 | 머신러닝 서비스를 만들기 위한 MLOps
+title:  머신러닝 서비스를 만들기 위한 MLOps Vol.1
 date:   2021-05-14 00:00:00 +0900
 author: 전지호
-tags: mlops aws kubenetes
+tags: mlops aws kubernetes
 excerpt: 머신러닝 실험 모델을 프로덕션 레벨로 사용하기 위한 필수적인 프로세스입니다. 로컬 컴퓨터, 제플린, 데이터브릭스에서만 사용해보았던 머신러닝 모델을 어떻게 해야 상용 서비스로 만들 수 있을까요? 머신러닝 엔지니어와 분석가가 개발자와의 업무 의존성을 줄이기 위한 머신러닝 인프라에 대해 설명합니다.
 use_math: false
 toc: true
@@ -82,7 +82,7 @@ production: true
 
 ## 이제, MLOps
 
-![MlOps 구글트랜드](https://www.freecodecamp.org/news/content/images/2021/03/Screenshot-2021-03-23-at-4.39.30-AM.png)
+![MlOps 구글트랜드](https://www.freecodecamp.org/news/content/images/2021/03/Screenshot-2021-03-23-at-4.39.30-AM.png){: #popup }
 
 <br/>
 
@@ -94,7 +94,7 @@ SW 개발자들은 비슷한 문제를 오랜기간 고민했습니다.
 
 <br/>
 
-![수 많은 CI/CD](https://teckangaroo.com/wp-content/uploads/2019/08/Screenshot_85411.png)
+![수 많은 CI/CD](https://teckangaroo.com/wp-content/uploads/2019/08/Screenshot_85411.png){: #popup }
 
 <br/>
 
@@ -202,7 +202,7 @@ Git 리포지터리의 마지막 코드를 `빌드`와 `업로드`를 대신해 
 
 왜냐면, 단 한번만 익숙해지면 알아서 쓰게됩니다.
 
-👉[<u>데이터 분석가를 위한 Docker</u>](/2021/05/13/DockerForAnalysis-전지호.html)👈
+데이터 분석가를 위한 도커 포스트를 작성 중입니다.
 
 <br/>
 
@@ -224,7 +224,7 @@ MLOps 개발자가 이 도구를 이용해 모델과 분석 코드의 배포, �
 
 <br/>
 
-![Azure MLOps](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/MLOPS%20featured%20image.png)
+![Azure MLOps](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/MLOPS%20featured%20image.png){: #popup }
 
 <br/>
 

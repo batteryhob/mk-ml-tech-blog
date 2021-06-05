@@ -1,109 +1,788 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-05-18T01:23:16-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">AWS DynamoDB 연동하기</title><link href="http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS DynamoDB 연동하기" /><published>2021-05-16T10:00:00-05:00</published><updated>2021-05-16T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;python으로-aws-dynamodb-연동하기-&quot;&gt;Python으로 AWS DynamoDB 연동하기 🤲&lt;/h1&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-06-04T03:09:04-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">AWS S3 데이터 Lifecycle 기능을 이용하여 정리하기</title><link href="http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS S3 데이터 Lifecycle 기능을 이용하여 정리하기" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;지호야너는-어쩜-정리도-안하고-방을-돼지우리-같이-하고-사니-&quot;&gt;“지호야…너는 어쩜 정리도 안하고 방을 돼지우리 같이 하고 사니…” 🐷&lt;/h1&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Python을 사용하여 AWS DynamoDB 데이터 쿼리&lt;/p&gt;
+  &lt;p&gt;우리, S3라도 정리합시다. 꿀꿀 🐷&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;boto3-설치&quot;&gt;boto3 설치&lt;/h2&gt;
+&lt;p&gt;Amazon S3를 이용하여 로그 및 분석 결과 혹은 파일을 저장하여 사용하다 보면 어느새 너무 많은 양의 데이터가 축적됩니다.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;데이터가 많아지면 많아질 수록, 스토리지 요금도 엄청나게 발생하게 됩니다.&lt;/p&gt;
 
-&lt;p&gt;설치된 python 패키지 매니저로 boto3를 설치합니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/s3lifecycle/%EC%97%84%EC%B2%AD%EB%82%9C%EC%9A%A9%EB%9F%89.JPG&quot; alt=&quot;엄청난 용량&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 중 사용하는 데이터나 파일은 상관이 없으나, 사용하지 않는 데이터가 너무 많이 쌓이면 문제가 발생할 수 도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;AWS Concsole이나 S3 Browser를 통해 데이터에 접근할 때, 많은 데이터 조회에 속도가 느려지는 현상도 목격할 수 있어요.&lt;/p&gt;
+
+&lt;p&gt;S3의 Lifecycle 기능을 이용하여 S3 버킷에 있는 데이터를 삭제하고 관리할 수 잇는 방법을 알아봅시다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;amazon-s3-lifecycle-기능-사용하기&quot;&gt;Amazon S3 Lifecycle 기능 사용하기&lt;/h2&gt;
+
 &lt;hr /&gt;
 
+&lt;p&gt;먼저, AWS Concsole로 S3 메뉴로 접근합니다.&lt;/p&gt;
+
+&lt;p&gt;그리고 버킷 리스트 중 정리를 할 S3 버킷을 클랙해 접근해보면 &lt;u&gt;&lt;b&gt;관리&lt;/b&gt;&lt;/u&gt;라는 메뉴가 보여요.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/s3lifecycle/%EB%B2%84%ED%82%B7%EC%A0%91%EA%B7%BC.JPG&quot; alt=&quot;S3 버킷 접근&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;u&gt;&lt;b&gt;수명 주기 규칙 생성&lt;/b&gt;&lt;/u&gt;버튼을 눌러서 생성화면으로 접근합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/s3lifecycle/%EC%88%98%EB%AA%85%EC%A3%BC%EA%B8%B0%EC%83%9D%EC%84%B1%ED%99%94%EB%A9%B40.JPG&quot; alt=&quot;수명주기 생성화면1&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음과 같은 화면을 볼 수 있어요.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/s3lifecycle/%EC%88%98%EB%AA%85%EC%A3%BC%EA%B8%B0%EC%83%9D%EC%84%B1%ED%99%94%EB%A9%B41.JPG&quot; alt=&quot;수명주기 생성화면2&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;수명 주기의 이름을 생성한 후, 범위를 지정해야 합니다.&lt;/p&gt;
+
+&lt;p&gt;범위를 지정하지 않으면, 모든 객체가 해당 수명 주기의 영향을 받으니 주의해주시기 바랍니다.&lt;/p&gt;
+
+&lt;p&gt;보통은 파일명(접두사)로 구분합니다. 접두사를 입력해주시면, 해당 접두사에 포함된 항목만 수명 주기에 영향을 받습니다.&lt;/p&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;boto3client-사용&quot;&gt;boto3.client 사용&lt;/h2&gt;
+&lt;h3 id=&quot;접두사란&quot;&gt;접두사란?&lt;/h3&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dynamodb = boto3.client('dynamodb', aws_access_key_id='본인의 Access ID', aws_secret_access_key='본인의 Secret Access Key', region_name='리전 입력')
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;S3에서 파일의 구조를 보면&lt;/p&gt;
 
-&lt;p&gt;boto3로 dynamoDB에 접근하는 방식은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.resource&lt;/code&gt; 와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.client&lt;/code&gt; 두 가지 방법이 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;&lt;u&gt;버킷이름/상위폴더명/하위폴더명/파일명&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.resource&lt;/code&gt;의 방식이 AWS의 공식 문서에 샘플로 등장하지만, 사용이 좀 더 간편한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.client&lt;/code&gt; 방식을 소개하겠습니다.&lt;/p&gt;
+&lt;p&gt;이렇게 된 폴더 구조를 볼 수 있는데, 이는 실제로는 폴더 구조가 아니라 폴더+파일명이 하나의 Key로 취급됩니다.&lt;/p&gt;
+
+&lt;p&gt;그렇기 때문에, 접두사는 파일명에 앞에 붙는 Key의 구분자라고 생각하시면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;따라서, 바로 위의 경우는 버킷이름을 제외하고 슬래시를 포함하여(/)&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;상위폴더명/하위폴더명/&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;까지가 해당 파일 Key의 접두사라고 보실 수 있습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;수명-주기의-규칙&quot;&gt;수명 주기의 규칙&lt;/h2&gt;
+
 &lt;hr /&gt;
 
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/s3lifecycle/%EC%88%98%EB%AA%85%EC%A3%BC%EA%B8%B0%EC%83%9D%EC%84%B1%ED%99%94%EB%A9%B42.JPG&quot; alt=&quot;수명주기 생성화면3&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;수명 주기의 규칙은 잘 쓰지 않는 마지막 조건을 제외하고, 4가지 조건을 볼 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. 스토리지 클래스 간에 객체의 `현재`버전 반환
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;해당 객체가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;최신&lt;/code&gt; 버전으로 취급되는 시간입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2. 스토리지 클래스 간에 객체의 `이전`버전 반환
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;해당 객체가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;이전&lt;/code&gt; 버전으로 취급되는 시간입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3. 객체의 `현재` 버전 만료
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;해당 객체가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;최신&lt;/code&gt; 버전으로 취급되지 않을 때까지의 시간입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;4. 객체의 `이전` 버전 영구 삭제
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;해당 객체가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;이전&lt;/code&gt; 버전으로 취급되어 영구적으로 삭제될 때까지의 시간입니다.&lt;/p&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;parameter-설정&quot;&gt;Parameter 설정&lt;/h2&gt;
+&lt;p&gt;저의 경우에는,&lt;/p&gt;
 
-&lt;p&gt;dynamoDB를 사용할 때는 각 row의 column에 해당하는 type을 명시해야 데이터 조작이 가능합니다.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;&lt;u&gt;S3에 업로드된 객체가 30일 후에 이전 버전으로 취급되고,&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
 
-&lt;p&gt;자주 사용하는 type은 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;&lt;u&gt;이전 버전이 된 지 60일이나 지나면 삭제하고 싶었습니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;결국, 총 90일 후 S3에 적재된 리소스를 삭제하고 싶었으므로,&lt;/p&gt;
+
+&lt;p&gt;2번과, 4번 조건을 이용해 수명 주기를 생성했습니다.&lt;/p&gt;
+
+&lt;p&gt;완료 버튼을 눌러 생성을 완료합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/s3lifecycle/%EC%83%9D%EC%84%B1%EC%99%84%EB%A3%8C.JPG&quot; alt=&quot;생성완료&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;상세 화면을 보면 등록된 수명 주기를 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/s3lifecycle/%ED%83%80%EC%9E%84%EB%9D%BC%EC%9D%B8%ED%99%95%EC%9D%B8.JPG&quot; alt=&quot;수명 주기 확인&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;결론&quot;&gt;결론&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;AWS S3 Lifecycle 기능을 사용하여 스토리지 요금을 줄이고, 복잡하지 않은 S3 파일 관리가 가능해졌습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;앞으로는 집에서 잔소리를 좀 듣더라도&lt;/p&gt;
+
+&lt;p&gt;데이터만이라도 잘 정리하여&lt;/p&gt;
+
+&lt;p&gt;효과적인 업무가 될 수 있도록 노력합시다.&lt;/p&gt;
+
+&lt;p&gt;그럼 20,000👋&lt;/p&gt;</content><author><name>전지호</name></author><category term="aws" /><summary type="html">S3를 이용하여 로그 및 분석 결과 혹은 파일을 저장하여 사용하다 보면 어느새 너무 많은 양의 데이터가 축적됩니다. 이 중 사용하는 데이터나 파일은 상관이 없으나, 사용하지 않는 데이터가 너무 많이 쌓이면 문제가 발생할 수 도 있습니다. AWS Concsole이나 S3 Browser를 통해 이를 삭제하고 관리할 수 잇는 방법을 알아봅시다.</summary></entry><entry><title type="html">월말보고(5월)- 최혁근</title><link href="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="월말보고(5월)- 최혁근" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;face-identification-시스템&quot;&gt;Face Identification 시스템&lt;/h1&gt;
+
+&lt;h2 id=&quot;face-identification-시스템-1&quot;&gt;Face Identification 시스템&lt;/h2&gt;
+&lt;h3 id=&quot;개요&quot;&gt;개요&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;필요성
+    &lt;ul&gt;
+      &lt;li&gt;오프라인 광고측정의 첫걸음&lt;/li&gt;
+      &lt;li&gt;사람들은
+        &lt;ul&gt;
+          &lt;li&gt;광고를 얼마나 보는가?&lt;/li&gt;
+          &lt;li&gt;얼마나 집중하는가?&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;이런 것을 어떻게 측정할 것인가?
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;카메라 + 얼굴인식으로 이걸 파악해보자&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;방법
+    &lt;ul&gt;
+      &lt;li&gt;카메라가 설치된 디지털 전광판에 광고를 송출
+        &lt;ul&gt;
+          &lt;li&gt;광고는 태그와 메타데이터로 어떤 종류의 광고인지 추적 가능&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;광고 송출중에 카메라 앞으로 다니는 사람들을 파악
+        &lt;ul&gt;
+          &lt;li&gt;화면에 잡힌 사람들을 개별적으로 인식&lt;/li&gt;
+          &lt;li&gt;DB에서 사람들을 누구인지 특징 / 추가 / 추적&lt;/li&gt;
+          &lt;li&gt;사람들이 광고에 시청여부 판단&lt;/li&gt;
+          &lt;li&gt;사람들의 집중시간 판단&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;광고별 시청률 / 집중률 등등 통계자료를 report&lt;/li&gt;
+      &lt;li&gt;관리자 모드에는 실시간 관찰 UI&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;세부기능 &amp;amp; 기술스택
+    &lt;ul&gt;
+      &lt;li&gt;사람 인식
+        &lt;ul&gt;
+          &lt;li&gt;Object Detection&lt;/li&gt;
+          &lt;li&gt;Human Detecetion&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;얼굴 인식
+        &lt;ul&gt;
+          &lt;li&gt;Face Detection&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사람 분류
+        &lt;ul&gt;
+          &lt;li&gt;Face embedding&lt;/li&gt;
+          &lt;li&gt;Face Verification / Identification&lt;/li&gt;
+          &lt;li&gt;Similarity&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;광고시청 / 집중
+        &lt;ul&gt;
+          &lt;li&gt;Head Pose Estimation&lt;/li&gt;
+          &lt;li&gt;Eye tracking&lt;/li&gt;
+          &lt;li&gt;Engagement detection&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사람 정보 저장
+        &lt;ul&gt;
+          &lt;li&gt;ID&lt;/li&gt;
+          &lt;li&gt;방문횟수&lt;/li&gt;
+          &lt;li&gt;머문 시간&lt;/li&gt;
+          &lt;li&gt;시청한 시간&lt;/li&gt;
+          &lt;li&gt;사진정보&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;요구사항
+    &lt;ul&gt;
+      &lt;li&gt;성능&lt;/li&gt;
+      &lt;li&gt;속도&lt;/li&gt;
+      &lt;li&gt;장비&lt;/li&gt;
+      &lt;li&gt;환경&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;일정
+    &lt;ul&gt;
+      &lt;li&gt;개발&lt;/li&gt;
+      &lt;li&gt;서베이
+        &lt;ul&gt;
+          &lt;li&gt;기술&lt;/li&gt;
+          &lt;li&gt;논문&lt;/li&gt;
+          &lt;li&gt;기타&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;문제점 분석&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;시스템-세부사항&quot;&gt;시스템 세부사항&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;카메라 대기 (동영상으로도 테스트 가능)
+    &lt;ul&gt;
+      &lt;li&gt;Cam에서 영상을 프레임 단위로 분리 / 이미지화&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;화질 / 영상 사이즈 고려&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;화면에서 사람 / 얼굴 인식
+    &lt;ul&gt;
+      &lt;li&gt;Object Detection&lt;/li&gt;
+      &lt;li&gt;Face Detection&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;사람 ID 확인
+    &lt;ul&gt;
+      &lt;li&gt;얼굴 사진을 embedding해서 vector로 변환&lt;/li&gt;
+      &lt;li&gt;기존 DB에 similarity 계산, 유사도가 높은 순 정리&lt;/li&gt;
+      &lt;li&gt;Top1, Top5 등등을 통해서 사람 선별 기준 확립&lt;/li&gt;
+      &lt;li&gt;얼굴이 아닌 사람 전체 모습을 통해서 이전 프레임과의 연관성을 통해&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tracking
+    &lt;ul&gt;
+      &lt;li&gt;확인한 사람을 frame단위로 계속 마킹해준다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;추가적으로-리서치가-필요한-분야&quot;&gt;추가적으로 리서치가 필요한 분야&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Human Pose Estimation
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/MVIG-SJTU/AlphaPose&quot;&gt;AlphaPose&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/facebookresearch/DetectAndTrack&quot;&gt;Detect And Track&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Object Tracking&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;research1--object-detection&quot;&gt;Research1 : Object Detection&lt;/h2&gt;
+&lt;h3 id=&quot;개요-1&quot;&gt;개요&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;사람을 인식하기 위해서는 기존의 물체 인식 (Object Detection) 모델들을 사용한다.&lt;/li&gt;
+  &lt;li&gt;실시간으로 진행하기 위해서는 추론 속도가, 후처리를 하기 위해서는 정확도가 중요하다.&lt;/li&gt;
+  &lt;li&gt;연구된 여러 가지 구현체들을 실험용 데모영상을 이용해서 정확도와 속도를 측정하고&lt;/li&gt;
+  &lt;li&gt;우리 시스템에 어울리는 모델이 무엇일지를 선별한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;실험설계&quot;&gt;실험설계&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;테스트 데이터
+    &lt;ul&gt;
+      &lt;li&gt;동영상 파일&lt;/li&gt;
+      &lt;li&gt;가장 일반적인 거리영상인 지하철입구 영상&lt;/li&gt;
+      &lt;li&gt;많은 사람들이 지나다닐 때 사람들을 정확히 포착할 수 있는가?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;테스트 동영상 &lt;a href=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/hgchoi16/4k-002.mkv&quot;&gt;링크&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1-1-tensorflow-object-detection-zoo&quot;&gt;1-1. Tensorflow Object Detection Zoo&lt;/h2&gt;
+&lt;h3 id=&quot;1-테스트-개요&quot;&gt;1. 테스트 개요&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;테스트 모델
+    &lt;ul&gt;
+      &lt;li&gt;Object Detection 6가지 모델
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/tensorflow/models/tree/master/research/object_detection&quot;&gt;Tensorflow2 Object Detection Model zoo&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;기존에 한번식 break-through를 만들어냈던 모델들&lt;/li&gt;
+          &lt;li&gt;최근 소개된 모델들도 추가해서&lt;/li&gt;
+          &lt;li&gt;해상도가 높은 모델들 선정 (1024x1024)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;선정된 모델들
+        &lt;ul&gt;
+          &lt;li&gt;CenterNet HourGlass104 1024x1024 (CenterNet)&lt;/li&gt;
+          &lt;li&gt;EfficientDet D4 1024x1024 (EfficientDet)&lt;/li&gt;
+          &lt;li&gt;SSD MobileNet V2 FPNLite 640x640 (MobileNet)&lt;/li&gt;
+          &lt;li&gt;SSD ResNet152 FPN 1024x1024 (RetinaNet)&lt;/li&gt;
+          &lt;li&gt;Fast R-CNN ResNet152 V1 1024x1024 (Fast R-CNN)&lt;/li&gt;
+          &lt;li&gt;Mask R-CNN Inception ResNet V2 1024x1024 (Mask R-CNN)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;테스트 방법
+    &lt;ol&gt;
+      &lt;li&gt;정확도 테스트
+        &lt;ul&gt;
+          &lt;li&gt;임의로 선별한 몇 개의 이미지에 대해서&lt;/li&gt;
+          &lt;li&gt;개별 모델을 실행해서 물체를 인식하고&lt;/li&gt;
+          &lt;li&gt;그 중에서 사람으로 판단하는 확률이 50% 이상인 결과들에 대해서&lt;/li&gt;
+          &lt;li&gt;Box 표시하고 이미지로 출력&lt;/li&gt;
+          &lt;li&gt;몇 명이나 사람을 찾아냈는지, 잘못 인식한 것은 얼마나 되는지 확인&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;추론 속도 테스트
+        &lt;ul&gt;
+          &lt;li&gt;동영상 전체를(10초, 600 frams)&lt;/li&gt;
+          &lt;li&gt;프레임별로 읽으면서&lt;/li&gt;
+          &lt;li&gt;모델 추론을 진행하고 결과를 확인해보는 방식&lt;/li&gt;
+          &lt;li&gt;추론 시 batchsize를 1, 5로 변화시켜가면서 시간 확인&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이렇게 테스트를 해보고 우리 환경에 맞는 모델을 선정하는 것이 목표&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-사람인식-테스트&quot;&gt;2. 사람인식 테스트&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;MODEL&lt;/th&gt;
+      &lt;th&gt;사&lt;/th&gt;
+      &lt;th&gt;람&lt;/th&gt;
+      &lt;th&gt;찾&lt;/th&gt;
+      &lt;th&gt;은&lt;/th&gt;
+      &lt;th&gt;수&lt;/th&gt;
+      &lt;th&gt;속도&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Image1&lt;/td&gt;
+      &lt;td&gt;Image2&lt;/td&gt;
+      &lt;td&gt;Image3&lt;/td&gt;
+      &lt;td&gt;Image 4&lt;/td&gt;
+      &lt;td&gt;Image 5&lt;/td&gt;
+      &lt;td&gt;동영상전체&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CenterNet&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;130.68s&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;EfficientDet&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;608.38s&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MobileNet&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;293.48s&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;RetinaNet&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;514.89s&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fast R-CNN&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;16&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;201.66s&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Mast R-CNN&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;14&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;311.81s&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;S: 문자열
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;S&quot;: &quot;Hello&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;N: 문자열
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;N&quot;: &quot;11.0&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;SS: 문자열 리스트
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;SS&quot;: [ &quot;Hello&quot;, &quot;Jiho&quot; ]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;NS: 숫자 문자열 리스트&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;NS&quot;: [ &quot;11.0&quot;, &quot;123.45&quot; ]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;M: key-value 형태의 Map
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;M&quot;: {&quot;Name&quot;: {&quot;S&quot;: &quot;Joe&quot;}, &quot;Age&quot;: {&quot;N&quot;: &quot;35&quot;}}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;L: 다양한 타입의 List
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &quot;L&quot;: [ {&quot;S&quot;: &quot;Hello&quot;}, {&quot;S&quot;: &quot;Hello&quot;}, {&quot;S&quot;: &quot;Hello&quot;} ]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;li&gt;테스트결과 (TODO : 링크주소 수정)
+    &lt;ul&gt;
+      &lt;li&gt;Image1
+  &lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/hgchoi16/test_result1.png&quot; alt=&quot;테스트결과1&quot; id=&quot;popup&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Image2
+  &lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/hgchoi16/test_result2.png&quot; alt=&quot;테스트결과2&quot; id=&quot;popup&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Image3
+  &lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/hgchoi16/test_result3.png&quot; alt=&quot;테스트결과3&quot; id=&quot;popup&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Image4
+  &lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/hgchoi16/test_result4.png&quot; alt=&quot;테스트결과4&quot; id=&quot;popup&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Image5
+  &lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/hgchoi16/test_result5.png&quot; alt=&quot;테스트결과5&quot; id=&quot;popup&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&quot;3-결과분석-및-여담&quot;&gt;3. 결과분석 및 여담&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;기존 논문에서 조사한대로 R-CNN의 성능이 우수한 것이 확인됌&lt;/li&gt;
+  &lt;li&gt;의야한 결과는 원래 SSD 계열들이 속도가 빠르게 나와야하는데 정확도와 속도 측면에서 결과가 이상해보인다.
+    &lt;ul&gt;
+      &lt;li&gt;구현된 다른 모델들을 찾아보고 보충실험을 진행해봐야하겠다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;CenterNet의 경우도 좋은 성능을 보여주고 있다. 이번 실험에서는 속도도 가장 빨랐다.&lt;/li&gt;
+  &lt;li&gt;추가적으로 Yolo계열와 SSD 모델을 새로 찾아서 추가실험을 진행해야하겠다.&lt;/li&gt;
+  &lt;li&gt;이 모델에 추가해서 얼굴인식 모델들도 결합해서 함께 진행해보자!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-앞으로-진행해야할-내용&quot;&gt;4. 앞으로 진행해야할 내용&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Pytorch 모델들 조사
+    &lt;ul&gt;
+      &lt;li&gt;간단하게 테스트해본 결과&lt;/li&gt;
+      &lt;li&gt;이쪽 모델들이 사용하거나 변형하기가 훨씬 쉬어보인다.&lt;/li&gt;
+      &lt;li&gt;제일 기본적인 예제 - &lt;a href=&quot;https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html#torchvision-object-detection-finetuning-tutorial&quot;&gt;TORCHVISION OBJECT DETECTION FINETUNING TUTORIAL&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;이런 식으로 사람만을 대상으로하는 detection 모델 개발 가능&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;다른 기법들 조사 및 적용&lt;/li&gt;
+  &lt;li&gt;자체 학습하면 어떻게 데이터를 구하고 어떻게 사용&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;1-2-pytorch-test&quot;&gt;1-2. Pytorch Test&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;현재 진행중&lt;/li&gt;
+  &lt;li&gt;torchvision에서 기본으로 제공되는 모델이
+    &lt;ul&gt;
+      &lt;li&gt;Mask R-CNN ResNet50 FPN&lt;/li&gt;
+      &lt;li&gt;Tensorflow의 Mask R-CNN에서 backbone architecture로 사용된 Inception ResNet V2 1024x1024보다 가벼운 모델&lt;/li&gt;
+      &lt;li&gt;이 모델 최상단에 추가로 Layer를 하나 더 두고 Person Class만을 따로 디텍션하도록 fine tuning 하는 tutorial이 존재&lt;/li&gt;
+      &lt;li&gt;이 과정만으로도 훨씬 무거운 tensorflow모델보다 빠르고 비슷한 성능을 보이는 것으로 확인됨&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;모델 다루기나 코딩도 pytorch 쪽이 훨씬 편리하기 때문에 이걸 중심으로 개발 진행
+    &lt;ul&gt;
+      &lt;li&gt;대신 성능 관련해서는 확실하게 문서화 진행 예정&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">5월 보고용 자료입니다.</summary></entry><entry><title type="html">Apache Zeppelin와 Jupyter의 비교</title><link href="http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="Apache Zeppelin와 Jupyter의 비교" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;아피치-제플린과-주피터의-간단-비교&quot;&gt;아피치 제플린과 주피터의 간단 비교&lt;/h1&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;데이터 분석의 워크플로를 개선하는 아파치 제플린과 주피터를 간단하게 비교해볼께요.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-설치-&quot;&gt;1. 설치 🛠&lt;/h2&gt;
+
 &lt;hr /&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;설치 단계에서부터 막히면, 아주 짜증이 많이납니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;주피터의 설치는 아주 간단합니다.&lt;/p&gt;
+
+&lt;p&gt;그냥 명령어를 통해 로컬에 설치만 하면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;로컬 환경을 쉽게 서버에 올리기 위해, 버전 별로 빌드된 도커 버전도 제공합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EC%A3%BC%ED%94%BC%ED%84%B0%20%EC%84%A0%ED%83%9D.JPG&quot; alt=&quot;다양한 주피터 도커&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html&quot;&gt;주피터&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://github.com/jupyter/docker-stacks&quot;&gt;주피터 도커 깃허브&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;그에 비해, 제플린의 설치는 조금 더 복잡합니다. 압축을 풀고 서버에서 실행해야 하죠.&lt;/p&gt;
+
+&lt;p&gt;많은 기능을 함께 사용할려면 소스를 빌드하고 다시 실행해하는 문제가 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;첫 번째 대결은, 주피터의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;insert&quot;&gt;Insert&lt;/h2&gt;
+&lt;h2 id=&quot;2-커뮤니티-&quot;&gt;2. 커뮤니티 💬&lt;/h2&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;response = dynamodb.put_item(
-    TableName='테이블 명', 
-    Item={ 
-            'column1':{ 
-                'S': 'value1' 
-            }, 
-            'column2':{
-                'S': 'value2' 
-            }
-        }
-    )
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;큰 커뮤니티는 레퍼런스와 도움을 받기 위해 아주 중요한 요소입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Jupyter의 커뮤니티는 이 Zeppelin보다 상당히 크고 훨씬 더 많은 외부 시스템을 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;그러나 Zeppelin의 커뮤니티는 성장 중이나 아직은 Jupyter에 밀리는 모습을 보여줍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;두 번째 대결은, Jupyter의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/compatition.jpg&quot; alt=&quot;구글 트렌드 비교&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-다중-사용자-지원-&quot;&gt;3. 다중 사용자 지원 👨‍👩‍👦‍👦&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;공용 환경에서 다중 사용자 지원은 필수입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Zeppelin는 다중 사용자를 지원하며,  Jupyter는 다중 사용자를 지원하지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;세 번째 대결은, Zeppelin의 승리일까요?&lt;/p&gt;
+
+&lt;p&gt;JupyterHub라는 Jupyter 확장 리소스는 다중 사용자 지원을 약속합니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 Zeppelin에 비해 Jupyter는 사용자마다 별도의 서버가 필요합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;이어질 내용으로 인해 이번 대결은 보류하겠습니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-다중-사용자-지원-시-리소스-분배-&quot;&gt;4. 다중 사용자 지원 시 리소스 분배 👨‍👩‍👦‍👦&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;다중 사용자가 많은 리소스를 동시에 사용할 때, 이에 대한 대응은 어떨까요?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Zeppelin은 서버 단일 프로세스를 사용합니다. 다중 사용자의 이용에 취약하죠.&lt;/p&gt;
+
+&lt;p&gt;이를 회피하기 위해, conda 환경과 docker를 Zeppelin 내부에서 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;Jupyter는 어떨까요?&lt;/p&gt;
+
+&lt;p&gt;Jupyter는 애초에 다중 사용자를 지원하지않으니, JupyterHub를 살펴봅시다.&lt;/p&gt;
+
+&lt;p&gt;JupyterHub는 각 사용자마다 서버를 따로 제공해야하니 단일 서버 프로세스를 사용한다 하더라도, 서로 영향을 주지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 각각의 서버를 구축하는 비용에 대한 문제는 어떻게 할까요?&lt;/p&gt;
+
+&lt;p&gt;JupyterHub는 쿠버네티스 환경을 제공하는 버전을 따로 내놨습니다.&lt;/p&gt;
+
+&lt;p&gt;하나의 서버에서 동작하는 쿠버네티스 환경에서의 JupyterHub는 각각의 사용자에 대해 가상의 컨테이너를 제공하여, 분리된 작업환경을 제공하는 동시에 서버 구축 비용을 줄일 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;네 번째 대결은, 주피터의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;5-확장프로그램-&quot;&gt;5. 확장프로그램 📥&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;더 많은 기능을 사용하고 싶다면…&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Jupyter는 약 20 개만있는 Zeppelin의 인터프리터 유형에 대해 지원되는 엔진이 85 개가 넘는 큰 목록으로 인해 승리합니다. 다양한 언어를 사용하고 싶다면, 주피터를 사용해야 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;6-차트---&quot;&gt;6. 차트 📊 📈 📉&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;데이터 시각화를 이용하여, 비주얼라이징 툴을 사용할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Jupyter와 Zeppelin을 둘 다 다양한 비주얼라이징 툴을 플로팅하여 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;따라서, 대결은 무승부입니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;7-결론&quot;&gt;7. 결론&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;개인의 선호도에 따라, 선택은 자유.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;하지만, 많은 부분에서 Jupyter의 우세를 점칠 수 있습니다. 최근 가장 핫한 개발트렌드인 docker와 쿠버네티스 지원이 우수한 것은 차이를 더 크게 만드는 요소일 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;위와 같은 이유로,&lt;/p&gt;
+
+&lt;p&gt;우리 팀은 &lt;b&gt;&lt;u&gt;쿠버네티스 환경에 JupyterHub&lt;/u&gt;&lt;/b&gt;를 구축하여 사용하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;도움이 되셨길 바랍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/netflixjupyter.png&quot; alt=&quot;넷플릭스도 쓰는 주피터&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;안녕👋&lt;/p&gt;</content><author><name>전지호</name></author><category term="zeppelin" /><category term="jupyter" /><summary type="html">데이터 분석의 워크플로를 개선하는 아파치 제플린과 주피터를 간단하게 비교해볼께요.</summary></entry><entry><title type="html">AWS Aurora DB, Mysql DB에서 스케줄러 사용하는 방법</title><link href="http://0.0.0.0:4000/2021/06/02/MysqlEvent-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS Aurora DB, Mysql DB에서 스케줄러 사용하는 방법" /><published>2021-06-02T10:00:00-05:00</published><updated>2021-06-02T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/02/MysqlEvent-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/02/MysqlEvent-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;aws-auroradb-mysql-db-에서-스케줄러-사용하는-방법-&quot;&gt;AWS AuroraDB, Mysql DB 에서 스케줄러 사용하는 방법 🕘&lt;/h1&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;AWS AuroraDB에서 데이터 사용을 용이하게 하기 위해 스케줄러를 사용해봅시다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;AWS에서 사용하는 RDB 데이터베이스인 AuroraDB에서 스케줄러를 사용하는 방법을 설명합니다.&lt;/p&gt;
+
+&lt;p&gt;굉장히 많은 데이터가 일반 RDB에 쌓일 경우, 불가피하게 속도에 영향을 끼칠 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;한 예로, 1 번의 쿼리로 데이터를 삭제하기 너무 많은 시간이 필요할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;스케줄러를 적절히 사용하면 데이터 관리를 용이하게 할 수 있을 것입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;이벤트-스케줄을-생성하는-기본-문법-️&quot;&gt;이벤트 스케줄을 생성하는 기본 문법 ✏️&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;먼저 기본 문법을 알아봅시다. workbench 등을 통해 접근하여 다음과 같은 문법으로 이벤트를 생성할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EVENT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EXISTS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;이벤트&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SCHEDULE&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;수행&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;반복&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;시간&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMPLETION&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRESERVE&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ENABLE&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;코멘트&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;DO&lt;/span&gt; 
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;수행할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;명령&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;실제-쿼리를-작성해봅시다-️&quot;&gt;실제 쿼리를 작성해봅시다. ✏️&lt;/h2&gt;
+
 &lt;hr /&gt;
 
+&lt;p&gt;일단, 매 시간마다 데이터를 삭제하는 예제 쿼리를 작성해보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EVENT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EXISTS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EVENT_DELETE_ROW_BEFORE_180DAY&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SCHEDULE&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EVERY&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;MINUTE&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;분&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;마다&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;EVERY&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HOUR&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMPLETION&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRESERVE&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ENABLE&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'현재일로 부터 180일 전 데이터는 삭제'&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;DO&lt;/span&gt; 
+
+    &lt;span class=&quot;o&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;수행할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;이벤트&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;DELETE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;테이블&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date_sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INTERVAL&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DAY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;select&quot;&gt;Select&lt;/h2&gt;
+&lt;h2 id=&quot;스케줄러-onoff&quot;&gt;스케줄러 On/Off&lt;/h2&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;response = dynamodb.get_item(
-    TableName='string',
-    Key={
-            'column1':{ 
-                'S': 'value1'
-            }
-        }
-    )
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>전지호</name></author><category term="aws" /><category term="python" /><summary type="html">AWS에서 사용하는 대표적인 NoSQL 데이터베이스인 DynamoDB의 데이터를 Python을 사용하여 가져오는 것을 알아봅시다.</summary></entry><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-05-15T10:00:00-05:00</published><updated>2021-05-15T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;6월-리뷰-&quot;&gt;6월 리뷰 📆&lt;/h1&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;쿼리 작성을 완료했다면, 해당 데이터베이스가 스케줄러가 작동가능한 지 확인해봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VARIABLES&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VARIABLE_NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'event_scheduler'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EC%8A%A4%EC%BC%80%EC%A4%84%EB%9F%AC.JPG&quot; alt=&quot;이벤트 확인&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;작동이 가능하지 않다면 아래 명령어를 통해 스케줄러 기능을 사용가능하게 바꿔주세요.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;GLOBAL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event_scheduler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;AWS에서는 AuroraDB를 처음 만들었을 때, 파라미터 그룹(Parameter groups)이라는 설정값에 의해 스케줄러가 on/off를 할 수 없는 상태로 생성됬을 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;AWS console에서 확인해 봅시다.&lt;/p&gt;
+
+&lt;p&gt;데이터 베이스의 파라미터 그룹을 확인해봅시다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%EA%B7%B8%EB%A3%B9.JPG&quot; alt=&quot;데이터 베이스 확인&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;default.aurora5.6라는 기본 파라미터 그룹으로 생성된 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%EA%B7%B8%EB%A3%B91.JPG&quot; alt=&quot;파라미터 그룹 확인&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이벤트 스케줄러가 변경이 가능하도록 되어있으나, 기본 파라미터 그룹은 값 변경이 되지 않습니다. 그렇기 때문에, 새 파라미터 그룹을 생성하고 데이터베이스 파라미터 그룹을 변경해야 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%20%EB%B3%80%EA%B2%BD.JPG&quot; alt=&quot;파라미터 변경&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;새로운 파라미터 그룹을 생성했다면 파라미터를 변경 후, 데이터베이스 파라미터 그룹을 생성한 파라미터 그룹으로 변경한다.
+&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;변경이 가능한 파라미터 그룹이라면 파라미터만 변경한다&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;적용 후, 데이터베이스 재부팅을 통해 파라미터가 변경이 적용되게 하세요.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EC%9E%AC%EB%B6%80%ED%8C%85.JPG&quot; alt=&quot;재부팅&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;재부팅이 완료된 후, 다시 명령어로 확인해봅니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VARIABLES&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VARIABLE_NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'event_scheduler'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%20%EB%B3%80%EA%B2%BD%20%EC%99%84%EB%A3%8C.JPG&quot; alt=&quot;파라미터 변경 완료&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 이벤트 스케줄러를 등록할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;이벤트-스케줄러-등록-&quot;&gt;이벤트 스케줄러 등록 📅&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;예제 쿼리를 실행합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EVENT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EXISTS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EVENT_DELETE_ROW_BEFORE_180DAY&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SCHEDULE&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EVERY&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;MINUTE&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;분&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;마다&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;EVERY&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HOUR&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMPLETION&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRESERVE&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ENABLE&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'현재일로 부터 180일 전 데이터는 삭제'&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;DO&lt;/span&gt; 
+
+    &lt;span class=&quot;o&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;수행할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;이벤트&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;DELETE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;테이블&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date_sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INTERVAL&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DAY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;등록된 이벤트는 다음 명령어로 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EVENTS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EB%93%B1%EB%A1%9D%EB%90%9C%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%9F%AC.JPG&quot; alt=&quot;등록된 이벤트 보기&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;등록된 이벤트를 삭제하려면 다음 명령어로 삭제할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;DROP&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;이벤트&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;그럼 20,000 👋&lt;/p&gt;</content><author><name>전지호</name></author><category term="aws" /><category term="sql" /><category term="mysql" /><summary type="html">AWS에서 사용하는 RDB 데이터베이스인 AuroraDB에서 스케줄러를 사용하는 방법을 설명합니다. 굉장히 많은 데이터가 일반 RDB에 쌓일 경우, 불가피하게 속도에 영향을 끼칠 수 있습니다. 한 예로, 1 번의 쿼리로 데이터를 삭제하기 너무 많은 시간이 필요할 수 있습니다. 스케줄러를 적절히 사용하면 데이터 관리를 용이하게 할 수 있을 것입니다.</summary></entry><entry><title type="html">6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/06/01/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="6월 머신러닝파트 월간 리뷰" /><published>2021-06-01T10:00:00-05:00</published><updated>2021-06-01T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/01/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/01/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;6월-리뷰-&quot;&gt;6월 리뷰 📆&lt;/h1&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -115,7 +794,11 @@
 
 &lt;h2 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h2&gt;
 
-&lt;p&gt;과금넛지 내용을 넣고&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;넛지반응 모델링을 위해 과금예측모델링을과 캐시플로우 정제 작업 중 주요 이슈에 봉착했습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;hr /&gt;
@@ -124,7 +807,90 @@
 
 &lt;h2 id=&quot;디지털사이니지&quot;&gt;디지털사이니지&lt;/h2&gt;
 
-&lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;디지털사이니지 마일스톤 중 FGT 웹 솔루션 제작 단계에 돌입했습니다. 또한, 아이덴티피케이션 모델 개발에 착수 했습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;머신러닝-파이프라인&quot;&gt;머신러닝 파이프라인&lt;/h2&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;머신러닝파트는 1년 간 머신러닝 서비스 운영 기술적 노하우를 축적하려 노력했습니다. 공유할 수 있는 결과물이 나오기 시작했습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;첫-번째-머신러닝파트-자체-쿠버네티스-기반-jupyterhub를-구축했습니다&quot;&gt;첫 번째, 머신러닝파트 자체 쿠버네티스 기반 JupyterHub를 구축했습니다.&lt;/h3&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;현재, 랩스내 많은 분석 조직에서 EC2 기반 EMR 제플린을 사용하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;컨텐츠 서비스 개발팀, ADS 개발팀이 그러합니다.&lt;/p&gt;
+
+&lt;p&gt;EC2에 하둡(아파티 스파크 사용을 위한)얼 설치한 EMR 제플린은 많은 사용자가 동시 사용 시, &lt;u&gt;한 작업이 리소스가 많이 필요할 경우&lt;/u&gt; 다른 사용자의 다른 작업에 영향을 줍니다.&lt;/p&gt;
+
+&lt;p&gt;최악의 경우, 제플린 서버의 프로세스가 멈추어, EC2 재시작하는 경우가 허다합니다.&lt;/p&gt;
+
+&lt;p&gt;때문에, 작업자마다 완전히 분리된 독립적인 분석 환경과 테스트 환경을 제공해줘야 합니다.&lt;/p&gt;
+
+&lt;p&gt;머신러닝 파트는 쿠버네티스 기반의 JupyterHub를 구축하여 가능하게 했습니다.&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;http://mlhub.na.nexon.co.kr&quot;&gt;&lt;u&gt;머신러닝파트 주피터허브&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;아시다시피, 도커 컨테이너는 독립적인 환경을 보장합니다.&lt;/p&gt;
+
+&lt;p&gt;쿠버네티스 기반의 주피터허브는 사용자가 로그인 시, 그때마다 도커 컨테이너를 만듭니다. 한 작업 컨테이너가 &lt;b&gt;폭파-!&lt;/b&gt; 되도 다른 컨테이너에 영향을 주지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;심지어 각 컨테이너마다 분석에 쓰이고자 하는 라이브러리 사양을 골라서 만들수 있고,&lt;/p&gt;
+
+&lt;p&gt;해당 컨테이너도 커스터 마이징이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;머신러닝파트는 랩스내 nxlog에 접근할 수 있는 하둡 기반의 pyspark 컨테이너, 머신러닝 프레임워크가 설치된 pytorch, tensorflow가 각각 설치된 3개의 컨테이너를 내부 사양에 맞게 커스터마이징하여 사용하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;10분 간, 사용하지 않는 컨테이너는 자동으로 내려갑니다. 따라서 쿠버네티스내 리소스는 효율적으로 관리됩니다.&lt;/p&gt;
+
+&lt;p&gt;전 세계에서 가장 유명한 머신러닝 혹은 데이터분석 도구인 kubeflow, sagemaker, 데이터브릭스에서 제공하는 기능입니다. 해당 기능을 각 조직마다 구축해 내부적으로 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;두-번째-머신러닝파트-자체-jupyterhub안에-있는-코드는-자연스럽게-서비스-레벨로-배포할-수-있습니다&quot;&gt;두 번째, 머신러닝파트 자체 JupyterHub안에 있는 코드는 자연스럽게 서비스 레벨로 배포할 수 있습니다.&lt;/h3&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;아시다시피, 일반 웹서비스처럼 머신러닝 혹은 분석 서비스 또한 라이브 레벨에서는 많은 유지 보수의 비용이 들어갑니다.&lt;/p&gt;
+
+&lt;p&gt;현재의 경우처럼 Job을 만들어 airflow로 실행하는 형태의 업무는 실제 대규모 서비스 레벨에 올라갈 경우, 많은 문제를 야기할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;일단 &lt;u&gt;&lt;b&gt;형상관리&lt;/b&gt;&lt;/u&gt;가 되지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;실수로 서비스 단계에 잘못된 소스가 올라갈 경우, 롤백에 취약하며, 작업자의 실수로 이전 코드를 찾을 수 없는 문제가 발생할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;공동 작업의 경우, 코드를 수정한 사람이나, 배포를 한 사람을 찾아내기 힘들 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;서든어택 월핵탐지기 경우처럼 다른 조직과 협업하여 하루에 수십만 건 이미지를 머신러닝 코드로 처리하는 프로세스와 같은 서비스가 있다면, 이러한 취약점은 감당하기 힘든 문제로 돌아올 수 도 있습니다. 인텔리전스랩스의 분석 및 머신러닝 서비스가 네이버페이, 카카오페이같은 일반 사용자 대상 금융 서비스라고 가정하면 대부분의 분석 서비스가 큰 어려움을 겪을 것이라고 쉽게 생각할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;현재 월핵탐지와 FGT 감정추론의 경우 &lt;u&gt;&lt;b&gt;개발자의 도움&lt;/b&gt;&lt;/u&gt;없이 작업자가 머신러닝 코드만 수정하여 배포, 롤백, 형상관리, 모니터링이 모두 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;머신러닝 파이프라인에 MLOps라 불리는 CI/CD를 적용했습니다.&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://a4b2cf330e1d2464a951ba793aaae70e-596153973.ap-northeast-2.elb.amazonaws.com/&quot;&gt;&lt;u&gt;월핵탐지기 모니터링 ArgoCD&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://ad1f03f16a72740d68c582a87b928f1b-1924335043.ap-northeast-2.elb.amazonaws.com/&quot;&gt;&lt;u&gt;FGT 실시간 감정추론 모니터링 ArgoCD&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;세-번째-mlops&quot;&gt;세 번째, MLOps&lt;/h3&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;hr /&gt;
@@ -133,7 +899,9 @@
 
 &lt;h2 id=&quot;옥외광고-지역-선정&quot;&gt;옥외광고 지역 선정&lt;/h2&gt;
 
-&lt;p&gt;디지털 사이니지의 내용을 넣고&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;넥슨유저의 위치정보 기반의 지역을 선정하다가 데이터의 한계를 느끼고 새로운 아이데이션에 착수했습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;hr /&gt;
@@ -142,501 +910,776 @@
 
 &lt;h2 id=&quot;상시-업무&quot;&gt;상시 업무&lt;/h2&gt;
 
-&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">1편 | 머신러닝 서비스를 만들기 위한 MLOps</title><link href="http://0.0.0.0:4000/2021/05/13/MLOpsPrologue-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="1편 | 머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-05-13T10:00:00-05:00</published><updated>2021-05-13T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/13/MLOpsPrologue-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/13/MLOpsPrologue-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;머신러닝-서비스를-만들고-싶은-분들에게-&quot;&gt;머신러닝 서비스를 만들고 싶은 분들에게 🤲&lt;/h1&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;티나지 않지만, 넥슨에 도움이 되는 업무를 지속적으로 하고 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
+&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기</title><link href="http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html" rel="alternate" type="text/html" title="Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기" /><published>2021-05-31T10:00:00-05:00</published><updated>2021-05-31T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">&lt;h1 id=&quot;spark-broadcast&quot;&gt;Spark Broadcast&lt;/h1&gt;
+&lt;h2 id=&quot;우리에게-필요한-것은-inference-효율성-&quot;&gt;우리에게 필요한 것은 inference 효율성 😎&lt;/h2&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;모델은 만들었는데 이제 어떻게 해야 하지?? 🚬&lt;/p&gt;
+  &lt;p&gt;기존 python ml 라이브러리로 다량의 데이터를 빠르게 처리를 해야 할 때!  &lt;u&gt;Spark broadcasting&lt;/u&gt;을 이용해 inference 속도를 개선할 수 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;대부분의 데이터 과학자, 데이터 분석가, 머신러닝 엔지니어들은 실험과 학습과 같은 연구에 중점을 둡니다.&lt;/p&gt;
-
-&lt;p&gt;예를 들겠습니다.&lt;/p&gt;
-
-&lt;p&gt;당신은 사람 얼굴만 보면 정확한 범죄 확률을 예측해 모든 범죄를 막을 수 있는 머신러닝 프로젝트에 참여했습니다.&lt;/p&gt;
-
-&lt;p&gt;수 많은 실험과 연구로 성능이 폭발적인 환상적인 모델을 만들었습니다. 모든 CCTV에 모델을 설치하면 마이너리티 리포트는 꿈이 아닙니다.&lt;/p&gt;
-
-&lt;p&gt;이제 어떻게 할까요?&lt;/p&gt;
-
-&lt;p&gt;전국의 CCTV 프로그래머에게 파이썬 설치 방법과 모델 파일을 첨부한 이메일을 발송할까요?&lt;/p&gt;
-
-&lt;p&gt;아니면 전국의 CCTV 영상 파일을 매일 매일 받아 로컬 머신 혹은 사내에 설치된 DGX 머신에서 돌려 결과를 다시 전달할까요?&lt;/p&gt;
+&lt;h3 id=&quot;spark의-공유-변수&quot;&gt;Spark의 공유 변수&lt;/h3&gt;
+&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;위와-같은-방법들은-많은-문제를-포함합니다&quot;&gt;위와 같은 방법들은 많은 문제를 포함합니다.&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;아피치 스파크&lt;/b&gt;는 SQL, 머신러닝 등 처리를 위한 기본 제공 모듈이 있는 &lt;u&gt;대규모 데이터 처리용 통합 분석 엔진&lt;/u&gt;입니다.&lt;/p&gt;
 
-&lt;h3 id=&quot;첫째-모든-cctv의-컴퓨팅-사양이-같지-않습니다&quot;&gt;첫째, 모든 CCTV의 컴퓨팅 사양이 같지 않습니다.&lt;/h3&gt;
-
-&lt;p&gt;내가 필요로 하는 프레임워크나 라이브러리가 설치가 안될 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;로컬 컴퓨터에서 당연하게 사용하는 파이썬조차 설치가 힘들 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;둘째-수동-작업은-너무-힘듭니다&quot;&gt;둘째, 수동 작업은 너무 힘듭니다.&lt;/h3&gt;
-
-&lt;p&gt;프로덕션 레벨에서의 반복적인 작업들은 연구 개발에 들어가야할 시간들을 뺏어갑니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;셋째-실험-환경과-프로덕션-환경이-분리되어-있지-못합니다&quot;&gt;셋째, 실험 환경과 프로덕션 환경이 분리되어 있지 못합니다.&lt;/h3&gt;
-
-&lt;p&gt;작업 환경에 cronjob이나 airflow를 사용하여 배치를 돌릴 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;그러나 실험 환경의 리소스를 나눠서 쓰게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;넷째-위-문제가-해결되었다-해도-모델을-업데이트할-때-마다-같은-작업을-반복해야-합니다&quot;&gt;넷째, 위 문제가 해결되었다 해도 모델을 업데이트할 때 마다 같은 작업을 반복해야 합니다.&lt;/h3&gt;
-
-&lt;p&gt;힘들게 배포한 모델에 오류가 숨어있었습니다.&lt;/p&gt;
-
-&lt;p&gt;더 많은 실험을 통해 모델의 성능이 눈에 띄게 좋아졌습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;새로운 라이브러리의 추가&lt;/strong&gt;, &lt;strong&gt;새로운 작업&lt;/strong&gt;, &lt;strong&gt;새로운 스케줄링&lt;/strong&gt;이 필요하다면 위 작업을 다시 해야할 까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;한 보고서에 따르면 AI를 다루는 기업은 &lt;strong&gt;88%&lt;/strong&gt;가&lt;/p&gt;
-
-&lt;p&gt;위와 같은 문제로 인해 테스트 단계에서 벗어나지 못하고 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;이제-mlops&quot;&gt;이제, MLOps&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://www.freecodecamp.org/news/content/images/2021/03/Screenshot-2021-03-23-at-4.39.30-AM.png&quot; alt=&quot;MlOps 구글트랜드&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;mlops로-불리는-머신러닝-파이프라인은전-세계-모든-조직들이-공통적으로-고민하는-문제입니다&quot;&gt;MLOps로 불리는 머신러닝 파이프라인은&lt;br /&gt;전 세계 모든 조직들이 공통적으로 고민하는 문제입니다.&lt;/h3&gt;
-
-&lt;p&gt;분석가와 머신러닝 엔지니어에 대한 관심이 지금보다 조금 적었을 때,&lt;/p&gt;
-
-&lt;p&gt;SW 개발자들은 비슷한 문제를 오랜기간 고민했습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://teckangaroo.com/wp-content/uploads/2019/08/Screenshot_85411.png&quot; alt=&quot;수 많은 CI/CD&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Git, Jenkins, Travis CI, TeamCity, Circle CI&lt;/p&gt;
-
-&lt;p&gt;한 번쯤 들어보신 적 있는 위의 이름들은 로컬 컴퓨터의 작업 코드를 원격지 서버의 코드와 동일하게 보장하기 위한 도구들입니다.&lt;/p&gt;
-
-&lt;p&gt;보통, 코드의 형상관리는 Git에서 하는게 일반적이죠.&lt;/p&gt;
-
-&lt;p&gt;Git에 있는 마지막 형상 코드를 젠킨스등 CI/CD라 불리는 도구들을 통해서 원격지 서버에 배포했습니다.&lt;/p&gt;
-
-&lt;p&gt;이를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DevOps&lt;/code&gt;라 부르고 있고,&lt;/p&gt;
-
-&lt;p&gt;현재, 필드에서 말하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MLOps&lt;/code&gt;는 이 아이디어를 일정 부분 가져옵니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;devops와-mlops는-뭣이-같고-뭣이-다른데&quot;&gt;DevOps와 MLOps는 뭣이 같고, 뭣이 다른데??&lt;/h3&gt;
-
-&lt;p&gt;일반적으로 웹 서비스를 구축할 때,&lt;/p&gt;
-
-&lt;p&gt;과거에는 코드를 서버에 업로드시키는 것만으로도 배포가 완료되는 시절이 있었습니다.&lt;/p&gt;
-
-&lt;p&gt;보통은 배치 작업같은 것이 필요없으니까, FTP같은 프로그램으로 서버에 올리면 끝났어요.&lt;/p&gt;
-
-&lt;p&gt;하지만, 웹 프레임워크가 발전하고 프로그래밍 언어가 발전하면서 다양한 외부 프레임워크의 의존성이 강해졌고,&lt;/p&gt;
-
-&lt;p&gt;곧 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;빌드&lt;/code&gt;라는 작업이 필요하게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;코드짜는 것도 짜증나는데 배포 단계가 늘어나는 걸 귀찮아했던 개발자들은&lt;/p&gt;
-
-&lt;p&gt;Git 리포지터리의 마지막 코드를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;빌드&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;업로드&lt;/code&gt;를 대신해 주는 걸 생각하게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;좀 편해졌다 싶었더니, 외부 프레임워크가 점점 발전하다보니 또 문제가 생겨요.&lt;/p&gt;
-
-&lt;p&gt;본질적으로 내 로컬 컴퓨터랑 서버 컴퓨터의 사양이 다르니 자꾸 오류가 생겨요.&lt;/p&gt;
-
-&lt;p&gt;이번에 개발자들은 내 로컬 환경과 동일한 환경을 서버에 통째로 올려버리는 걸 만들어 버립니다.(=도커)&lt;/p&gt;
-
-&lt;p&gt;점점 접점이 있다는 것이 느껴지시나요?&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;주피터-설치하는-법-아나콘다-설치하는-법-텐서플로-설치하는-법&quot;&gt;주피터 설치하는 법, 아나콘다 설치하는 법, 텐서플로 설치하는 법&lt;/h3&gt;
-
-&lt;p&gt;네이버에 검색하면서 다들 고생 한 번씩 해보셨을 겁니다.&lt;/p&gt;
-
-&lt;p&gt;머신러닝 서비스는 웹 서비스에서 사용하는 라이브러리에 비해 설치가 굉장히 까다롭습니다.&lt;/p&gt;
-
-&lt;p&gt;또, &lt;u&gt;버전 의존성이 매우 크지만, 호환성은 매우 취약합니다.&lt;/u&gt;&lt;/p&gt;
-
-&lt;p&gt;머신러닝 서비스를 운영할 컴퓨터에 로컬 실험 환경과 같은 환경으로 라이브러리를 세팅할 자신 있으신가요?&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;도커&quot;&gt;도커&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;도커를 사용하는 것이 텐서플로를 사용하는 가장 쉬운 방법입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;텐서플로 공식문서에 다운로드 챕터에 포함되어 있는 제일 첫 문구입니다.&lt;/p&gt;
-
-&lt;p&gt;그렇지만, 아직도 머신러닝 엔지니어나 데이터 분석가들은 도커의 사용을 어려워합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;도대체 도커를 왜 써야하는데??&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;혹시 DGX 머신을 가지고 있으신가요?&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+일반적인 스파크 연산이 클러스터에서 실행될 때 함수에서 사용되는 변수는 각 클러스터에 복제되고 각 노드 연산에서는 독립적입니다. 클러스터 상에서 변수를 공유하는 것은 비효율적이기 때문인데, 일반적인 연산 패턴을 지원하기 위해 아래와 같은 공유 변수를 제공합니다
+.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;수 많은 가상 환경과 버전이 충돌하는 프레임워크들로 범벅이 되어 있진 않은가요?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;GPU를 나눠서 실험 환경과 서비스 환경을 분리할 수 있을까요?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;다른 사람이 GPU를 점유하고 있을 때, 언제 끝나나 기다리시고 계신가요?&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;broadcast variables : 큰 데이터를 효율적으로 처리하는데 사용&lt;/li&gt;
+  &lt;li&gt;Accumulators variables : 특정 컬렉션의 정보를 집계하는 데 사용&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;제플린에서 머신러닝 코드를 실행하시나요?&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;나의 코드가 제플린 서버를 멈추게 하여 다른 작업자의 야근을 유도하진 않았나요?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;내 코드가 환경에 비해 적은 리소스, 혹은 많은 리소스를 사용하진 않나요?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;배치 작업을 하기 위해 airflow등 외부 도구에 의존하진 않나요?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;오늘은 &lt;b&gt;broadcast variables&lt;/b&gt;에 대하여 알아보도록 하겠습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;결국-문제는-분리&quot;&gt;결국, 문제는 &lt;strong&gt;분리&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;공통 환경을 사용하는 각 작업자의 독립적인 실험 환경 &lt;strong&gt;분리&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;실험 환경과 서비스 환경의 &lt;strong&gt;분리&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;분리&lt;/strong&gt;된 실험 환경과 서비스 환경의 &lt;strong&gt;동일한 환경 보장&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&quot;spark-broadcast-란&quot;&gt;Spark broadcast 란?&lt;/h3&gt;
+&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;도커는-작업-환경의-분리와-이식이-가능한-이-세상이-허락한-유일한-마약&quot;&gt;도커는 작업 환경의 분리와 이식이 가능한, 이 세상이 허락한 유일한 마약.&lt;/h3&gt;
-
-&lt;p&gt;왜냐면, 단 한번만 익숙해지면 알아서 쓰게됩니다.&lt;/p&gt;
-
-&lt;p&gt;👉&lt;a href=&quot;/2021/05/13/DockerForAnalysis-전지호.html&quot;&gt;&lt;u&gt;데이터 분석가를 위한 Docker&lt;/u&gt;&lt;/a&gt;👈&lt;/p&gt;
+&lt;p&gt;broadcast 변수는 읽기 전용 변수입니다. 모든 노드에 큰 input 데이터셋을 제공할 때 효과적인 방법이라고 할 수 있습니다. 이를 사용하면 효율적인 broadcast 알고리즘을 통해 계산 비용을 줄일 수도 있습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;쿠버네티스&quot;&gt;쿠버네티스&lt;/h2&gt;
+&lt;p&gt;스파크의 액션들은 기본적으로 여러 단계의 집합으로 실행되는데, 자동적으로 각 단계에 필요한 공유 변수들을 broadcast하는 것입니다.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;어렵지만, 자세히 알지 못해도 됩니다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Broadcast 변수는 RDD나 Dataframe과 동일한 방식으로 사용될 수 있습니다. (데이터는 serialized 캐싱되고 deserialized 되어 각 테스크로 넘어가게 됩니다.)&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+호출 방법은 다음과 같습니다.&lt;/p&gt;
 
-&lt;p&gt;도커 파일로 만든 컨테이너들의 생성(=코드의 실행)과 삭제(=리소스 부족으로 인한 폭파)와 스케줄링(=배치 작업)을 대신해주는 친절한 도구입니다.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sc &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; SparkContext&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+var &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 사용할 공유 변수 var&lt;/span&gt;
 
-&lt;p&gt;머신러닝 엔지니어와 분석가가 도커 파일만 작성할 줄 안다면,&lt;/p&gt;
+broadcastvar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;var&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;일단 broadcast variable이 만들어지면, 클러스터상의 모든 함수에 사용될 수 있습니다. (즉, &lt;u&gt;var은 한 번 이상 노드에 올라가지 않게&lt;/u&gt; 됩니다.)&lt;/p&gt;
 
-&lt;p&gt;MLOps 개발자가 이 도구를 이용해 모델과 분석 코드의 배포, 스케줄링이 가능하게 해줄 겁니다.&lt;/p&gt;
+&lt;p&gt;참고로, 한 번 생성된 broadcastvar 객체는 이후 수정될 수 없습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt; 
+broadcast 된 값을 이용하기 위해서는 &lt;b&gt;value 메소드&lt;/b&gt;를 사용하면 됩니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;다음-포스트는-아주-아주-아주-낮은-수준의-머신러닝-파이프라인을-다룰-예정입니다그런데도-양이-적지-않습니다-&quot;&gt;다음 포스트는 &lt;br /&gt;아주 아주 아주 낮은 수준의 머신러닝 파이프라인을 다룰 예정입니다.&lt;br /&gt;그런데도, 양이 적지 않습니다. 😹&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# value 값에 액세스 하기 위함&lt;/span&gt;
+broadcastvar.value
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/MLOPS%20featured%20image.png&quot; alt=&quot;Azure MLOps&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 포스트에서는 파이프라인 뒷부분에 해당하는 모델 배포 자동화 파이프라인을 소개합니다.&lt;/p&gt;
-
-&lt;p&gt;머신러닝파트가 운영하는 서비스에 구축되어 있는 환경입니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;모델과 머신러닝 프레임워크 환경의 자동 빌드&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;모델의 프로덕션 환경에 배포와 스케줄링&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;새로운 모델의 업데이트&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;배포된 모델의 모니터링와 관리&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;그 다음 포스트에서는 데이터 처리와 학습, 실험, 재 학습이 포함된 파이프라인을 소개할 것입니다.&lt;/p&gt;</content><author><name>전지호</name></author><category term="mlops" /><category term="aws" /><category term="kubenetes" /><summary type="html">머신러닝 실험 모델을 프로덕션 레벨로 사용하기 위한 필수적인 프로세스입니다. 로컬 컴퓨터, 제플린, 데이터브릭스에서만 사용해보았던 머신러닝 모델을 어떻게 해야 상용 서비스로 만들 수 있을까요? 머신러닝 엔지니어와 분석가가 개발자와의 업무 의존성을 줄이기 위한 머신러닝 인프라에 대해 설명합니다.</summary></entry><entry><title type="html">2편 | 머신러닝 서비스를 만들기 위한 MLOps</title><link href="http://0.0.0.0:4000/2021/04/15/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="2편 | 머신러닝 서비스를 만들기 위한 MLOps" /><published>2021-04-15T11:00:00-05:00</published><updated>2021-04-15T11:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/15/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/15/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;랩스에서-아주-간단한-mlops-만들기-&quot;&gt;랩스에서 아주 간단한 MLOps 만들기 🤲&lt;/h1&gt;
+&lt;h2 id=&quot;sklearn에-spark-broadcast를-적용해-inference-하기&quot;&gt;sklearn에 spark broadcast를 적용해 inference 하기&lt;/h2&gt;
+&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;인텔리전스 랩스에서 가장 빠르게 AWS를 이용하여 MLOps를 구축하는 방법&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;python에서 가장 많이 이용되는 mechine learning library는 sklearn일 것입니다. sklearn 에서는 보통 pandas dataframe 을 활용한 데이터를 fit하고 predict 하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, KNN (K-Nearest Neighbors)과 같은 알고리즘을 사용하게 된다면 우리는 각 key 값에 대한 각각의 k개의 neighbors를 모두 구해야합니다. 즉, &lt;b&gt;key 값 하나하나에 모든 데이터를 연산&lt;/b&gt;하게 됩니다.결국 inference 시간이 엄청나게 길어질 수 밖에 없는 구조가 됩니다.&lt;/p&gt;
+
+&lt;p&gt;이는 &lt;b&gt;&lt;u&gt;sklearn model을 broadcast 하는 방식&lt;/u&gt;&lt;/b&gt;을 활용해 효율적으로 처리될 수 있습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;같이-일하는-개발자에게-앞으로는-이렇게-말하세요&quot;&gt;같이 일하는 개발자에게 앞으로는 이렇게 말하세요!&lt;/h2&gt;
+&lt;p&gt;예제 코드는 다음과 같습니다. ( knn model 사용 )&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;MLOps 구축해주세요!&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def knn_regressor_broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;data_pd, &lt;span class=&quot;nv&quot;&gt;neighbors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;100, &lt;span class=&quot;nv&quot;&gt;n_partitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;uniform&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+
+  &lt;span class=&quot;c&quot;&gt;# X_train, y_train, X_test, y_test 의 경우 pandas dataframe 형태&lt;/span&gt;
+  
+
+  &lt;span class=&quot;c&quot;&gt;# 모델 fit&lt;/span&gt;
+  knn &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; KNeighborsRegressor&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;n_neighbors &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; neighbors, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; weights&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; knn.fit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_train, y_train&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  
+  &lt;span class=&quot;c&quot;&gt;# 여러 배치로 돌리기 위한 함수&lt;/span&gt;
+  def batch&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+    yield list&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    
+  rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_test, n_partitions&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.zipWithIndex&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+  b_model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;model&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;batch&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.map&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda value: &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;x[0] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value], &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x[1] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value]&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;.flatMap&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda x: zip&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[1], b_model.value.predict&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[0]&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt;
+  
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; result.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위와 같이 &lt;b&gt;model을 broadcast + rdd test data&lt;/b&gt;를 사용하자 Pandas dataframe을 이용해 predict를 하였을 때 Runtime errorrk가 났던 모델을 약 5분 내외로 처리할 수 있었습니다 👏👏&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;다시-처음으로-돌아가서머신러닝-모델을-상용화하는-방법은-아주-간단합니다mlops가-구축되어-있다면요&quot;&gt;다시 처음으로 돌아가서,&lt;br /&gt;머신러닝 모델을 상용화하는 방법은 아주 간단합니다.&lt;br /&gt;&lt;u&gt;MLOps가 구축&lt;/u&gt;되어 있다면요&lt;/h3&gt;
+&lt;p&gt;부가적인 코드 설명을 잠시 하자면&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;mapPartitions의 경우 나눠진 partition내에서 연산을 수행하게 해줍니다&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;1, 2, 3, 4], 2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+def f&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: yield &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;첫째, 코드 작성하기&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;둘째, 도커파일 작성하기&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;셋째, 푸쉬!&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>전지호</name></author><category term="mlops" /><category term="aws" /><category term="kubenetes" /><summary type="html">인텔리전스 랩스에서 AWS를 이용하여 가장 쉽게 MLOps를 구축하는 방법</summary></entry><entry><title type="html">데이터 분석가를 위한 Docker</title><link href="http://0.0.0.0:4000/2021/04/15/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="데이터 분석가를 위한 Docker" /><published>2021-04-15T10:00:00-05:00</published><updated>2021-04-15T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/15/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/15/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;요망한-고래이야기-&quot;&gt;요망한 고래이야기 🐳&lt;/h1&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;주피터 설치가 귀찮다면… 🚬&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubenetes" /><summary type="html">도커는 개발자만을 위한 도구가 아닙니다. 데이터 분석가와 머신러닝 엔지니어 하물며 내 컴퓨터를 깨끗이 쓰고 싶은 사람에게도 적합합니다.</summary></entry><entry><title type="html">최혁근 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="최혁근 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;object-detection-survey&quot;&gt;Object Detection: Survey!!!!!!!!!!!!&lt;/h1&gt;
-
-&lt;p&gt;디지털 사이니지 프로젝트에는 여러가지 Deep Learning Task들이 존재한다.
-그 중 가장 기초가 되는 Object Detection 관련 연구상황을 정리하고 Tensorflow를 이용한 실제 코드 구현을 실습하는 방법을 기록한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Introduction&lt;/li&gt;
-  &lt;li&gt;Problem Definition&lt;/li&gt;
-  &lt;li&gt;Performence Measure&lt;/li&gt;
-  &lt;li&gt;Dataset &amp;amp; Examples&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Representative tasks in computer vision&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/task.png&quot; alt=&quot;Object detection and other tasks&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Object Detection은 Image Classification task에 사물의 위치를 Bounding Box로 예측하는 Regression task가 추가된 문제이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig2_classification_example.PNG&quot; alt=&quot;image classification&quot; /&gt;
-&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig2_classification_example.PNG&quot; alt=&quot;object detection&quot; /&gt;
-&lt;strong&gt;Object Detection = Multi-labeled classification + Bounding regression&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;현재 연구 진행상황
-&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig4_paper_trend_2019.PNG&quot; alt=&quot;Research history&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;적용분야&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig1.PNG&quot; alt=&quot;ADAS&quot; /&gt;
-  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig2.PNG&quot; alt=&quot;CCTV&quot; /&gt;
-  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig3.PNG&quot; alt=&quot;OCR&quot; /&gt;
-  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig4.PNG&quot; alt=&quot;Aerial Image&quot; /&gt;
-  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig5.PNG&quot; alt=&quot;Body Detection&quot; /&gt;
-  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig7.PNG&quot; alt=&quot;Sport Analysis&quot; /&gt;
-  &lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_third/fig8.PNG&quot; alt=&quot;Amazon Go&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2-problem-definition&quot;&gt;2. Problem Definition&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;DATASET
-    &lt;ul&gt;
-      &lt;li&gt;$I$ - an image&lt;/li&gt;
-      &lt;li&gt;$O(I)$ - objects with descriptions in the image $I$
-        &lt;ul&gt;
-          &lt;li&gt;$O(I) = { (Y_1^&lt;em&gt;, Z_1^&lt;/em&gt;), \ldots, (Y_i^&lt;em&gt;, Z_i^&lt;/em&gt;), \ldots, (Y_{N_i^&lt;em&gt;}^&lt;/em&gt;, Z_{N_i^&lt;em&gt;}^&lt;/em&gt;)}$&lt;/li&gt;
-          &lt;li&gt;$Y_i^* \in \mathcal{Y}$ - the category of the $i$th object&lt;/li&gt;
-          &lt;li&gt;$Z_{N_i^&lt;em&gt;}^&lt;/em&gt; \in \mathcal{Z}$ - the bounding box information of $i$th object, ex. $(x, y, w, h)$&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Object Detection $D(I, \lambda)$
-    &lt;ul&gt;
-      &lt;li&gt;이미지 $I$에 Objects $O(I)$를 찾아내는 함수 $D$를 구하기&lt;/li&gt;
-      &lt;li&gt;$D(I, \lambda) = { (Y_1, Z_1), \ldots, (Y_i, Z_i),\ldots, (Y_{N_i(\lambda)}, Z_{N_i(\lambda)})}$&lt;/li&gt;
-      &lt;li&gt;$\lambda$로 false alarm과 missed detection 조절&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;3-performance-measure&quot;&gt;3. Performance Measure&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Ground Truth $O(I)$와 Prediction $D(I, \lambda)$를 비교
-    &lt;ul&gt;
-      &lt;li&gt;classification : 각각의 class를 정확하게 예측했는가?&lt;/li&gt;
-      &lt;li&gt;regression : 정확하게 Bounding Box의 위치와 크기를 지정했는가?
-        &lt;ul&gt;
-          &lt;li&gt;Intersection Over Union(IoU)
-            &lt;ul&gt;
-              &lt;li&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_fourth/fig1.PNG&quot; alt=&quot;IOU&quot; /&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_fourth/fig2.PNG&quot; alt=&quot;IOU Example&quot; /&gt;&lt;/li&gt;
-              &lt;li&gt;IoU값이 일정이상일 경우 정답으로 간주
-                &lt;ul&gt;
-                  &lt;li&gt;PASCAL VOC : 0.5&lt;/li&gt;
-                  &lt;li&gt;ImageNet : min(0.5, wh / (w+10)(h+10))&lt;/li&gt;
-                  &lt;li&gt;MS COCO : 0.5, 0.55, $\ldots$, 0.95&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Mean Average Precision(mAP)
-    &lt;ul&gt;
-      &lt;li&gt;Average Precision
-        &lt;ul&gt;
-          &lt;li&gt;&lt;img src=&quot;https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&amp;amp;fname=http%3A%2F%2Fcfile2.uf.tistory.com%2Fimage%2F220E10365869F5CA344843&quot; alt=&quot;AP&quot; /&gt;&lt;/li&gt;
-          &lt;li&gt;Recall을 0부터 1까지 0.1단위로 증가시키면서 얻은 precision값을 평균내어 계산&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;mAP
-        &lt;ul&gt;
-          &lt;li&gt;전체 Class에 대해서 AP를 계산하여 평균낸 값&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Frame Per Second
-    &lt;ul&gt;
-      &lt;li&gt;초당 처리가능한 이미지의 수 (이미지 종류와 하드웨어에 따라 상대적인 값)&lt;/li&gt;
-      &lt;li&gt;최근 논문은 정확도 뿐만 아니라 속도에도 집중하는 경향&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;4-miscellanea&quot;&gt;4. miscellanea&lt;/h2&gt;
-&lt;h3 id=&quot;techniques-before-deep-learning&quot;&gt;Techniques before deep learning&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Sliding Windows
-&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig6_sliding_window.PNG&quot; alt=&quot;sw1&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;Selective Search
-&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_first/fig7_selective_search.PNG&quot; alt=&quot;ss&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;stages&quot;&gt;Stages&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;1-stage object detector
-&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_second/fig6_1stage.PNG&quot; alt=&quot;1-stage object detector&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;2-stage object detector
-&lt;img src=&quot;https://hoya012.github.io/assets/img/object_detection_second/fig5_2stage.PNG&quot; alt=&quot;2-stage object detector&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;PASCAL VOC
-    &lt;ul&gt;
-      &lt;li&gt;Pattern Analysis, Statistical Modeling and Computational Learning&lt;/li&gt;
-      &lt;li&gt;20 Object types
-        &lt;ul&gt;
-          &lt;li&gt;사람: 사람&lt;/li&gt;
-          &lt;li&gt;동물: 새, 고양이, 소, 개, 말, 양&lt;/li&gt;
-          &lt;li&gt;탈것: 비행기, 자전거, 보트, 버스, 승용차, 오토바이, 기차&lt;/li&gt;
-          &lt;li&gt;사물: 병, 의자, 식탁, 화초, 소파, 모니터&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;대표적으로 VOC05, VOC12 가 많이 사용됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cocodataset.org/#home&quot;&gt;MS COCO&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;91 Object types, 328k images, 2.5m labeled instance&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://www.researchgate.net/profile/Minkesh_Asati/publication/334867305/figure/fig1/AS:787322064875522@1564723616547/Samples-of-annotated-images-in-the-MS-COCO-dataset-from-12.jpg&quot; alt=&quot;cocoex&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/walton-wang929/Object_Detection&quot;&gt;Object Detection Survey by walton-wang929&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1809.03193&quot;&gt;Recent Advances in Object Detection in the Age of Deep Convolutional Neural Networks&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hoya012.github.io/blog/Tutorials-of-Object-Detection-Using-Deep-Learning-what-is-object-detection/&quot;&gt;HOYA012’s Research Blog - Tutorial of Object Detection using Deep Learning&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">디지털 사이니지 프로젝트에는 여러가지 Deep Learning Task들이 존재한다.그 중 가장 기초가 되는 Object Detection 관련 연구상황을 정리하고 실습한다.</summary></entry><entry><title type="html">권승진 샘플</title><link href="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="권승진 샘플" /><published>2021-04-12T10:00:00-05:00</published><updated>2021-04-12T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구 😍
-야호야호야호
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3, 7]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;즉, broadcast된 모델에 test 데이터를 batch  형태로 분산 처리가 가능해진다고 할 수 있습니다.
 &lt;br /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;작은-제목&quot;&gt;작은 제목&lt;/h2&gt;
+&lt;h2 id=&quot;참고-자료&quot;&gt;참고 자료&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://www.tutorialspoint.com/apache_spark/advanced_spark_programming.htm&quot;&gt;About advaced spark programming - spark broadcast&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://sparkbyexamples.com/spark/spark-broadcast-variables/&quot;&gt;Spark Broadcast Varibales&lt;/a&gt;&lt;/p&gt;</content><author><name>김연수</name></author><category term="python" /><category term="sklearn" /><category term="ml" /><category term="spark" /><summary type="html">좀 더 빠른 ML inference를 위해 spark broadcasting을 사용해봅니다.</summary></entry><entry><title type="html">Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기</title><link href="http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html" rel="alternate" type="text/html" title="Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기" /><published>2021-05-31T10:00:00-05:00</published><updated>2021-05-31T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">&lt;h1 id=&quot;spark-broadcast&quot;&gt;Spark Broadcast&lt;/h1&gt;
+&lt;h2 id=&quot;우리에게-필요한-것은-inference-효율성-&quot;&gt;우리에게 필요한 것은 inference 효율성 😎&lt;/h2&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
-  &lt;p&gt;인용구 askldjlaskjdlkas;dlkalksjdasldkjlaskdasdasdasdasdasd&lt;/p&gt;
+  &lt;p&gt;기존 python ml 라이브러리로 다량의 데이터를 빠르게 처리를 해야 할 때!  &lt;u&gt;Spark broadcasting&lt;/u&gt;을 이용해 inference 속도를 개선할 수 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spark의-공유-변수&quot;&gt;Spark의 공유 변수&lt;/h3&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">동해물과 백두산이 마르고 닳도록 하느님이 무궁화 꽃이 피었습니다.</summary></entry><entry><title type="html">제목</title><link href="http://0.0.0.0:4000/1986/12/29/Sample.html" rel="alternate" type="text/html" title="제목" /><published>1986-12-29T09:00:00-06:00</published><updated>1986-12-29T09:00:00-06:00</updated><id>http://0.0.0.0:4000/1986/12/29/Sample</id><content type="html" xml:base="http://0.0.0.0:4000/1986/12/29/Sample.html">&lt;h1 id=&quot;큰-제목&quot;&gt;큰 제목&lt;/h1&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;b&gt;아피치 스파크&lt;/b&gt;는 SQL, 머신러닝 등 처리를 위한 기본 제공 모듈이 있는 &lt;u&gt;대규모 데이터 처리용 통합 분석 엔진&lt;/u&gt;입니다.&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;/br&amp;gt;
+일반적인 스파크 연산이 클러스터에서 실행될 때 함수에서 사용되는 변수는 각 클러스터에 복제되고 각 노드 연산에서는 독립적입니다. 클러스터 상에서 변수를 공유하는 것은 비효율적이기 때문인데, 일반적인 연산 패턴을 지원하기 위해 아래와 같은 공유 변수를 제공합니다
+.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;broadcast variables : 큰 데이터를 효율적으로 처리하는데 사용&lt;/li&gt;
+  &lt;li&gt;Accumulators variables : 특정 컬렉션의 정보를 집계하는 데 사용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;오늘은 &lt;b&gt;broadcast variables&lt;/b&gt;에 대하여 알아보도록 하겠습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;작은-제목&quot;&gt;작은 제목&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;spark-broadcast-란&quot;&gt;Spark broadcast 란?&lt;/h3&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;더-작은-제목&quot;&gt;더 작은 제목&lt;/h3&gt;
+&lt;p&gt;broadcast 변수는 읽기 전용 변수입니다. 모든 노드에 큰 input 데이터셋을 제공할 때 효과적인 방법이라고 할 수 있습니다. 이를 사용하면 효율적인 broadcast 알고리즘을 통해 계산 비용을 줄일 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;스파크의 액션들은 기본적으로 여러 단계의 집합으로 실행되는데, 자동적으로 각 단계에 필요한 공유 변수들을 broadcast하는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;Broadcast 변수는 RDD나 Dataframe과 동일한 방식으로 사용될 수 있습니다. (데이터는 serialized 캐싱되고 deserialized 되어 각 테스크로 넘어가게 됩니다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+호출 방법은 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sc &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; SparkContext&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+var &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 사용할 공유 변수 var&lt;/span&gt;
+
+broadcastvar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;var&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;일단 broadcast variable이 만들어지면, 클러스터상의 모든 함수에 사용될 수 있습니다. (즉, &lt;u&gt;var은 한 번 이상 노드에 올라가지 않게&lt;/u&gt; 됩니다.)&lt;/p&gt;
+
+&lt;p&gt;참고로, 한 번 생성된 broadcastvar 객체는 이후 수정될 수 없습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt; 
+broadcast 된 값을 이용하기 위해서는 &lt;b&gt;value 메소드&lt;/b&gt;를 사용하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# value 값에 액세스 하기 위함&lt;/span&gt;
+broadcastvar.value
+
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;sklearn에-spark-broadcast를-적용해-inference-하기&quot;&gt;sklearn에 spark broadcast를 적용해 inference 하기&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;python에서 가장 많이 이용되는 mechine learning library는 sklearn일 것입니다. sklearn 에서는 보통 pandas dataframe 을 활용한 데이터를 fit하고 predict 하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, KNN (K-Nearest Neighbors)과 같은 알고리즘을 사용하게 된다면 우리는 각 key 값에 대한 각각의 k개의 neighbors를 모두 구해야합니다. 즉, &lt;b&gt;key 값 하나하나에 모든 데이터를 연산&lt;/b&gt;하게 됩니다.결국 inference 시간이 엄청나게 길어질 수 밖에 없는 구조가 됩니다.&lt;/p&gt;
+
+&lt;p&gt;이는 &lt;b&gt;&lt;u&gt;sklearn model을 broadcast 하는 방식&lt;/u&gt;&lt;/b&gt;을 활용해 효율적으로 처리될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;예제 코드는 다음과 같습니다. ( knn model 사용 )&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def knn_regressor_broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;data_pd, &lt;span class=&quot;nv&quot;&gt;neighbors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;100, &lt;span class=&quot;nv&quot;&gt;n_partitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;uniform&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+
+  &lt;span class=&quot;c&quot;&gt;# X_train, y_train, X_test, y_test 의 경우 pandas dataframe 형태&lt;/span&gt;
+  
+
+  &lt;span class=&quot;c&quot;&gt;# 모델 fit&lt;/span&gt;
+  knn &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; KNeighborsRegressor&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;n_neighbors &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; neighbors, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; weights&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; knn.fit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_train, y_train&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  
+  &lt;span class=&quot;c&quot;&gt;# 여러 배치로 돌리기 위한 함수&lt;/span&gt;
+  def batch&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+    yield list&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    
+  rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_test, n_partitions&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.zipWithIndex&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+  b_model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;model&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;batch&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.map&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda value: &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;x[0] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value], &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x[1] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value]&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;.flatMap&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda x: zip&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[1], b_model.value.predict&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[0]&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt;
+  
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; result.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위와 같이 &lt;b&gt;model을 broadcast + rdd test data&lt;/b&gt;를 사용하자 Pandas dataframe을 이용해 predict를 하였을 때 Runtime errorrk가 났던 모델을 약 5분 내외로 처리할 수 있었습니다 👏👏&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;부가적인 코드 설명을 잠시 하자면&lt;/p&gt;
+
+&lt;p&gt;mapPartitions의 경우 나눠진 partition내에서 연산을 수행하게 해줍니다&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;1, 2, 3, 4], 2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+def f&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: yield &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3, 7]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;즉, broadcast된 모델에 test 데이터를 batch  형태로 분산 처리가 가능해진다고 할 수 있습니다.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;참고-자료&quot;&gt;참고 자료&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://www.tutorialspoint.com/apache_spark/advanced_spark_programming.htm&quot;&gt;About advaced spark programming - spark broadcast&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://sparkbyexamples.com/spark/spark-broadcast-variables/&quot;&gt;Spark Broadcast Varibales&lt;/a&gt;&lt;/p&gt;</content><author><name>김연수</name></author><category term="python" /><category term="sklearn" /><category term="ml" /><category term="spark" /><summary type="html">좀 더 빠른 ML inference를 위해 spark broadcasting을 사용해봅니다.</summary></entry><entry><title type="html">AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기</title><link href="http://0.0.0.0:4000/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기" /><published>2021-05-30T10:00:00-05:00</published><updated>2021-05-30T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;쿠버네티스-jupyterhub-설정법-&quot;&gt;쿠버네티스 JupyterHub 설정법 👨‍💻&lt;/h1&gt;
+
 &lt;blockquote&gt;
-  &lt;p&gt;인용구&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>작성자</name></author><category term="python" /><category term="aws" /><summary type="html">메인페이지 노출 description</summary></entry></feed>
+  &lt;p&gt;config.yaml을 이용한 사용자 별 환경 구성법&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;첫-번째-configyaml이-작업-폴더에-있는지-확인해-주세요&quot;&gt;첫 번째, config.yaml이 작업 폴더에 있는지 확인해 주세요.&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;👉&lt;a href=&quot;/2021/05/27/JupyterhubForK8S-전지호.html&quot;&gt;첫번째포스트&lt;/a&gt;👈&lt;/p&gt;
+
+&lt;p&gt;위 포스트 처음에 만들었던 config.yaml를 확인합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/config%EC%9C%84%EC%B9%98.JPG&quot; alt=&quot;config.yaml 위치&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;config.yaml을 수정하고 다음 명령어를 입력하면 변경사항이 jupyterhub에 적용됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm upgrade &lt;span class=&quot;nt&quot;&gt;--cleanup-on-fail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--install&lt;/span&gt; jhub &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; jhub &lt;span class=&quot;nt&quot;&gt;--values&lt;/span&gt; config.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;두-번째-기본으로-사용되는-jupyter-이미지를-사양에-맡게-변경해봅시다&quot;&gt;두 번째, 기본으로 사용되는 jupyter 이미지를 사양에 맡게 변경해봅시다.&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;다음과 같이 config.yaml을 수정하면 기본 도커이미지가 jupyter/datascience-notebook로 변경됩니다.&lt;/p&gt;
+
+&lt;p&gt;사무실 환경에 맡게 커스텀한 도커이미지를 도커허브에 푸쉬한 뒤 그것을 사용해도 무방합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;singleuser&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# You should replace the &quot;latest&quot; tag with a fixed version from:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# https://hub.docker.com/r/jupyter/datascience-notebook/tags/&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Inspect the Dockerfile at:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# https://github.com/jupyter/docker-stacks/tree/HEAD/datascience-notebook/Dockerfile&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jupyter/datascience-notebook&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;latest&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;세-번째-jupyterlab을-기본으로-사용해봅시다&quot;&gt;세 번째, jupyterlab을 기본으로 사용해봅시다.&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;singleuser&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;defaultUrl&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/lab&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EC%A3%BC%ED%94%BC%ED%84%B0%EB%9E%A9.JPG&quot; alt=&quot;주피터랩&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;네-번째-다양한-주피터-이미지를-선택할-수-있게-합시다&quot;&gt;네 번째, 다양한 주피터 이미지를 선택할 수 있게 합시다.&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;profileList에 항목을 추가하면 로그인 시 이미지를 선택하여 jupyter를 실행할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;아래 예는 pyspark버전과 datascience버전을 선택할 수 있는 예제입니다.&lt;/p&gt;
+
+&lt;p&gt;선택하지 않으면, jupyter/minimal-notebook이 실행됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;singleuser&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;defaultUrl&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/lab&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jupyter/minimal-notebook&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;latest&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;profileList&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;display_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;MLP&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Notebook&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;pyspark&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spark를&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;사용할&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;수&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;있는&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;일반&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;notebook&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;kubespawner_override&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jupyter/pyspark-notebook&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;latest&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;display_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;MLP&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Notebook&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tensorflow&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tensorflow가&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;설치되어&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;있는&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;notebook&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;kubespawner_override&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jupyter/tensorflow-notebook&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;7a0c7325e470&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EC%A3%BC%ED%94%BC%ED%84%B0%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%84%A0%ED%83%9D.JPG&quot; alt=&quot;원하는 주피터로 시작&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;다섯-번째-사용자와-비밀번호를-설정하는-방법&quot;&gt;다섯 번째, 사용자와 비밀번호를 설정하는 방법&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;아래와 같이 입력하면 2명의 관리자 유저, 2명의 일반 유저, 공통 비밀번호로 접근할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;hub&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;Authenticator&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;admin_users&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;admin&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;batteryho&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;allowed_users&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;seungjin&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ehdud8565&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yeonsuuu&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sanghyunbaek&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;hgchoi16&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;DummyAuthenticator&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;lt;비밀번호입력&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;JupyterHub&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;authenticator_class&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dummy&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;singleuser&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 생략&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;리소스를-설정하는-방법&quot;&gt;리소스를 설정하는 방법&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;쿠버네티스내에 jupyter notebook들은 기본적으로 각 사용자에게는 1G의 RAM 이 보장 됩니다. 모든 사용자는 1G 이상을 가지고 있지만 가능한 경우 기술적으로 더 많이 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;다음과 같이 입력하여 메모리 제한을 변경할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;guarantee는 필요에 의해 남아있는 다른 리소스를 사용하는 것을 의미하고,&lt;/p&gt;
+
+&lt;p&gt;limit는 더이상 리소스를 사용하지 못함을 의미 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;singleuser&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;2G&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;guarantee&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;1G&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;cpu의 제한 또한 다음과 같이 변경할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;singleuser&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;cpu&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.5&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;guarantee&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;gpu-할당하는-방법&quot;&gt;GPU 할당하는 방법&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;tensorflow나 pytorch같은 딥러닝 프레임워크들은 GPU를 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;다음과 같이 입력하여 gpu 할당이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;물론, 쿠버네티스 환경에 gpu가 있어야합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;singleuser&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;defaultUrl&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/lab&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jupyter/minimal-notebook&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;latest&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;profileList&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;display_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;MLP&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Notebook&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;pyspark&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spark를&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;사용할&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;수&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;있는&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;일반&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;notebook&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;kubespawner_override&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jupyter/pyspark-notebook&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;latest&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;display_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;MLP&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Notebook&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tensorflow&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tensorflow가&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;설치되어&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;있는&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;jupyter&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;notebook&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;kubespawner_override&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jupyter/tensorflow-notebook&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;7a0c7325e470&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 해당부분&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;extra_resource_limits&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;nvidia.com/gpu&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;기본적인 사용방법을 알아봤습니다.&lt;/p&gt;
+
+&lt;p&gt;더 많은 정보는 아래 링크에서 확인해주세요.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;참고문헌&quot;&gt;참고문헌&lt;/h2&gt;
+
+&lt;p&gt;👉&lt;a href=&quot;https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html&quot;&gt;zero-to-jupyterhub-on-k8s&lt;/a&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubernetes" /><category term="jupyter" /><category term="aws" /><summary type="html">JupyterHub를 구축했다면 사용자 별 환경과 리소스를 구분하기 위한 설정방법을 알아봅시다.</summary></entry><entry><title type="html">Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기</title><link href="http://0.0.0.0:4000/2021/05/30/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html" rel="alternate" type="text/html" title="Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기" /><published>2021-05-30T10:00:00-05:00</published><updated>2021-05-30T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/30/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/30/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">&lt;h1 id=&quot;spark-broadcast&quot;&gt;Spark Broadcast&lt;/h1&gt;
+&lt;h2 id=&quot;우리에게-필요한-것은-inference-효율성-&quot;&gt;우리에게 필요한 것은 inference 효율성 😎&lt;/h2&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;기존 python ml 라이브러리로 다량의 데이터를 빠르게 처리를 해야 할 때!  &lt;u&gt;Spark broadcasting&lt;/u&gt;을 이용해 inference 속도를 개선할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spark의-공유-변수&quot;&gt;Spark의 공유 변수&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;아피치 스파크&lt;/b&gt;는 SQL, 머신러닝 등 처리를 위한 기본 제공 모듈이 있는 &lt;u&gt;대규모 데이터 처리용 통합 분석 엔진&lt;/u&gt;입니다.&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;/br&amp;gt;
+일반적인 스파크 연산이 클러스터에서 실행될 때 함수에서 사용되는 변수는 각 클러스터에 복제되고 각 노드 연산에서는 독립적입니다. 클러스터 상에서 변수를 공유하는 것은 비효율적이기 때문인데, 일반적인 연산 패턴을 지원하기 위해 아래와 같은 공유 변수를 제공합니다
+.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;broadcast variables : 큰 데이터를 효율적으로 처리하는데 사용&lt;/li&gt;
+  &lt;li&gt;Accumulators variables : 특정 컬렉션의 정보를 집계하는 데 사용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;오늘은 &lt;b&gt;broadcast variables&lt;/b&gt;에 대하여 알아보도록 하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spark-broadcast-란&quot;&gt;Spark broadcast 란?&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;broadcast 변수는 읽기 전용 변수입니다. 모든 노드에 큰 input 데이터셋을 제공할 때 효과적인 방법이라고 할 수 있습니다. 이를 사용하면 효율적인 broadcast 알고리즘을 통해 계산 비용을 줄일 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;스파크의 액션들은 기본적으로 여러 단계의 집합으로 실행되는데, 자동적으로 각 단계에 필요한 공유 변수들을 broadcast하는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;Broadcast 변수는 RDD나 Dataframe과 동일한 방식으로 사용될 수 있습니다. (데이터는 serialized 캐싱되고 deserialized 되어 각 테스크로 넘어간다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+호출 방법은 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sc &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; SparkContext&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+var &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 사용할 공유 변수 var&lt;/span&gt;
+
+broadcastvar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;var&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;일단 broadcast variable이 만들어지면, 클러스터상의 모든 함수에 사용될 수 있습니다. (즉, &lt;u&gt;var은 한 번 이상 노드에 올라가지 않게&lt;/u&gt; 됩니다.)&lt;/p&gt;
+
+&lt;p&gt;참고로, 한 번 생성된 broadcastvar 객체는 이후 수정될 수 없습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt; 
+broadcast 된 값을 이용하기 위해서는 &lt;b&gt;value 메소드&lt;/b&gt;를 사용하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# value 값에 액세스 하기 위함&lt;/span&gt;
+broadcastvar.value
+
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;sklearn에-spark-broadcast를-적용해-inference-하기&quot;&gt;sklearn에 spark broadcast를 적용해 inference 하기&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;python에서 가장 많이 이용되는 mechine learning library는 sklearn일 것입니다. sklearn 에서는 보통 pandas dataframe 을 활용한 데이터를 fit하고 predict 하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, KNN (K-Nearest Neighbors)과 같은 알고리즘을 사용하게 된다면 우리는 각 key 값에 대한 각각의 k개의 neighbors를 모두 구해야합니다. 즉, &lt;b&gt;key 값 하나하나에 모든 데이터를 연산&lt;/b&gt;하게 됩니다.결국 inference 시간이 엄청나게 길어질 수 밖에 없는 구조가 됩니다.&lt;/p&gt;
+
+&lt;p&gt;이는 &lt;b&gt;&lt;u&gt;sklearn model을 broadcast 하는 방식&lt;/u&gt;&lt;/b&gt;을 활용해 효율적으로 처리될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;예제 코드는 다음과 같습니다. ( knn model 사용 )&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def knn_regressor_broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;data_pd, &lt;span class=&quot;nv&quot;&gt;neighbors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;100, &lt;span class=&quot;nv&quot;&gt;n_partitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;uniform&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+
+  &lt;span class=&quot;c&quot;&gt;# X_train, y_train, X_test, y_test 의 경우 pandas dataframe 형태&lt;/span&gt;
+  
+
+  &lt;span class=&quot;c&quot;&gt;# 모델 fit&lt;/span&gt;
+  knn &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; KNeighborsRegressor&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;n_neighbors &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; neighbors, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; weights&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; knn.fit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_train, y_train&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  
+  &lt;span class=&quot;c&quot;&gt;# 여러 배치로 돌리기 위한 함수&lt;/span&gt;
+  def batch&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+    yield list&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    
+  rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_test, n_partitions&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.zipWithIndex&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+  b_model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;model&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;batch&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.map&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda value: &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;x[0] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value], &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x[1] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value]&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;.flatMap&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda x: zip&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[1], b_model.value.predict&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[0]&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt;
+  
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; result.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x[1] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;result]
+  pred_df &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; pd.DataFrame&lt;span class=&quot;o&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;true&quot;&lt;/span&gt;:test1, &lt;span class=&quot;s2&quot;&gt;&quot;pred&quot;&lt;/span&gt;:result&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;pred_df
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위와 같이 &lt;b&gt;model을 broadcast + rdd test data&lt;/b&gt;를 사용하자 Pandas dataframe을 이용해 predict를 하였을 때 Runtime errorrk가 났던 모델을 약 5분 내외로 처리할 수 있었습니다 👏👏&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;부가적인 코드 설명을 잠시 하자면&lt;/p&gt;
+
+&lt;p&gt;mapPartitions의 경우 나눠진 partition내에서 연산을 수행하게 해줍니다&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;1, 2, 3, 4], 2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+def f&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: yield &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3, 7]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;즉, broadcast된 모델에 test 데이터를 batch  형태로 분산 처리가 가능해진다고 할 수 있습니다.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;참고-자료&quot;&gt;참고 자료&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://www.tutorialspoint.com/apache_spark/advanced_spark_programming.htm&quot;&gt;About advaced spark programming - spark broadcast&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://sparkbyexamples.com/spark/spark-broadcast-variables/&quot;&gt;Spark Broadcast Varibales&lt;/a&gt;&lt;/p&gt;</content><author><name>김연수</name></author><category term="python" /><category term="sklearn" /><category term="ml" /><category term="spark" /><summary type="html">좀 더 빠른 ML inference를 위해 spark broadcasting을 사용해봅니다.</summary></entry><entry><title type="html">AWS EKS 쿠버네티스에서 JupyterHub 설치하기</title><link href="http://0.0.0.0:4000/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS EKS 쿠버네티스에서 JupyterHub 설치하기" /><published>2021-05-27T10:00:00-05:00</published><updated>2021-05-27T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;쿠버네티스에-jupyterhub-설치-&quot;&gt;쿠버네티스에 JupyterHub 설치 👨‍💻&lt;/h1&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;쿠버네티스가 구축되어 있다면, helm 차트를 이용하여 간단하게 JupyterHub를 설치할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;일단 작업환경을 수행할 폴더를 만들고 해당 폴더안에서 작업을 수행합니다.&lt;/p&gt;
+
+&lt;p&gt;해당 폴더는 JupyterHub의 앞으로의 configration을 담당할 폴더입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;첫-번째-helm-repogitory-업데이트&quot;&gt;첫 번째, helm repogitory 업데이트&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;쿠버네티스 환경에 연결되어 있고, helm이 설치되어 있다면 다음의 명령어로 차트를 설치할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/
+helm repo update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음과 같은 출력이 보여야합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Hang tight &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;we grab the latest from your chart repositories...
+...Skip &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;chart repository
+...Successfully got an update from the &lt;span class=&quot;s2&quot;&gt;&quot;stable&quot;&lt;/span&gt; chart repository
+...Successfully got an update from the &lt;span class=&quot;s2&quot;&gt;&quot;jupyterhub&quot;&lt;/span&gt; chart repository
+Update Complete. ⎈ Happy Helming!⎈
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;두-번째-jupyterhub-차트-다운로드&quot;&gt;두 번째, JupyterHub 차트 다운로드&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;차트를 바로 설치하기 보단 템플릿의 구성을 확인하고 설치하기 위해 차트를 다운로드합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm fetch jupyterhub/jupyterhub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;다운로드가 완료되면 압축된 차트 파일이 보입니다. 압축을 해제합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; .&lt;span class=&quot;se&quot;&gt;\&amp;lt;&lt;/span&gt;다운로드된파일&amp;gt;.tgz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/jhubdir.JPG&quot; alt=&quot;주피터허브 폴더구조&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;세-번째-템플릿을-변경할-수-있는-구성-파일을-만들어-봅시다&quot;&gt;세 번째, 템플릿을 변경할 수 있는 구성 파일을 만들어 봅시다.&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;helm 차트 리소스에 기본적으로 설치할 구성요소에 대한 리소스가 모두 포함되어 있습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 config.yaml 파일을 이용하면 구성요서에 대한 템플릿의 변경이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;그렇기때문에, config.yaml을 만들어 참조하고 설정을 변경해봅시다.&lt;/p&gt;
+
+&lt;p&gt;아래와 같이 빈 config.yaml을 만들어 작업 폴더 밑 차트 폴더에에 추가해주세요.(Chart.yaml과 같은 위치)&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# This file can update the JupyterHub Helm chart's default configuration values.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# For reference see the configuration reference and default values, but make&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# sure to refer to the Helm chart version of interest to you!&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Introduction to YAML:     https://www.youtube.com/watch?v=cdLNKUoMc6c&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Chart config reference:   https://zero-to-jupyterhub.readthedocs.io/en/stable/resources/reference.html&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Chart default values:     https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/HEAD/jupyterhub/values.yaml&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Available chart versions: https://jupyterhub.github.io/helm-chart/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;네-번째-차트를-쿠버네티스-환경에-배포하여-설치해봅시다&quot;&gt;네 번째, 차트를 쿠버네티스 환경에 배포하여 설치해봅시다.&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;차트 폴더에서 아래의 명령어를 입력해주세요.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm upgrade &lt;span class=&quot;nt&quot;&gt;--cleanup-on-fail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--install&lt;/span&gt; jhub &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; jhub &lt;span class=&quot;nt&quot;&gt;--create-namespace&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--values&lt;/span&gt; config.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;🤬🤬🤬&lt;/p&gt;
+
+&lt;p&gt;아래와 같은 에러가 있다면, 배포환경에 토큰이 꼭 필요하단 이야기입니다.(예시: AWS EKS)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/tokenerror.JPG&quot; alt=&quot;토큰필요&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Openssl이나 여타 다른 토큰 제네레이터 프로그램을 이용하여 32자리의 hex코드를 임의로 생성해주세요.&lt;/p&gt;
+
+&lt;p&gt;폴더 안 values.yaml 파일에 시크릿 토큰을 입력하는 곳이 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/requiredtokken.JPG&quot; alt=&quot;토큰넣기&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;시크릿 토큰 입력&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/requiredtokkensuccess.JPG&quot; alt=&quot;토큰성공&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;다시 명령어를 입력해주세요.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm upgrade &lt;span class=&quot;nt&quot;&gt;--cleanup-on-fail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--install&lt;/span&gt; jhub &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; jhub &lt;span class=&quot;nt&quot;&gt;--create-namespace&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--values&lt;/span&gt; config.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;인스톨이 성공했습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/installsuccess.JPG&quot; alt=&quot;주피터허브인스톨&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Pod가 모두 잘 돌아갑니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get pod &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/pods.JPG&quot; alt=&quot;주피터허브파드&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;외부접속을 위한 서비스도 볼 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get svc &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/svc.JPG&quot; alt=&quot;주피터허브서비스&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;다섯-번째-jupyterhub-접속하기&quot;&gt;다섯 번째, JupyterHub 접속하기&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;서비스에 나온 퍼블릭 주소로 접근해봅시다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/connectsuccess.JPG&quot; alt=&quot;외부접속&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;쿠버네티스에 설치된 주피터 허브에 접속이 가능합니다!!(로드밸런서 설정은 따로 해주세요.)&lt;/p&gt;
+
+&lt;p&gt;아무 아이디로 로그인을 해봅시다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;로그인 후에 사용자별 서버가 생성되는 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/servercreate.JPG&quot; alt=&quot;서버생성&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;주피터 노트북이 떳습니다!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/jupyterhub.JPG&quot; alt=&quot;주피터허브&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음 명령어를 입력해보면,&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get pod &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/userpod.JPG&quot; alt=&quot;유저별파드&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;유저별로 Pod가 생성된 유연한 환경 분리가 가능한 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;마지막-jupyterhub-삭제&quot;&gt;마지막, JupyterHub 삭제&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;JupyterHub를 삭제하려면 간단하게 다음 명령어를 입력하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm uninstall jhub &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;가능한-것들&quot;&gt;가능한 것들&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;JupyterHub를 쿠버네티스 환경에 구축하므로서 생각했던 두 가지 목표가 가능해졌습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;사용자 별 다른 주피터 노트북 환경 구성 (pyspark-notebook, datascience-notebook)&lt;/li&gt;
+  &lt;li&gt;사용자 별 GPU 점유 주피터 노트북 (pyspark-notebook, datascience-notebook)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다음 포스트에서는 config.yaml을 수정하여 위와 같은 활동을 다뤄보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;🖐🖐🖐&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;참고문헌&quot;&gt;참고문헌&lt;/h2&gt;
+&lt;p&gt;👉&lt;a href=&quot;https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/installation.html#install-jupyterhub&quot;&gt;zero-to-jupyterhub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉&lt;a href=&quot;https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html&quot;&gt;zero-to-jupyterhub-on-k8s&lt;/a&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubernetes" /><category term="jupyter" /><category term="aws" /><summary type="html">쿠버네티스에 여러명의 분석가가 함께 작업할 수 있는 JupyterHub를 구축해보십니다. 각자 분리된 환경에서 일할 수 있으면 참 좋겠죠?</summary></entry></feed>

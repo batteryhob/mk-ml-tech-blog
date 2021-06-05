@@ -17,7 +17,42 @@
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css">
   <link href="/assets/favicon.ico" rel="shortcut icon">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="머신러닝파트 기술블로그" />
+  <!-- 이미지 팝업 -->
+  <script src="/assets/lib/jquery.js"></script>
+  <script src="/assets/lib/magnific-popup.min.js"></script>
+  <link rel="stylesheet" href="/assets/magnific-popup.css">
+  <!-- 폰트어썸 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <!-- 코드블록 하이라이트 -->
+  <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.0.0/styles/monokai-sublime.min.css">
+  <script src="//unpkg.com/@highlightjs/cdn-assets@11.0.0/highlight.min.js"></script>
+  <script>    
+    $(document).ready(function() {
+      
+      //하이라이팅
+      hljs.initHighlightingOnLoad();
+
+      // id가 magnific인 경우에만 magnific-popup 적용.
+      $('.page-content img[id="popup"]').wrap( function(){
+          // magnific-popup 옵션 설정.
+          $(this).magnificPopup({
+              type: 'image',
+              closeOnContentClick: true,
+              showCloseBtn: false,
+              items: {
+                src: $(this).attr('src')
+              },
+          });
+          
+          // p 태그 높이를 내부 컨텐츠 높이에 자동으로 맞추기.
+          $(this).parent('p').css('overflow', 'auto');
+          
+          // 이미지를 감쌀 태그 설정.
+          return '<a href="' + $(this).attr('src') + '" style="width:' + $(this).attr('width') +'px; float: left;"><figure> </figure>' + '<figcaption style="text-align: center;" class="caption">' + $(this).attr('alt') + '</figcaption>' + '</a>';
+      });
+      
+    });
+  </script>
 </head>
 <body>
   
@@ -79,6 +114,42 @@
         <h2 id="aws">#aws</h2>
         <ul>
           
+            <a href="/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS S3 데이터 Lifecycle 기능을 이용하여 정리하기
+              <span class="post-meta" style="margin-left: 15px;">
+                June 3, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/06/02/MysqlEvent-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS Aurora DB, Mysql DB에서 스케줄러 사용하는 방법
+              <span class="post-meta" style="margin-left: 15px;">
+                June 2, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 설치하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 27, 2021
+              </span>
+            </li>
+          </a>
+          
             <a href="/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
               AWS DynamoDB 연동하기
@@ -90,7 +161,7 @@
           
             <a href="/2021/05/13/MLOpsPrologue-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
-              1편 | 머신러닝 서비스를 만들기 위한 MLOps
+              머신러닝 서비스를 만들기 위한 MLOps Vol.1
               <span class="post-meta" style="margin-left: 15px;">
                 May 13, 2021
               </span>
@@ -99,7 +170,7 @@
           
             <a href="/2021/04/15/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
-              2편 | 머신러닝 서비스를 만들기 위한 MLOps
+              머신러닝 서비스를 만들기 위한 MLOps Vol.2
               <span class="post-meta" style="margin-left: 15px;">
                 April 15, 2021
               </span>
@@ -120,18 +191,36 @@
         <h2 id="computervision">#computervision</h2>
         <ul>
           
-            <a href="/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">
+            <a href="/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html">
             <li>
-              최혁근 샘플
+              월말보고(5월)- 최혁근
               <span class="post-meta" style="margin-left: 15px;">
-                April 12, 2021
+                June 3, 2021
               </span>
             </li>
           </a>
           
-            <a href="/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">
+            <a href="/2021/05/25/FacialExpression%EA%B8%B0%EB%B0%98%EA%B2%8C%EC%9E%84%EA%B2%BD%ED%97%98%ED%8F%89%EA%B0%80-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">
             <li>
-              권승진 샘플
+              Facial Expression 기반의 게임 경험 평가
+              <span class="post-meta" style="margin-left: 15px;">
+                May 25, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/17/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">
+            <li>
+              파이썬 자주 쓰는 코드 사전
+              <span class="post-meta" style="margin-left: 15px;">
+                May 17, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">
+            <li>
+              최혁근 샘플
               <span class="post-meta" style="margin-left: 15px;">
                 April 12, 2021
               </span>
@@ -143,6 +232,24 @@
         <h2 id="docker">#docker</h2>
         <ul>
           
+            <a href="/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 설치하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 27, 2021
+              </span>
+            </li>
+          </a>
+          
             <a href="/2021/04/15/DockerForAnalysis-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
               데이터 분석가를 위한 Docker
@@ -154,12 +261,76 @@
           
         </ul>
        
-        <h2 id="kubenetes">#kubenetes</h2>
+        <h2 id="facialexpressionrecognition">#facialexpressionrecognition</h2>
         <ul>
+          
+            <a href="/2021/05/25/FacialExpression%EA%B8%B0%EB%B0%98%EA%B2%8C%EC%9E%84%EA%B2%BD%ED%97%98%ED%8F%89%EA%B0%80-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">
+            <li>
+              Facial Expression 기반의 게임 경험 평가
+              <span class="post-meta" style="margin-left: 15px;">
+                May 25, 2021
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="jupyter">#jupyter</h2>
+        <ul>
+          
+            <a href="/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              Apache Zeppelin와 Jupyter의 비교
+              <span class="post-meta" style="margin-left: 15px;">
+                June 3, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 설치하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 27, 2021
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="kubernetes">#kubernetes</h2>
+        <ul>
+          
+            <a href="/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS EKS 쿠버네티스에서 JupyterHub 설치하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 27, 2021
+              </span>
+            </li>
+          </a>
           
             <a href="/2021/05/13/MLOpsPrologue-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
-              1편 | 머신러닝 서비스를 만들기 위한 MLOps
+              머신러닝 서비스를 만들기 위한 MLOps Vol.1
               <span class="post-meta" style="margin-left: 15px;">
                 May 13, 2021
               </span>
@@ -168,7 +339,7 @@
           
             <a href="/2021/04/15/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
-              2편 | 머신러닝 서비스를 만들기 위한 MLOps
+              머신러닝 서비스를 만들기 위한 MLOps Vol.2
               <span class="post-meta" style="margin-left: 15px;">
                 April 15, 2021
               </span>
@@ -180,6 +351,38 @@
               데이터 분석가를 위한 Docker
               <span class="post-meta" style="margin-left: 15px;">
                 April 15, 2021
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="ml">#ml</h2>
+        <ul>
+          
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/30/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
               </span>
             </li>
           </a>
@@ -191,7 +394,7 @@
           
             <a href="/2021/05/13/MLOpsPrologue-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
-              1편 | 머신러닝 서비스를 만들기 위한 MLOps
+              머신러닝 서비스를 만들기 위한 MLOps Vol.1
               <span class="post-meta" style="margin-left: 15px;">
                 May 13, 2021
               </span>
@@ -200,7 +403,7 @@
           
             <a href="/2021/04/15/MLOpsFirst-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
-              2편 | 머신러닝 서비스를 만들기 위한 MLOps
+              머신러닝 서비스를 만들기 위한 MLOps Vol.2
               <span class="post-meta" style="margin-left: 15px;">
                 April 15, 2021
               </span>
@@ -212,11 +415,25 @@
         <h2 id="monthlyreport">#monthlyreport</h2>
         <ul>
           
-            <a href="/2021/05/15/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <a href="/2021/06/01/2106MonthlyReport-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
               6월 머신러닝파트 월간 리뷰
               <span class="post-meta" style="margin-left: 15px;">
-                May 15, 2021
+                June 1, 2021
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="mysql">#mysql</h2>
+        <ul>
+          
+            <a href="/2021/06/02/MysqlEvent-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS Aurora DB, Mysql DB에서 스케줄러 사용하는 방법
+              <span class="post-meta" style="margin-left: 15px;">
+                June 2, 2021
               </span>
             </li>
           </a>
@@ -226,18 +443,18 @@
         <h2 id="objectdetection">#objectdetection</h2>
         <ul>
           
-            <a href="/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">
+            <a href="/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html">
             <li>
-              최혁근 샘플
+              월말보고(5월)- 최혁근
               <span class="post-meta" style="margin-left: 15px;">
-                April 12, 2021
+                June 3, 2021
               </span>
             </li>
           </a>
           
-            <a href="/2021/04/12/Sample-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">
+            <a href="/2021/04/12/Sample-%EC%B5%9C%ED%98%81%EA%B7%BC.html">
             <li>
-              권승진 샘플
+              최혁근 샘플
               <span class="post-meta" style="margin-left: 15px;">
                 April 12, 2021
               </span>
@@ -249,6 +466,33 @@
         <h2 id="python">#python</h2>
         <ul>
           
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/30/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
+              </span>
+            </li>
+          </a>
+          
             <a href="/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html">
             <li>
               AWS DynamoDB 연동하기
@@ -258,11 +502,139 @@
             </li>
           </a>
           
+            <a href="/1986/12/29/6%EC%9B%94%EB%A6%AC%EB%B7%B0_%EB%84%9B%EC%A7%80-%EA%B9%80%EB%8F%84%EC%98%81.html">
+            <li>
+              6월리뷰 넛지 초안
+              <span class="post-meta" style="margin-left: 15px;">
+                December 29, 1986
+              </span>
+            </li>
+          </a>
+          
+            <a href="/1986/12/29/SparkDF_Handling.html">
+            <li>
+              스택오버플로우 FAQ - 스파크 데이터프레임 핸들링
+              <span class="post-meta" style="margin-left: 15px;">
+                December 29, 1986
+              </span>
+            </li>
+          </a>
+          
             <a href="/1986/12/29/Sample.html">
             <li>
               제목
               <span class="post-meta" style="margin-left: 15px;">
                 December 29, 1986
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="sklearn">#sklearn</h2>
+        <ul>
+          
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/30/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="spark">#spark</h2>
+        <ul>
+          
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 31, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/2021/05/30/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">
+            <li>
+              Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기
+              <span class="post-meta" style="margin-left: 15px;">
+                May 30, 2021
+              </span>
+            </li>
+          </a>
+          
+            <a href="/1986/12/29/6%EC%9B%94%EB%A6%AC%EB%B7%B0_%EB%84%9B%EC%A7%80-%EA%B9%80%EB%8F%84%EC%98%81.html">
+            <li>
+              6월리뷰 넛지 초안
+              <span class="post-meta" style="margin-left: 15px;">
+                December 29, 1986
+              </span>
+            </li>
+          </a>
+          
+            <a href="/1986/12/29/SparkDF_Handling.html">
+            <li>
+              스택오버플로우 FAQ - 스파크 데이터프레임 핸들링
+              <span class="post-meta" style="margin-left: 15px;">
+                December 29, 1986
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="sql">#sql</h2>
+        <ul>
+          
+            <a href="/2021/06/02/MysqlEvent-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              AWS Aurora DB, Mysql DB에서 스케줄러 사용하는 방법
+              <span class="post-meta" style="margin-left: 15px;">
+                June 2, 2021
+              </span>
+            </li>
+          </a>
+          
+        </ul>
+       
+        <h2 id="zeppelin">#zeppelin</h2>
+        <ul>
+          
+            <a href="/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html">
+            <li>
+              Apache Zeppelin와 Jupyter의 비교
+              <span class="post-meta" style="margin-left: 15px;">
+                June 3, 2021
               </span>
             </li>
           </a>
@@ -279,7 +651,7 @@
           <a href="/tags/#aws">
             aws
             <span>
-              4
+              8
             </span>
           </a>
         </li>
@@ -288,7 +660,7 @@
           <a href="/tags/#computervision">
             computervision
             <span>
-              2
+              4
             </span>
           </a>
         </li>
@@ -297,14 +669,41 @@
           <a href="/tags/#docker">
             docker
             <span>
+              3
+            </span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/#facialexpressionrecognition">
+            facialexpressionrecognition
+            <span>
               1
             </span>
           </a>
         </li>
       
         <li>
-          <a href="/tags/#kubenetes">
-            kubenetes
+          <a href="/tags/#jupyter">
+            jupyter
+            <span>
+              3
+            </span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/#kubernetes">
+            kubernetes
+            <span>
+              5
+            </span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/#ml">
+            ml
             <span>
               3
             </span>
@@ -330,6 +729,15 @@
         </li>
       
         <li>
+          <a href="/tags/#mysql">
+            mysql
+            <span>
+              1
+            </span>
+          </a>
+        </li>
+      
+        <li>
           <a href="/tags/#objectdetection">
             objectdetection
             <span>
@@ -342,7 +750,43 @@
           <a href="/tags/#python">
             python
             <span>
-              2
+              7
+            </span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/#sklearn">
+            sklearn
+            <span>
+              3
+            </span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/#spark">
+            spark
+            <span>
+              5
+            </span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/#sql">
+            sql
+            <span>
+              1
+            </span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags/#zeppelin">
+            zeppelin
+            <span>
+              1
             </span>
           </a>
         </li>
