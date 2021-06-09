@@ -333,6 +333,8 @@
     top: 83.84px;
     .side-bar-tags {
       min-width: 200px;
+      max-width: 200px;
+      overflow-x: hidden;
       ul {
         list-style: none;
         margin: 0;

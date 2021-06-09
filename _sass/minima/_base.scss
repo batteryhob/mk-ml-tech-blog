@@ -161,7 +161,7 @@ blockquote {
  * Code formatting
  */
 pre,
-code {
+code {  
   @include relative-font-size(0.9375);
   // border: 1px solid $grey-color-light;
   // border-radius: 3px;
@@ -171,6 +171,10 @@ code {
 
 code {
   padding: 1px 5px;
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $code-font-family;
+  &.language-plaintext {
+    font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+  }
 }
 
 pre {

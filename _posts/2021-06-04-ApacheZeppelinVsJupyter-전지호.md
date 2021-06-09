@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Apache Zeppelin와 Jupyter의 비교
+title:  Apache Zeppelin과 Jupyter의 비교
 date:   2021-06-04 00:00:00 +0900
 author: 전지호
 tags: zeppelin jupyter
@@ -46,7 +46,7 @@ toc: true
 
 많은 기능을 함께 사용할려면 소스를 빌드하고 다시 실행해하는 문제가 있습니다.
 
-<b><u>첫 번째 대결은, 주피터의 손을 들어줍니다.</u></b>
+<b><u>첫 번째 대결은, Jupyter의 손을 들어줍니다.</u></b>
 
 <br/>
 

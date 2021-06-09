@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-06-05T10:57:58-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">2021년 6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/06/04/MonthlyReport202106-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="2021년 6월 머신러닝파트 월간 리뷰" /><published>2021-06-04T10:00:00-05:00</published><updated>2021-06-04T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/04/MonthlyReport202106-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/04/MonthlyReport202106-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-06-08T22:29:25-05:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">머신러닝파트 기술블로그</title><subtitle></subtitle><entry><title type="html">2021년 6월 머신러닝파트 월간 리뷰</title><link href="http://0.0.0.0:4000/2021/06/04/MonthlyReport202106-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="2021년 6월 머신러닝파트 월간 리뷰" /><published>2021-06-04T10:00:00-05:00</published><updated>2021-06-04T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/04/MonthlyReport202106-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/04/MonthlyReport202106-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;과금넛지&quot;&gt;과금넛지&lt;/h1&gt;
 
 &lt;hr /&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;5차 실험 집행 후, 넛지 대상자의 반응 여부를 판단하기 위해 충전액 예측 모델링을 진행 중입니다.&lt;/p&gt;
+  &lt;p&gt;4차 실험 집행 후, 넛지 대상자의 반응 여부를 판단하기 위해 충전액 예측 모델링을 진행 중입니다.&lt;/p&gt;
   &lt;blockquote&gt;
     &lt;p&gt;&lt;u&gt;넛지 전후 충전액을 예측&lt;/u&gt;하여 유저의 반응 여부와 효과를 측정하기 위함입니다.&lt;/p&gt;
   &lt;/blockquote&gt;
@@ -23,7 +23,7 @@
 
 &lt;h3 id=&quot;feature-extraction&quot;&gt;Feature Extraction&lt;/h3&gt;
 
-&lt;p&gt;충전액을 예측할 수 있는 Feature를 분류별로 추줄해보았습니다.&lt;/p&gt;
+&lt;p&gt;충전액을 예측할 수 있는 Feature를 분류별로 추출해보았습니다.&lt;/p&gt;
 
 &lt;p&gt;첫 번째, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;접속, 충전, 구매&lt;/code&gt;와 관련한 Features입니다.&lt;/p&gt;
 &lt;ul&gt;
@@ -60,10 +60,14 @@
 
 &lt;h3 id=&quot;model-fitting&quot;&gt;Model Fitting&lt;/h3&gt;
 
-&lt;p&gt;목적??&lt;/p&gt;
+&lt;p&gt;목적&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;유저별 30일간의 충전량 예측
-사용 데이터&lt;/li&gt;
+  &lt;li&gt;(실험군 유저가 넛지를 받지 않았을 때의) 30일간의 충전량 예측&lt;/li&gt;
+  &lt;li&gt;실제로는 실험군 유저 모두가 넛지를 받았으므로, 일어나지 않은 일(counterfactuals)에 대한 예측&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;사용 데이터&lt;/p&gt;
+&lt;ul&gt;
   &lt;li&gt;모델링 과정의 데이터는 대조군만을 사용 (넛지에 오염되지 않은 실험대상)&lt;/li&gt;
   &lt;li&gt;초반 과금량 분포를 보고, 전체 유저의 10퍼센트 정도의 상위 outlier 제거
     &lt;ul&gt;
@@ -215,12 +219,12 @@
 
 &lt;p&gt;대부분의 값을 0의로 예측했고, 충전여부를 예측하는 분류모델도 제대로 작동하지 않았습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;u&gt;&lt;b&gt;모델 성능에 문제가 있었던 점을 다음 3가지로 예상하고 있습니다.&lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;&lt;b&gt;모델 성능에 문제가 있었던 이유는 아래의 3가지 중 하나로 가정하고 있습니다. (+Cashflow 데이터)&lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;모델에 충분한 정보를 주지 않음
+  &lt;li&gt;1 : 모델에 충분한 정보를 주지 않음
     &lt;ul&gt;
-      &lt;li&gt;추가 feature 생성
+      &lt;li&gt;추가 feature 생성 진행중
         &lt;ul&gt;
           &lt;li&gt;개별 게임에 종속된 정보&lt;/li&gt;
           &lt;li&gt;cashflow에서 얻을 수 있는 정보&lt;/li&gt;
@@ -229,13 +233,13 @@
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;관찰기간인 30일 간, 발생하는 외부 이벤트가 유저 구매행동에 영향을 줌
+  &lt;li&gt;2 : 관찰기간인 30일 간, 발생하는 외부 이벤트가 유저 구매행동에 영향을 줌
     &lt;ul&gt;
       &lt;li&gt;구매 행동에 영향을 줄 수 있는 외부 이벤트: 이탈, 게임 내 여론 변화, 확률형 아이템의 사용결과(운) 등등&lt;/li&gt;
       &lt;li&gt;모델에 가능한 한 많은 정보를 제공했음에도 스코어가 개선되지 않을 때 의심할 것&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;유저의 구매행동이 충동적으로 일어나므로 예측이 불가
+  &lt;li&gt;3 : 유저의 구매행동이 충동적으로 일어나므로 유의미한 범위 내의 예측이 불가
     &lt;ul&gt;
       &lt;li&gt;&lt;u&gt;&lt;b&gt;위의 모든 가능성을 다 탐색했음에도 모델 성능이 충분히 나오지 않을 경우, 예측이 불가능한 것으로 간주할 예정&lt;/b&gt;&lt;/u&gt;&lt;/li&gt;
     &lt;/ul&gt;
@@ -252,6 +256,25 @@
 &lt;h2 id=&quot;cashflow-데이터-eda&quot;&gt;Cashflow 데이터 EDA&lt;/h2&gt;
 
 &lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;u&gt;구매액은 증가했으나, 충전액의 변화 없다&lt;/u&gt;는 것이 확인되었습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;cashflow EDA 결과에 대한 그림이 들어가는 곳 (도영 추가예정 (통계값과 그림))&lt;/p&gt;
+
+&lt;p&gt;구체적으로 다음과 같은 특징을 확인할 수 있었습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;무료캐시 지급 후 72시간 내에 다수(구매유저 중 60%)의 유저가 무료캐시 사용&lt;/li&gt;
+  &lt;li&gt;무료캐시 사용시 추가 유료충전 빈도는 비교군에서 자연발생하는 유료충전과 같은 빈도를 보임
+    &lt;ul&gt;
+      &lt;li&gt;잔액이 없을 경우, 지급받은 무료캐시로 구매가능한 정도의 아이템을 구매&lt;/li&gt;
+      &lt;li&gt;잔액이 있을 경우, 지급받은 무료캐시와 잔액을 활용하여 아이템을 구매&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;무료캐시를 사용한 구매를 제외하면 충전 및 구매 양상에 변화 없음&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -292,6 +315,38 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
+&lt;h2 id=&quot;넥슨-퍼스트-관련-헙업-문서-제안&quot;&gt;넥슨 퍼스트 관련 헙업 문서 제안&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/FGT%20%EC%98%81%EC%83%81%EB%B6%84%EC%84%9D%20%EA%B8%B0%EC%88%A0%20%ED%98%91%EC%97%85%20%EC%A0%9C%EC%95%88%EC%84%9C_v1.0.pdf&quot;&gt;&lt;u&gt;협업 제안서&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;넥슨 퍼스트 관련 향후 문제점이 될 만한 요소들은 다음과 같습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;테스트 유저가 노출을 원하지 않거나, 모바일 테스트 시 카메라를 가리는 이슈
+    &lt;ul&gt;
+      &lt;li&gt;카메라 노출 시, 추가적인 혜택을 주는 방안을 고려&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;관련 분석을 어떻게 활용할 수 있을 지에 대한 인사이트 부족
+    &lt;ul&gt;
+      &lt;li&gt;데이터 분석가의 리포트를 통해 인사이트를 줄 수 있는 방안을 고려&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;넥슨 퍼스트의 확정되지 않은 개발 기간
+    &lt;ul&gt;
+      &lt;li&gt;Dependency를 줄이는 방안으로 개발&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;따라서 넥슨 퍼스트와는 별도로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;데모 분석 리포트&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;데모 웹 콘솔&lt;/code&gt;을 제작해 추후 시연하는 방식으로 협의가 이루어 졌습니다.&lt;/p&gt;
+
+&lt;p&gt;추가로 UX실에서 25G 용량의 게임 플레이 동영상을 제공해주었고, 이를 모델 개발과 리포트 개발에 활용했습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;facialexpression-모델-개발&quot;&gt;FacialExpression 모델 개발&lt;/h2&gt;
 
 &lt;hr /&gt;
@@ -299,6 +354,10 @@
 &lt;blockquote&gt;
   &lt;p&gt;영상을 통해 감정을 추론하는 모델은 목표로 했던 수준의 &lt;u&gt;개발이 완료&lt;/u&gt;되어, &lt;u&gt;추론 결과를 바탕으로 리포트&lt;/u&gt;를 개발 중입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;NXLog랑 매핑하여 감정 변화 상태를 추적할 수 있는 리포트 샘플입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/reportsample.png&quot; alt=&quot;감정 리포트 타임라인 샘플&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -337,6 +396,26 @@
   &lt;li&gt;Fast R-CNN ResNet152 V1 1024x1024 (Fast R-CNN)&lt;/li&gt;
   &lt;li&gt;Mask R-CNN Inception ResNet V2 1024x1024 (Mask R-CNN)&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;test&quot;&gt;Test&lt;/h3&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/hgchoi16/4k-002.mkv&quot;&gt;&lt;u&gt;테스트 영상 링크&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Face Detection으로 구현한 샘플입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/%EB%8D%B0%EB%AA%A81.gif&quot; alt=&quot;1차 데모&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Object Detection으로 구현한 샘플입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/%EB%8D%B0%EB%AA%A82.JPG&quot; alt=&quot;2차 데모&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/%EB%8D%B0%EB%AA%A83.JPG&quot; alt=&quot;2차 데모&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;evaluation-1&quot;&gt;Evaluation&lt;/h3&gt;
 
@@ -480,9 +559,11 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;👉 &lt;a href=&quot;http://mlhub.na.nexon.co.kr&quot;&gt;&lt;u&gt;머신러닝파트 주피터허브&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;👉 &lt;a href=&quot;http://mlhub.na.nexon.com/&quot;&gt;&lt;u&gt;머신러닝파트 주피터 허브&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;👉 &lt;a href=&quot;/2021/06/03/ApacheZeppelinVsJupyter-전지호.html&quot;&gt;&lt;u&gt;제플린과 주피터의 비교&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D%EC%9E%A5%EB%B9%84%EC%9A%B4%EC%98%81%EC%82%AC%EB%A1%80.pdf&quot;&gt;&lt;u&gt;머신러닝 장비 운영 사례&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -502,7 +583,7 @@
 
 &lt;p&gt;3개의 컨테이너를 내부 사양에 맞게 커스터마이징하여 사용하고 있습니다.&lt;/p&gt;
 
-&lt;p&gt;10분 간, 사용하지 않는 컨테이너는 자동으로 내려갑니다. 따라서 쿠버네티스내 리소스는 효율적으로 관리됩니다.&lt;/p&gt;
+&lt;p&gt;10분 간, 사용하지 않는 컨테이너는 자동으로 내려갑니다. 따라서 쿠버네티스내 컴퓨팅 리소스는 효율적으로 관리됩니다.&lt;/p&gt;
 
 &lt;p&gt;전 세계에서 가장 유명한 머신러닝와 데이터 분석도구인 kubeflow, sagemaker, 데이터브릭스에서 제공하는 기능입니다.&lt;/p&gt;
 
@@ -526,9 +607,15 @@
 
 &lt;p&gt;공동 작업의 경우, 코드를 수정한 사람이나, 배포를 한 사람을 찾아내기 힘들 수도 있습니다.&lt;/p&gt;
 
-&lt;p&gt;서든어택 월핵탐지기 경우처럼 다른 조직과 협업하여 하루에 수십만 건 이미지를 머신러닝 코드로 처리하는 프로세스와 같은 서비스가 있다면, 이러한 취약점은 감당하기 힘든 문제로 돌아올 수 도 있습니다. 인텔리전스랩스의 분석 및 머신러닝 서비스가 네이버페이, 카카오페이같은 일반 사용자 대상 금융 서비스라고 가정하면 대부분의 분석 서비스가 큰 어려움을 겪을 것이라고 쉽게 생각할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;서든어택 월핵탐지기 경우처럼 다른 조직과 협업하여 하루에 수십만 건 이미지를 머신러닝 코드로 처리하는 프로세스와 같은 서비스가 있다면,&lt;/p&gt;
+
+&lt;p&gt;이러한 취약점은 감당하기 힘든 문제로 돌아올 수 도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;인텔리전스랩스의 분석 및 머신러닝 서비스가 네이버페이, 카카오페이같은 일반 사용자 대상 금융 서비스라고 가정하면 대부분의 분석 서비스가 큰 어려움을 겪을 것이라고 쉽게 생각할 수 있습니다.&lt;/p&gt;
 
 &lt;p&gt;그렇기 때문에, 머신러닝 파이프라인에 MLOps라 불리는 CI/CD를 적용했습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/1_s3uqyy6y3Wo4G8BPiY7vwA.png&quot; alt=&quot;MLOps 배포 파이프라인&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;현재 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;월핵탐지&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FGT 감정추론&lt;/code&gt;의 경우,&lt;/p&gt;
 
@@ -542,13 +629,19 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;옥외광고-지역-선정&quot;&gt;옥외광고 지역 선정&lt;/h1&gt;
+&lt;h1 id=&quot;오프라인광고-지역-선정&quot;&gt;오프라인광고 지역 선정&lt;/h1&gt;
 
 &lt;hr /&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;넥슨 유저의 위치정보 기반의 지역을 선정하다가 위치 기반 데이터의 한계를 느끼고 옥외 광고의 성과를 추적할 수 있는 새로운 아이데이션을 시도했습니다.&lt;/p&gt;
+  &lt;p&gt;넥슨 유저의 위치정보 기반의 지역을 선정하다가 위치 기반 데이터의 한계를 느끼고 오프라인광고의 성과를 추적할 수 있는 새로운 아이데이션을 시도했습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://confluence.nexon.com/pages/viewpage.action?pageId=389531331&quot;&gt;&lt;u&gt;오프라인광고 지역 선정&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/monthlyreport/%EC%98%A5%EC%99%B8%EA%B4%91%EA%B3%A0%EC%84%B1%EA%B3%BC%EC%B8%A1%EC%A0%95%EC%A0%9C%EC%95%88_%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D%ED%8C%8C%ED%8A%B8.pdf&quot;&gt;&lt;u&gt;[아이데이션]옥외광고소재와 성과측정&lt;/u&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -560,7 +653,431 @@
   &lt;p&gt;넥슨과 인텔리전스랩스에 도움이 되는 업무를 지속적으로 하고 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;마무리한다&lt;/p&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">월말보고(5월)- 최혁근</title><link href="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="월말보고(5월)- 최혁근" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;face-identification-시스템&quot;&gt;Face Identification 시스템&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;카트라이더 리그 지원&lt;/li&gt;
+  &lt;li&gt;카트라이더 TMI 운영 및 리소스 업데이트&lt;/li&gt;
+  &lt;li&gt;월핵탐지기 운영 및 요청사항 반영&lt;/li&gt;
+  &lt;li&gt;사내 기술 블로그 운영&lt;/li&gt;
+  &lt;li&gt;NDC 2021 발표 (권승진)&lt;/li&gt;
+  &lt;li&gt;FGT 관련 논문 작업 중 (권승진)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>전지호</name></author><category term="monthlyreport" /><summary type="html">과금넛지와 디지털사이니지, 오프라인 광고지역 선정에 대한 리뷰입니다.</summary></entry><entry><title type="html">월말보고(5월)- 권승진</title><link href="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="월말보고(5월)- 권승진" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">&lt;h1 id=&quot;디지털사이니지&quot;&gt;디지털사이니지&lt;/h1&gt;
+&lt;h2 id=&quot;얼굴-분석-엔진---ux분석팀-넥슨-퍼스트-4월-제안서-송부--미팅&quot;&gt;얼굴 분석 엔진 - UX분석팀 넥슨 퍼스트 4월 제안서 송부 &amp;amp; 미팅&lt;/h2&gt;
+&lt;p&gt;4월에 작성했던 제안서를 UX분석팀에 제안하였습니다. 다행히 긍정적으로 생각해주셨고 미팅을 진행 했습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;협업-포인트-긍정&quot;&gt;협업 포인트 긍정&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Usability Test 분석의 새로운 방향에 대한 기대&lt;br /&gt;
+감정 분석과 NX LOG의 결합에 대한 기대&lt;br /&gt;
+UX분석팀은 다양한 분석 방식 도입은 언제든 환영&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;협업-포인트-걱정&quot;&gt;협업 포인트 걱정&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;모바일 플레이시 카메라 가림&lt;br /&gt;
+모바일 성능 한계로 인한 고사양 게임 + 고해상도 스트리밍 한계&lt;br /&gt;
+상호 프로젝트 간 개발 기간 상이 문제&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;제안된 방식이 테스트 참가자를 직접 촬영한 영상에 대한 분석인데, UX분석팀에서는 이 부분은 고려하지 않고 있었는데 이렇게 제안되어 신선했다는 반응이었습니다. 다만 넥슨 퍼스트에서도 테스트 참가자 얼굴 영상 녹화를 고려하고 있었고, 검토했지만 모바일 게임의 경우 게임을 플레이하면서 핸드폰을 잡는 그립 방식이 카메라를 가리는 경우가 많고, 고해상도 스트리밍이 한계가 있기 때문에 도입에 대해서는 좀 더 검토가 필요하다고 걱정하는 면이 있었습니다.&lt;/p&gt;
+
+&lt;p&gt;그럼에도 불구하고, 차후에 코로나 상황이 끝난 뒤라도 실제 오프라인으로 참가자를 초대하는 방식의 FGT에서의 도입도 적극 희망한다는 의견을 주셨습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;이후-협업&quot;&gt;이후 협업&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;UX분석팀 분들(김슬기님, 한가람님) 초대 후 시연&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;미팅 후 UX분석팀 분들(김슬기님, 한가람님)을 저희 파티션에 초대하여 프레임워크 동작 방식을 설명드리고 시연하는 자리를 가졌고, 저희 프레임워크 성능 시험을 위해 적극적으로 영상을 제공하겠다는 의사를 비춰주셨습니다. 후에 5/4에 UX분석팀 분들께서 게임을 플레이하면서 촬영한 영상을 전달 받았습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;얼굴-분석-엔진---방향-설정&quot;&gt;얼굴 분석 엔진 - 방향 설정&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;방향 설정 - 플랫폼 의존 없이 다양한 영상 소스로부터 수집된 영상을 분석하는 파이프라인 구축&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이러한 내용들을 바탕으로 저희 프로젝트는 결론적으로 플랫폼 의존 없이 영상을 입력으로 하는 분석 엔진을 만드는 것으로 의견을 모았고, 유튜브, FGT프레임워크, 넥슨퍼스트, 직접 입력등으로 수집되는 영상들을 분석하는 파이프라인을 제작하고 데모 레포트와 데모 웹 프로토타입을 제작해서 UX실에 전달하기로 했습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;얼굴-분석-엔진---진척-상황&quot;&gt;얼굴 분석 엔진 - 진척 상황&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;데모 섹션 리포트와 NX LOG 매핑 리포트 데모&lt;br /&gt;
+모델 성능 개선&lt;br /&gt;
+파이프라인 제작&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;게임 분석에 영감을 줄 수 있는 항목들을 선별하여, 데모 섹션 리포트를 제작하고 있고, 마무리 단계에 있습니다. 해당 내용을 UX분석 팀에 공유하여 피드백을 받을 예정이고, 항목이 정해지고 피드백을 거쳐 폴리싱 되면 해당 기획을 가지고 웹 프로토타입을 개발할 예정입니다.&lt;br /&gt;
+-FGT결과글링크
+&lt;br /&gt;&lt;br /&gt;
+동시에 NX LOG에 매핑 되어 게임 LOG와 감정 표출의 상관관계에 대한 분석을 진행 중입니다.&lt;br /&gt;
+-도영님그림링크
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;초기 프로토타입 데모에 있었던 몇가지 버그를 수정하고, 몇몇 참가자에 대해 Fear 감정이 많이 발생하는 부분을 모델 개선을 통해 수정했습니다.&lt;br /&gt;
+파이프라인 제작에 관한 기술적인 이야기는 다음 포스트에서 확인할 수 있습니다.
+&lt;br /&gt;
+-링크&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;다음-마일스톤&quot;&gt;다음 마일스톤&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;다음 계획은 리포트를 보내고 피드백을 받은 후, 리포트를 볼 수 있는 웹 프로토타입을 제작할 것이다.&lt;/li&gt;
+  &lt;li&gt;모델 개발 완료 후, 프로토타입 개발시간을 이용해 아이덴티피케이션 모델을 개발할 것&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;-이후 혁근님 글 이어서&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;기타-사항&quot;&gt;기타 사항&lt;/h2&gt;
+&lt;p&gt;상용 서비스 중인 주요 얼굴 분석 엔진들의 기능과 비용에 대해 조사했고, Face Play 프로젝트에 공유하였습니다.&lt;br /&gt;
+https://confluence.nexon.com/pages/viewpage.action?pageId=382323477&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;추가 특허 확보에 대해 조사했고, 사내 IP팀 오승현님과 논의하였고, 이후 리앤목 특허법인의 신경하 변리사님과 미팅 진행하였습니다. 
+주요 내용은&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;얼굴 분석 장치 자체로서는 특허 의미를 갖기가 어렵다. Face Play만의 구체적인 게임 방식에 얼굴 분석 장치를 활용하는 것에 특허 의미를 부여할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;였습니다.&lt;br /&gt;
+https://confluence.nexon.com/pages/viewpage.action?pageId=382333496&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;NDC에서 해당 내용으로 발표를 신청해서 발표하게 되었고, 5/10 촬영 했습니다. 6/9 송출 예정이라고 합니다. 회사 내부 이야기는 최대한 배제하고, 흥미 위주와 공개 기술 위주로 발표하였습니다.&lt;br /&gt;
+https://ndc.nexon.com/common/CommonNotPeriod?category=sessionday1&lt;/p&gt;</content><author><name>권승진</name></author><category term="computervision" /><category term="objectdetection" /><category term="fgt" /><summary type="html">5월 보고용 자료입니다.</summary></entry><entry><title type="html">FGT 파이프라인 1 - 유튜브 다운로드</title><link href="http://0.0.0.0:4000/2021/06/03/FGT-p1-%EC%9C%A0%ED%8A%9C%EB%B8%8C%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.html" rel="alternate" type="text/html" title="FGT 파이프라인 1 - 유튜브 다운로드" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/FGT-p1-%EC%9C%A0%ED%8A%9C%EB%B8%8C%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/FGT-p1-%EC%9C%A0%ED%8A%9C%EB%B8%8C%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.html">&lt;h1 id=&quot;fgt-영상-분석-파이프라인&quot;&gt;FGT 영상 분석 파이프라인🤲&lt;/h1&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;영상 확보부터 리포트까지&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;영상 분석 분야에서는 영상 데이터가 용량이 크기 때문에 데이터를 확보하고, 전처리하고, 분석하는 단계를 잘 세분화해서 일을 두번하지 않게 만들어야 합니다.&lt;br /&gt;
+이 영상 처리 파이프라인 처리 과정을 소개해보려고 합니다.&lt;br /&gt;
+&lt;img src=&quot;https://solution-userstats.s3.amazonaws.com/techblogs/seungjin/2021-06-04/1.png&quot; alt=&quot;Process&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 과정은 원터치 실행도 가능해야하고, 따로 실행도 가능해야합니다.
+그리고 잦은 코드 변경 없이 파이프라인으로 굳히기 위해 모든 과정을 다 Docker로 실행되도록 만들었고, 추가된다면 그 역시 Docker로 만들어질 것입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;그 중 제일 먼저 유튜브 영상을 다운로드 자동화 하는 일부터 설명해보겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-유튜브-다운로드&quot;&gt;1. 유튜브 다운로드&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;유튜브 영상을 URL만 주면 가장 높은 해상도 영상을 다운 받아 저장&lt;br /&gt;
+pytube라는 라이브러리 사용&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;파이썬으로 유튜브에서 영상을 다운 받는 일은 당연히 인터넷에 찾아보면 많이 있는 일이지만, 몇가지 고려할 점이 있습니다. 유튜브 자체에서 영상을 다운로드 할 때, 720p이하 영상은 일시 전송하고, 720p가 넘는 고화질 영상은 다 스트리밍 형식의 전송이며, 이 때는 비디오와 오디오가 분리되서 전송되게 되어있다고 합니다.&lt;br /&gt;
+그래서 라이브러리를 이용해서 그냥 4k영상을 다운 받으면 영상만 다운로드 되기 때문에, 오디오와 비디오 데이터를 다운 받아서 합쳐주는 작업을 거쳐야합니다. 코드로 보면 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytube&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;YouTube&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 유튜브영상을 다운로드하기 위한 모듈
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os.path&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 경로를 설정하기 위한 모듈
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ffmpeg&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 미디어를 변환하기 위한 모듈
+&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Download&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# link 인자는 gui에서 입력된 값을 받을 때 사용
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./&quot;&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;YouTube&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getVideoName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'''(GUI버전) 비디오 이름을 내보내는 함수'''&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;downloadMp3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'''mp3 파일로 다운로드하는 함수'''&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# mp4형태지만 영상 없이 소리만 있는 파일 다운로드
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;only_audio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;download&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_filename&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# mp4로 다운받은 영상제목(파일명과 같음)
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'mp3'&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# mp3로 변환된 파일명
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# mp4에서 mp3로 변환
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;overwrite_output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 변환되기 전 mp4파일 삭제
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 저장한 파일명 리턴
+&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;downloadMp4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'''mp4 파일로 다운로드하는 함수'''&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;audio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloadMp3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# mp3파일 다운로드
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;video&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file_extension&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mp4'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;order_by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'resolution'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;video&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;video&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;download&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# mp4파일 다운로드
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# mp4로 해상도 높은 파일을 받으면 vcodec만 존재
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# -&amp;gt;비디오에 소리를 입히려면 acodec 있는 파일 받아 FFmpeg로 병합
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# -&amp;gt;downloadMp3로 mp3파일을 받고 오디오 소스로 사용
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;input_audio_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;audio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;input_video_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;video&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;inputAudio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_audio_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;inputVideo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_video_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 영상에 소리 입혀 &quot;new.mp4&quot;파일로 내보내기
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputAudio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputVideo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;new.mp4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vcodec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'copy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;overwrite_output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 변환이 끝나 더 이상 필요 없는 mp3, mp4 파일 지우기
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;video&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;audio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# &quot;new.mp4&quot;를 영상 제목으로 바꾸기
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;new.mp4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent_dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;video&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;video&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_filename&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 저장한 파일명 리턴
+&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;downloader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Download&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://www.youtube.com/watch?v=r7ZZCKmX2OI'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getVideoName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;downloaded_file_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;downloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloadMp4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloaded_file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://kiffblog.tistory.com/162&quot;&gt;코드 원본 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;그대로 실행하면, “[BE ORIGINAL] ITZY(있지) 마피아 In the morning (4K)” 유튜브를 최대 해상도로 mp4파일로 가져오게 됩니다.&lt;br /&gt;
+만약에 다른 조건으로 영상을 다운 받고 싶다면 유튜브에서 받을 수 있는 데이터 형태를 yt.streams.filter를 이용해서 선택해야 합니다. 예를 들어 “[BE ORIGINAL] ITZY(있지) 마피아 In the morning (4K)” 유튜브에서 가능한 모든 옵션을 쭉 불러오면 다음과 같습니다.&lt;/p&gt;
+
+&lt;details&gt;
+&lt;summary&gt;옵션 펼쳐보기&lt;/summary&gt;
+&lt;div&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&amp;lt;Stream: itag=&quot;160&quot; mime_type=&quot;video/mp4&quot; res=&quot;144p&quot; fps=&quot;30fps&quot; vcodec=&quot;avc1.4d400c&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;278&quot; mime_type=&quot;video/webm&quot; res=&quot;144p&quot; fps=&quot;30fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;394&quot; mime_type=&quot;video/mp4&quot; res=&quot;144p&quot; fps=&quot;30fps&quot; vcodec=&quot;av01.0.00M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;133&quot; mime_type=&quot;video/mp4&quot; res=&quot;240p&quot; fps=&quot;30fps&quot; vcodec=&quot;avc1.4d4015&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;242&quot; mime_type=&quot;video/webm&quot; res=&quot;240p&quot; fps=&quot;30fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;395&quot; mime_type=&quot;video/mp4&quot; res=&quot;240p&quot; fps=&quot;30fps&quot; vcodec=&quot;av01.0.00M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;18&quot; mime_type=&quot;video/mp4&quot; res=&quot;360p&quot; fps=&quot;30fps&quot; vcodec=&quot;avc1.42001E&quot; acodec=&quot;mp4a.40.2&quot; progressive=&quot;True&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;134&quot; mime_type=&quot;video/mp4&quot; res=&quot;360p&quot; fps=&quot;30fps&quot; vcodec=&quot;avc1.4d401e&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;, 
+ &amp;lt;Stream: itag=&quot;243&quot; mime_type=&quot;video/webm&quot; res=&quot;360p&quot; fps=&quot;30fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;396&quot; mime_type=&quot;video/mp4&quot; res=&quot;360p&quot; fps=&quot;30fps&quot; vcodec=&quot;av01.0.01M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;135&quot; mime_type=&quot;video/mp4&quot; res=&quot;480p&quot; fps=&quot;30fps&quot; vcodec=&quot;avc1.4d401f&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;, 
+ &amp;lt;Stream: itag=&quot;244&quot; mime_type=&quot;video/webm&quot; res=&quot;480p&quot; fps=&quot;30fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;397&quot; mime_type=&quot;video/mp4&quot; res=&quot;480p&quot; fps=&quot;30fps&quot; vcodec=&quot;av01.0.04M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;136&quot; mime_type=&quot;video/mp4&quot; res=&quot;720p&quot; fps=&quot;30fps&quot; vcodec=&quot;avc1.4d401f&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;247&quot; mime_type=&quot;video/webm&quot; res=&quot;720p&quot; fps=&quot;30fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;298&quot; mime_type=&quot;video/mp4&quot; res=&quot;720p&quot; fps=&quot;60fps&quot; vcodec=&quot;avc1.4d4020&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;302&quot; mime_type=&quot;video/webm&quot; res=&quot;720p&quot; fps=&quot;60fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;398&quot; mime_type=&quot;video/mp4&quot; res=&quot;720p&quot; fps=&quot;60fps&quot; vcodec=&quot;av01.0.08M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;299&quot; mime_type=&quot;video/mp4&quot; res=&quot;1080p&quot; fps=&quot;60fps&quot; vcodec=&quot;avc1.64002a&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;303&quot; mime_type=&quot;video/webm&quot; res=&quot;1080p&quot; fps=&quot;60fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;399&quot; mime_type=&quot;video/mp4&quot; res=&quot;1080p&quot; fps=&quot;60fps&quot; vcodec=&quot;av01.0.09M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;308&quot; mime_type=&quot;video/webm&quot; res=&quot;1440p&quot; fps=&quot;60fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;400&quot; mime_type=&quot;video/mp4&quot; res=&quot;1440p&quot; fps=&quot;60fps&quot; vcodec=&quot;av01.0.12M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;315&quot; mime_type=&quot;video/webm&quot; res=&quot;2160p&quot; fps=&quot;60fps&quot; vcodec=&quot;vp9&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;,
+ &amp;lt;Stream: itag=&quot;401&quot; mime_type=&quot;video/mp4&quot; res=&quot;2160p&quot; fps=&quot;60fps&quot; vcodec=&quot;av01.0.13M.08&quot; progressive=&quot;False&quot; type=&quot;video&quot;&amp;gt;]  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;
+간단히 요약하면 다운로드 옵션을&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;only video or only audio&lt;/li&gt;
+  &lt;li&gt;mp4 or webm&lt;/li&gt;
+  &lt;li&gt;해상도 144p ~ 2160p&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;정도 가지고 있다고 볼 수 있을 것 같습니다.&lt;/p&gt;
+
+&lt;p&gt;사용하는 입장에서는 yt.streams.filter함수를 이용해서 원하는 데이터와 원하는 해상도, 원하는 확장자 포맷을 설정한 다음에 다운 받으면 된다는 것만 알고 있으면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;video&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file_extension&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mp4'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;order_by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'resolution'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이렇게 하면 mp4의 확장자 중에 해상도 순서로 정렬해서 가장 마지막 것을 선택하도록 하는 필터가 됩니다. mp4중 최대 해상도 영상을 선택하게 되겠죠.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-docker-&quot;&gt;2. Docker 💬&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;코덱 때문에 특히 특히 무~~조건 Docker를 쓰는게 정신 건강에 좋음.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이 pytube라는 코드는 내부적으로 ffmpeg-python 라이브러리를 쓰고 있고, 이 ffmpeg-python 라이브러리는 또, ffmpeg라는 도구를 실행해서 결과를 얻게 되어 있고, 이 ffmpeg는 여러 코덱을 사용해서 수행하게 되는데, 결국 코덱 설치가 필요한 일이라 같은 파이썬 코드와 환경이라도 이 컴퓨터에서 되던 코드가 저 컴퓨터가면 코덱이 없어서 안되고 그런 일들이 일어납니다. 특히, Windows OS에서 많이 일어납니다.&lt;br /&gt;
+그래서 운영체제 단부터 코덱 설치까지 모두 환경 조성이 가능한 docker가 여기서 더 빛을 발하게 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN apt-get install -y ffmpeg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이렇게 설치해주면, 리눅스 환경에서 어려움 없이 pytube 라이브러리를 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-업로드&quot;&gt;3. 업로드&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;S3에 영상을 적재&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;S3에 영상을 적재하면 됩니다. 이건 모두가 아시다시피 boto3을 활용하면 됩니다. 실제 쓰이는 코드에서 발췌했는데 대략적으로 이렇게 하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'s3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;region_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_RESION&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aws_access_key_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_AWS_ACCESS_KEY_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aws_secret_access_key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_AWS_SECRET_ACCESS_KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upload_file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;local_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bucket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remote_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;다음엔 이 코드들이 어떻게 분석 엔진에 들어가게 되는지 써보겠습니다.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;안녕👋&lt;/p&gt;</content><author><name>권승진</name></author><category term="fgt" /><summary type="html">FGT 파이프라인 첫번째 유튜브 영상 다운로드 코드</summary></entry><entry><title type="html">Apache Zeppelin과 Jupyter의 비교</title><link href="http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="Apache Zeppelin과 Jupyter의 비교" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;아피치-제플린과-주피터의-간단-비교&quot;&gt;아피치 제플린과 주피터의 간단 비교&lt;/h1&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;데이터 분석의 워크플로를 개선하는 아파치 제플린과 주피터를 간단하게 비교해볼께요.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-설치-&quot;&gt;1. 설치 🛠&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;설치 단계에서부터 막히면, 아주 짜증이 많이납니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;주피터의 설치는 아주 간단합니다.&lt;/p&gt;
+
+&lt;p&gt;그냥 명령어를 통해 로컬에 설치만 하면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;로컬 환경을 쉽게 서버에 올리기 위해, 버전 별로 빌드된 도커 버전도 제공합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EC%A3%BC%ED%94%BC%ED%84%B0%20%EC%84%A0%ED%83%9D.JPG&quot; alt=&quot;다양한 주피터 도커&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html&quot;&gt;주피터&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://github.com/jupyter/docker-stacks&quot;&gt;주피터 도커 깃허브&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;그에 비해, 제플린의 설치는 조금 더 복잡합니다. 압축을 풀고 서버에서 실행해야 하죠.&lt;/p&gt;
+
+&lt;p&gt;많은 기능을 함께 사용할려면 소스를 빌드하고 다시 실행해하는 문제가 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;첫 번째 대결은, Jupyter의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-커뮤니티-&quot;&gt;2. 커뮤니티 💬&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;큰 커뮤니티는 레퍼런스와 도움을 받기 위해 아주 중요한 요소입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Jupyter의 커뮤니티는 이 Zeppelin보다 상당히 크고 훨씬 더 많은 외부 시스템을 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;그러나 Zeppelin의 커뮤니티는 성장 중이나 아직은 Jupyter에 밀리는 모습을 보여줍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;두 번째 대결은, Jupyter의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/compatition.jpg&quot; alt=&quot;구글 트렌드 비교&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-다중-사용자-지원-&quot;&gt;3. 다중 사용자 지원 👨‍👩‍👦‍👦&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;공용 환경에서 다중 사용자 지원은 필수입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Zeppelin는 다중 사용자를 지원하며,  Jupyter는 다중 사용자를 지원하지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;세 번째 대결은, Zeppelin의 승리일까요?&lt;/p&gt;
+
+&lt;p&gt;JupyterHub라는 Jupyter 확장 리소스는 다중 사용자 지원을 약속합니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 Zeppelin에 비해 Jupyter는 사용자마다 별도의 서버가 필요합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;이어질 내용으로 인해 이번 대결은 보류하겠습니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-다중-사용자-지원-시-리소스-분배-&quot;&gt;4. 다중 사용자 지원 시 리소스 분배 👨‍👩‍👦‍👦&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;다중 사용자가 많은 리소스를 동시에 사용할 때, 이에 대한 대응은 어떨까요?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Zeppelin은 서버 단일 프로세스를 사용합니다. 다중 사용자의 이용에 취약하죠.&lt;/p&gt;
+
+&lt;p&gt;이를 회피하기 위해, conda 환경과 docker를 Zeppelin 내부에서 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;Jupyter는 어떨까요?&lt;/p&gt;
+
+&lt;p&gt;Jupyter는 애초에 다중 사용자를 지원하지않으니, JupyterHub를 살펴봅시다.&lt;/p&gt;
+
+&lt;p&gt;JupyterHub는 각 사용자마다 서버를 따로 제공해야하니 단일 서버 프로세스를 사용한다 하더라도, 서로 영향을 주지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 각각의 서버를 구축하는 비용에 대한 문제는 어떻게 할까요?&lt;/p&gt;
+
+&lt;p&gt;JupyterHub는 쿠버네티스 환경을 제공하는 버전을 따로 내놨습니다.&lt;/p&gt;
+
+&lt;p&gt;하나의 서버에서 동작하는 쿠버네티스 환경에서의 JupyterHub는 각각의 사용자에 대해 가상의 컨테이너를 제공하여, 분리된 작업환경을 제공하는 동시에 서버 구축 비용을 줄일 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;네 번째 대결은, 주피터의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;5-확장프로그램-&quot;&gt;5. 확장프로그램 📥&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;더 많은 기능을 사용하고 싶다면…&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Jupyter는 약 20 개만있는 Zeppelin의 인터프리터 유형에 대해 지원되는 엔진이 85 개가 넘는 큰 목록으로 인해 승리합니다. 다양한 언어를 사용하고 싶다면, 주피터를 사용해야 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;6-차트---&quot;&gt;6. 차트 📊 📈 📉&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;데이터 시각화를 이용하여, 비주얼라이징 툴을 사용할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Jupyter와 Zeppelin을 둘 다 다양한 비주얼라이징 툴을 플로팅하여 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;u&gt;따라서, 대결은 무승부입니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;7-결론&quot;&gt;7. 결론&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;개인의 선호도에 따라, 선택은 자유.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;하지만, 많은 부분에서 Jupyter의 우세를 점칠 수 있습니다. 최근 가장 핫한 개발트렌드인 docker와 쿠버네티스 지원이 우수한 것은 차이를 더 크게 만드는 요소일 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;위와 같은 이유로,&lt;/p&gt;
+
+&lt;p&gt;우리 팀은 &lt;b&gt;&lt;u&gt;쿠버네티스 환경에 JupyterHub&lt;/u&gt;&lt;/b&gt;를 구축하여 사용하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;도움이 되셨길 바랍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/netflixjupyter.png&quot; alt=&quot;넷플릭스도 쓰는 주피터&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;안녕👋&lt;/p&gt;</content><author><name>전지호</name></author><category term="zeppelin" /><category term="jupyter" /><summary type="html">데이터 분석의 워크플로를 개선하는 아파치 제플린과 주피터를 간단하게 비교해볼께요.</summary></entry><entry><title type="html">월말보고(5월)- 최혁근</title><link href="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html" rel="alternate" type="text/html" title="월말보고(5월)- 최혁근" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/%EC%9B%94%EB%A7%90%EB%B3%B4%EA%B3%A0-5%EC%9B%94-%EC%B5%9C%ED%98%81%EA%B7%BC.html">&lt;h1 id=&quot;face-identification-시스템&quot;&gt;Face Identification 시스템&lt;/h1&gt;
 
 &lt;h2 id=&quot;face-identification-시스템-1&quot;&gt;Face Identification 시스템&lt;/h2&gt;
 &lt;h3 id=&quot;개요&quot;&gt;개요&lt;/h3&gt;
@@ -915,157 +1432,7 @@
       &lt;li&gt;대신 성능 관련해서는 확실하게 문서화 진행 예정&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">5월 보고용 자료입니다.</summary></entry><entry><title type="html">Apache Zeppelin와 Jupyter의 비교</title><link href="http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="Apache Zeppelin와 Jupyter의 비교" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/ApacheZeppelinVsJupyter-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;아피치-제플린과-주피터의-간단-비교&quot;&gt;아피치 제플린과 주피터의 간단 비교&lt;/h1&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;데이터 분석의 워크플로를 개선하는 아파치 제플린과 주피터를 간단하게 비교해볼께요.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;1-설치-&quot;&gt;1. 설치 🛠&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;설치 단계에서부터 막히면, 아주 짜증이 많이납니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;주피터의 설치는 아주 간단합니다.&lt;/p&gt;
-
-&lt;p&gt;그냥 명령어를 통해 로컬에 설치만 하면 됩니다.&lt;/p&gt;
-
-&lt;p&gt;로컬 환경을 쉽게 서버에 올리기 위해, 버전 별로 빌드된 도커 버전도 제공합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/%EC%A3%BC%ED%94%BC%ED%84%B0%20%EC%84%A0%ED%83%9D.JPG&quot; alt=&quot;다양한 주피터 도커&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;👉 &lt;a href=&quot;https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html&quot;&gt;주피터&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;👉 &lt;a href=&quot;https://github.com/jupyter/docker-stacks&quot;&gt;주피터 도커 깃허브&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;그에 비해, 제플린의 설치는 조금 더 복잡합니다. 압축을 풀고 서버에서 실행해야 하죠.&lt;/p&gt;
-
-&lt;p&gt;많은 기능을 함께 사용할려면 소스를 빌드하고 다시 실행해하는 문제가 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;&lt;u&gt;첫 번째 대결은, 주피터의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;2-커뮤니티-&quot;&gt;2. 커뮤니티 💬&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;큰 커뮤니티는 레퍼런스와 도움을 받기 위해 아주 중요한 요소입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Jupyter의 커뮤니티는 이 Zeppelin보다 상당히 크고 훨씬 더 많은 외부 시스템을 지원합니다.&lt;/p&gt;
-
-&lt;p&gt;그러나 Zeppelin의 커뮤니티는 성장 중이나 아직은 Jupyter에 밀리는 모습을 보여줍니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;&lt;u&gt;두 번째 대결은, Jupyter의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/compatition.jpg&quot; alt=&quot;구글 트렌드 비교&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;3-다중-사용자-지원-&quot;&gt;3. 다중 사용자 지원 👨‍👩‍👦‍👦&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;공용 환경에서 다중 사용자 지원은 필수입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Zeppelin는 다중 사용자를 지원하며,  Jupyter는 다중 사용자를 지원하지 않습니다.&lt;/p&gt;
-
-&lt;p&gt;세 번째 대결은, Zeppelin의 승리일까요?&lt;/p&gt;
-
-&lt;p&gt;JupyterHub라는 Jupyter 확장 리소스는 다중 사용자 지원을 약속합니다.&lt;/p&gt;
-
-&lt;p&gt;하지만 Zeppelin에 비해 Jupyter는 사용자마다 별도의 서버가 필요합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;&lt;u&gt;이어질 내용으로 인해 이번 대결은 보류하겠습니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;4-다중-사용자-지원-시-리소스-분배-&quot;&gt;4. 다중 사용자 지원 시 리소스 분배 👨‍👩‍👦‍👦&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;다중 사용자가 많은 리소스를 동시에 사용할 때, 이에 대한 대응은 어떨까요?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Zeppelin은 서버 단일 프로세스를 사용합니다. 다중 사용자의 이용에 취약하죠.&lt;/p&gt;
-
-&lt;p&gt;이를 회피하기 위해, conda 환경과 docker를 Zeppelin 내부에서 지원합니다.&lt;/p&gt;
-
-&lt;p&gt;Jupyter는 어떨까요?&lt;/p&gt;
-
-&lt;p&gt;Jupyter는 애초에 다중 사용자를 지원하지않으니, JupyterHub를 살펴봅시다.&lt;/p&gt;
-
-&lt;p&gt;JupyterHub는 각 사용자마다 서버를 따로 제공해야하니 단일 서버 프로세스를 사용한다 하더라도, 서로 영향을 주지 않습니다.&lt;/p&gt;
-
-&lt;p&gt;하지만 각각의 서버를 구축하는 비용에 대한 문제는 어떻게 할까요?&lt;/p&gt;
-
-&lt;p&gt;JupyterHub는 쿠버네티스 환경을 제공하는 버전을 따로 내놨습니다.&lt;/p&gt;
-
-&lt;p&gt;하나의 서버에서 동작하는 쿠버네티스 환경에서의 JupyterHub는 각각의 사용자에 대해 가상의 컨테이너를 제공하여, 분리된 작업환경을 제공하는 동시에 서버 구축 비용을 줄일 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;&lt;u&gt;네 번째 대결은, 주피터의 손을 들어줍니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;5-확장프로그램-&quot;&gt;5. 확장프로그램 📥&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;더 많은 기능을 사용하고 싶다면…&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Jupyter는 약 20 개만있는 Zeppelin의 인터프리터 유형에 대해 지원되는 엔진이 85 개가 넘는 큰 목록으로 인해 승리합니다. 다양한 언어를 사용하고 싶다면, 주피터를 사용해야 합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;6-차트---&quot;&gt;6. 차트 📊 📈 📉&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;데이터 시각화를 이용하여, 비주얼라이징 툴을 사용할 수 있습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Jupyter와 Zeppelin을 둘 다 다양한 비주얼라이징 툴을 플로팅하여 사용할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;&lt;u&gt;따라서, 대결은 무승부입니다.&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;7-결론&quot;&gt;7. 결론&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;개인의 선호도에 따라, 선택은 자유.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;하지만, 많은 부분에서 Jupyter의 우세를 점칠 수 있습니다. 최근 가장 핫한 개발트렌드인 docker와 쿠버네티스 지원이 우수한 것은 차이를 더 크게 만드는 요소일 수도 있습니다.&lt;/p&gt;
-
-&lt;p&gt;위와 같은 이유로,&lt;/p&gt;
-
-&lt;p&gt;우리 팀은 &lt;b&gt;&lt;u&gt;쿠버네티스 환경에 JupyterHub&lt;/u&gt;&lt;/b&gt;를 구축하여 사용하고 있습니다.&lt;/p&gt;
-
-&lt;p&gt;도움이 되셨길 바랍니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/netflixjupyter.png&quot; alt=&quot;넷플릭스도 쓰는 주피터&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;안녕👋&lt;/p&gt;</content><author><name>전지호</name></author><category term="zeppelin" /><category term="jupyter" /><summary type="html">데이터 분석의 워크플로를 개선하는 아파치 제플린과 주피터를 간단하게 비교해볼께요.</summary></entry><entry><title type="html">AWS S3 데이터 Lifecycle 기능을 이용하여 정리하기</title><link href="http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS S3 데이터 Lifecycle 기능을 이용하여 정리하기" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;너는-어쩜-정리도-안하고-방을-돼지우리-같이-하고-사니&quot;&gt;“너는 어쩜 정리도 안하고 방을 돼지우리 같이 하고 사니…”&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name>최혁근</name></author><category term="computervision" /><category term="objectdetection" /><summary type="html">5월 보고용 자료입니다.</summary></entry><entry><title type="html">AWS S3 데이터 Lifecycle 기능을 이용하여 정리하기</title><link href="http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS S3 데이터 Lifecycle 기능을 이용하여 정리하기" /><published>2021-06-03T10:00:00-05:00</published><updated>2021-06-03T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/06/03/S3Lifecycle-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;너는-어쩜-정리도-안하고-방을-돼지우리-같이-하고-사니&quot;&gt;“너는 어쩜 정리도 안하고 방을 돼지우리 같이 하고 사니…”&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;우리, S3라도 정리합시다. 꿀꿀 🐷&lt;/p&gt;
@@ -1471,6 +1838,132 @@ rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&
 
 &lt;p&gt;👉 &lt;a href=&quot;https://www.tutorialspoint.com/apache_spark/advanced_spark_programming.htm&quot;&gt;About advaced spark programming - spark broadcast&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;👉 &lt;a href=&quot;https://sparkbyexamples.com/spark/spark-broadcast-variables/&quot;&gt;Spark Broadcast Varibales&lt;/a&gt;&lt;/p&gt;</content><author><name>김연수</name></author><category term="python" /><category term="sklearn" /><category term="ml" /><category term="spark" /><summary type="html">좀 더 빠른 ML inference를 위해 spark broadcasting을 사용해봅니다.</summary></entry><entry><title type="html">Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기</title><link href="http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html" rel="alternate" type="text/html" title="Spark broadcasting을 이용해 기존 머신러닝 라이브러리 속도 개선하기" /><published>2021-05-31T10:00:00-05:00</published><updated>2021-05-31T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/31/Sparkbroadcasting-%EA%B9%80%EC%97%B0%EC%88%98.html">&lt;h1 id=&quot;spark-broadcast&quot;&gt;Spark Broadcast&lt;/h1&gt;
+&lt;h2 id=&quot;우리에게-필요한-것은-inference-효율성-&quot;&gt;우리에게 필요한 것은 inference 효율성 😎&lt;/h2&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;기존 python ml 라이브러리로 다량의 데이터를 빠르게 처리를 해야 할 때!  &lt;u&gt;Spark broadcasting&lt;/u&gt;을 이용해 inference 속도를 개선할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spark의-공유-변수&quot;&gt;Spark의 공유 변수&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;아피치 스파크&lt;/b&gt;는 SQL, 머신러닝 등 처리를 위한 기본 제공 모듈이 있는 &lt;u&gt;대규모 데이터 처리용 통합 분석 엔진&lt;/u&gt;입니다.&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;/br&amp;gt;
+일반적인 스파크 연산이 클러스터에서 실행될 때 함수에서 사용되는 변수는 각 클러스터에 복제되고 각 노드 연산에서는 독립적입니다. 클러스터 상에서 변수를 공유하는 것은 비효율적이기 때문인데, 일반적인 연산 패턴을 지원하기 위해 아래와 같은 공유 변수를 제공합니다
+.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;broadcast variables : 큰 데이터를 효율적으로 처리하는데 사용&lt;/li&gt;
+  &lt;li&gt;Accumulators variables : 특정 컬렉션의 정보를 집계하는 데 사용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;오늘은 &lt;b&gt;broadcast variables&lt;/b&gt;에 대하여 알아보도록 하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spark-broadcast-란&quot;&gt;Spark broadcast 란?&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;broadcast 변수는 읽기 전용 변수입니다. 모든 노드에 큰 input 데이터셋을 제공할 때 효과적인 방법이라고 할 수 있습니다. 이를 사용하면 효율적인 broadcast 알고리즘을 통해 계산 비용을 줄일 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;스파크의 액션들은 기본적으로 여러 단계의 집합으로 실행되는데, 자동적으로 각 단계에 필요한 공유 변수들을 broadcast하는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;Broadcast 변수는 RDD나 Dataframe과 동일한 방식으로 사용될 수 있습니다. (데이터는 serialized 캐싱되고 deserialized 되어 각 테스크로 넘어가게 됩니다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+호출 방법은 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sc &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; SparkContext&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+var &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 사용할 공유 변수 var&lt;/span&gt;
+
+broadcastvar &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;var&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;일단 broadcast variable이 만들어지면, 클러스터상의 모든 함수에 사용될 수 있습니다. (즉, &lt;u&gt;var은 한 번 이상 노드에 올라가지 않게&lt;/u&gt; 됩니다.)&lt;/p&gt;
+
+&lt;p&gt;참고로, 한 번 생성된 broadcastvar 객체는 이후 수정될 수 없습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt; 
+broadcast 된 값을 이용하기 위해서는 &lt;b&gt;value 메소드&lt;/b&gt;를 사용하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# value 값에 액세스 하기 위함&lt;/span&gt;
+broadcastvar.value
+
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Array&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4,5,6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;sklearn에-spark-broadcast를-적용해-inference-하기&quot;&gt;sklearn에 spark broadcast를 적용해 inference 하기&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;python에서 가장 많이 이용되는 mechine learning library는 sklearn일 것입니다. sklearn 에서는 보통 pandas dataframe 을 활용한 데이터를 fit하고 predict 하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, KNN (K-Nearest Neighbors)과 같은 알고리즘을 사용하게 된다면 우리는 각 key 값에 대한 각각의 k개의 neighbors를 모두 구해야합니다. 즉, &lt;b&gt;key 값 하나하나에 모든 데이터를 연산&lt;/b&gt;하게 됩니다.결국 inference 시간이 엄청나게 길어질 수 밖에 없는 구조가 됩니다.&lt;/p&gt;
+
+&lt;p&gt;이는 &lt;b&gt;&lt;u&gt;sklearn model을 broadcast 하는 방식&lt;/u&gt;&lt;/b&gt;을 활용해 효율적으로 처리될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;예제 코드는 다음과 같습니다. ( knn model 사용 )&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def knn_regressor_broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;data_pd, &lt;span class=&quot;nv&quot;&gt;neighbors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;100, &lt;span class=&quot;nv&quot;&gt;n_partitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;uniform&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+
+  &lt;span class=&quot;c&quot;&gt;# X_train, y_train, X_test, y_test 의 경우 pandas dataframe 형태&lt;/span&gt;
+  
+
+  &lt;span class=&quot;c&quot;&gt;# 모델 fit&lt;/span&gt;
+  knn &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; KNeighborsRegressor&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;n_neighbors &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; neighbors, weights &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; weights&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; knn.fit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_train, y_train&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  
+  &lt;span class=&quot;c&quot;&gt;# 여러 배치로 돌리기 위한 함수&lt;/span&gt;
+  def batch&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+    yield list&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    
+  rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;X_test, n_partitions&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.zipWithIndex&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+  b_model &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.broadcast&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;model&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;batch&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.map&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda value: &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;x[0] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value], &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x[1] &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;x &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value]&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;.flatMap&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;lambda x: zip&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[1], b_model.value.predict&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x[0]&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt;
+  
+  result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; result.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위와 같이 &lt;b&gt;model을 broadcast + rdd test data&lt;/b&gt;를 사용하자 Pandas dataframe을 이용해 predict를 하였을 때 Runtime errorrk가 났던 모델을 약 5분 내외로 처리할 수 있었습니다 👏👏&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;부가적인 코드 설명을 잠시 하자면&lt;/p&gt;
+
+&lt;p&gt;mapPartitions의 경우 나눠진 partition내에서 연산을 수행하게 해줍니다&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rdd &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sc.parallelize&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;1, 2, 3, 4], 2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+def f&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: yield &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.collect&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# output&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3, 7]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;즉, broadcast된 모델에 test 데이터를 batch  형태로 분산 처리가 가능해진다고 할 수 있습니다.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;참고-자료&quot;&gt;참고 자료&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;👉 &lt;a href=&quot;https://www.tutorialspoint.com/apache_spark/advanced_spark_programming.htm&quot;&gt;About advaced spark programming - spark broadcast&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;👉 &lt;a href=&quot;https://sparkbyexamples.com/spark/spark-broadcast-variables/&quot;&gt;Spark Broadcast Varibales&lt;/a&gt;&lt;/p&gt;</content><author><name>김연수</name></author><category term="python" /><category term="sklearn" /><category term="ml" /><category term="spark" /><summary type="html">좀 더 빠른 ML inference를 위해 spark broadcasting을 사용해봅니다.</summary></entry><entry><title type="html">AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기</title><link href="http://0.0.0.0:4000/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS EKS 쿠버네티스에서 JupyterHub 환경 설정하기" /><published>2021-05-30T10:00:00-05:00</published><updated>2021-05-30T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/30/JupyterhubConfig-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;쿠버네티스-jupyterhub-설정법-&quot;&gt;쿠버네티스 JupyterHub 설정법 👨‍💻&lt;/h1&gt;
 
 &lt;blockquote&gt;
@@ -1483,7 +1976,7 @@ rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&
 
 &lt;hr /&gt;
 
-&lt;p&gt;👉 &lt;a href=&quot;/2021/05/27/JupyterhubForK8S-전지호.html&quot;&gt;첫번째포스트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;👉 &lt;a href=&quot;/2021/05/27/JupyterhubForK8S-전지호.html&quot;&gt;첫번째 포스트&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;위 포스트 처음에 만들었던 config.yaml를 확인합니다.&lt;/p&gt;
 
@@ -1653,555 +2146,4 @@ rdd.mapPartitions&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&
 
 &lt;h2 id=&quot;참고문헌&quot;&gt;참고문헌&lt;/h2&gt;
 
-&lt;p&gt;👉 &lt;a href=&quot;https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html&quot;&gt;zero-to-jupyterhub-on-k8s&lt;/a&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubernetes" /><category term="jupyter" /><category term="aws" /><summary type="html">JupyterHub를 구축했다면 사용자 별 환경과 리소스를 구분하기 위한 설정방법을 알아봅시다.</summary></entry><entry><title type="html">AWS EKS 쿠버네티스에서 JupyterHub 설치하기</title><link href="http://0.0.0.0:4000/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS EKS 쿠버네티스에서 JupyterHub 설치하기" /><published>2021-05-27T10:00:00-05:00</published><updated>2021-05-27T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/27/JupyterhubForK8S-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;쿠버네티스에-jupyterhub-설치-&quot;&gt;쿠버네티스에 JupyterHub 설치 👨‍💻&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;쿠버네티스가 구축되어 있다면, helm 차트를 이용하여 간단하게 JupyterHub를 설치할 수 있습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;일단 작업환경을 수행할 폴더를 만들고 해당 폴더안에서 작업을 수행합니다.&lt;/p&gt;
-
-&lt;p&gt;해당 폴더는 JupyterHub의 앞으로의 configration을 담당할 폴더입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;첫-번째-helm-repogitory-업데이트&quot;&gt;첫 번째, helm repogitory 업데이트&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;쿠버네티스 환경에 연결되어 있고, helm이 설치되어 있다면 다음의 명령어로 차트를 설치할 수 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/
-helm repo update
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음과 같은 출력이 보여야합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Hang tight &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;we grab the latest from your chart repositories...
-...Skip &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;chart repository
-...Successfully got an update from the &lt;span class=&quot;s2&quot;&gt;&quot;stable&quot;&lt;/span&gt; chart repository
-...Successfully got an update from the &lt;span class=&quot;s2&quot;&gt;&quot;jupyterhub&quot;&lt;/span&gt; chart repository
-Update Complete. ⎈ Happy Helming!⎈
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;두-번째-jupyterhub-차트-다운로드&quot;&gt;두 번째, JupyterHub 차트 다운로드&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;차트를 바로 설치하기 보단 템플릿의 구성을 확인하고 설치하기 위해 차트를 다운로드합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm fetch jupyterhub/jupyterhub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;다운로드가 완료되면 압축된 차트 파일이 보입니다. 압축을 해제합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; .&lt;span class=&quot;se&quot;&gt;\&amp;lt;&lt;/span&gt;다운로드된파일&amp;gt;.tgz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/jhubdir.JPG&quot; alt=&quot;주피터허브 폴더구조&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;세-번째-템플릿을-변경할-수-있는-구성-파일을-만들어-봅시다&quot;&gt;세 번째, 템플릿을 변경할 수 있는 구성 파일을 만들어 봅시다.&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;helm 차트 리소스에 기본적으로 설치할 구성요소에 대한 리소스가 모두 포함되어 있습니다.&lt;/p&gt;
-
-&lt;p&gt;하지만 config.yaml 파일을 이용하면 구성요서에 대한 템플릿의 변경이 가능합니다.&lt;/p&gt;
-
-&lt;p&gt;그렇기때문에, config.yaml을 만들어 참조하고 설정을 변경해봅시다.&lt;/p&gt;
-
-&lt;p&gt;아래와 같이 빈 config.yaml을 만들어 작업 폴더 밑 차트 폴더에에 추가해주세요.(Chart.yaml과 같은 위치)&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# This file can update the JupyterHub Helm chart's default configuration values.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# For reference see the configuration reference and default values, but make&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# sure to refer to the Helm chart version of interest to you!&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Introduction to YAML:     https://www.youtube.com/watch?v=cdLNKUoMc6c&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Chart config reference:   https://zero-to-jupyterhub.readthedocs.io/en/stable/resources/reference.html&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Chart default values:     https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/HEAD/jupyterhub/values.yaml&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Available chart versions: https://jupyterhub.github.io/helm-chart/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;네-번째-차트를-쿠버네티스-환경에-배포하여-설치해봅시다&quot;&gt;네 번째, 차트를 쿠버네티스 환경에 배포하여 설치해봅시다.&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;차트 폴더에서 아래의 명령어를 입력해주세요.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm upgrade &lt;span class=&quot;nt&quot;&gt;--cleanup-on-fail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--install&lt;/span&gt; jhub &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; jhub &lt;span class=&quot;nt&quot;&gt;--create-namespace&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--values&lt;/span&gt; config.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;🤬🤬🤬&lt;/p&gt;
-
-&lt;p&gt;아래와 같은 에러가 있다면, 배포환경에 토큰이 꼭 필요하단 이야기입니다.(예시: AWS EKS)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/tokenerror.JPG&quot; alt=&quot;토큰필요&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Openssl이나 여타 다른 토큰 제네레이터 프로그램을 이용하여 32자리의 hex코드를 임의로 생성해주세요.&lt;/p&gt;
-
-&lt;p&gt;폴더 안 values.yaml 파일에 시크릿 토큰을 입력하는 곳이 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/requiredtokken.JPG&quot; alt=&quot;토큰넣기&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;시크릿 토큰 입력&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/requiredtokkensuccess.JPG&quot; alt=&quot;토큰성공&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다시 명령어를 입력해주세요.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm upgrade &lt;span class=&quot;nt&quot;&gt;--cleanup-on-fail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--install&lt;/span&gt; jhub &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; jhub &lt;span class=&quot;nt&quot;&gt;--create-namespace&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--values&lt;/span&gt; config.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;인스톨이 성공했습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/installsuccess.JPG&quot; alt=&quot;주피터허브인스톨&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Pod가 모두 잘 돌아갑니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get pod &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/pods.JPG&quot; alt=&quot;주피터허브파드&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;외부접속을 위한 서비스도 볼 수 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get svc &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/svc.JPG&quot; alt=&quot;주피터허브서비스&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;다섯-번째-jupyterhub-접속하기&quot;&gt;다섯 번째, JupyterHub 접속하기&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;서비스에 나온 퍼블릭 주소로 접근해봅시다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/connectsuccess.JPG&quot; alt=&quot;외부접속&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;쿠버네티스에 설치된 주피터 허브에 접속이 가능합니다!!(로드밸런서 설정은 따로 해주세요.)&lt;/p&gt;
-
-&lt;p&gt;아무 아이디로 로그인을 해봅시다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;로그인 후에 사용자별 서버가 생성되는 것을 알 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/servercreate.JPG&quot; alt=&quot;서버생성&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;주피터 노트북이 떳습니다!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/jupyterhub.JPG&quot; alt=&quot;주피터허브&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 명령어를 입력해보면,&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get pod &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.ap-northeast-1.amazonaws.com/techblogs/batteryho/userpod.JPG&quot; alt=&quot;유저별파드&quot; id=&quot;popup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;유저별로 Pod가 생성된 유연한 환경 분리가 가능한 것을 알 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;마지막-jupyterhub-삭제&quot;&gt;마지막, JupyterHub 삭제&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;JupyterHub를 삭제하려면 간단하게 다음 명령어를 입력하면 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm uninstall jhub &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;가능한-것들&quot;&gt;가능한 것들&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;JupyterHub를 쿠버네티스 환경에 구축하므로서 생각했던 두 가지 목표가 가능해졌습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사용자 별 다른 주피터 노트북 환경 구성 (pyspark-notebook, datascience-notebook)&lt;/li&gt;
-  &lt;li&gt;사용자 별 GPU 점유 주피터 노트북 (pyspark-notebook, datascience-notebook)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;다음 포스트에서는 config.yaml을 수정하여 위와 같은 활동을 다뤄보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;🖐🖐🖐&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;참고문헌&quot;&gt;참고문헌&lt;/h2&gt;
-&lt;p&gt;👉 &lt;a href=&quot;https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/installation.html#install-jupyterhub&quot;&gt;zero-to-jupyterhub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;👉 &lt;a href=&quot;https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html&quot;&gt;zero-to-jupyterhub-on-k8s&lt;/a&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubernetes" /><category term="jupyter" /><category term="aws" /><summary type="html">쿠버네티스에 여러명의 분석가가 함께 작업할 수 있는 JupyterHub를 구축해보십니다. 각자 분리된 환경에서 일할 수 있으면 참 좋겠죠?</summary></entry><entry><title type="html">Facial Expression 기반의 게임 경험 평가</title><link href="http://0.0.0.0:4000/2021/05/25/FacialExpression%EA%B8%B0%EB%B0%98%EA%B2%8C%EC%9E%84%EA%B2%BD%ED%97%98%ED%8F%89%EA%B0%80-%EA%B6%8C%EC%8A%B9%EC%A7%84.html" rel="alternate" type="text/html" title="Facial Expression 기반의 게임 경험 평가" /><published>2021-05-25T10:00:00-05:00</published><updated>2021-05-25T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/25/FacialExpression%EA%B8%B0%EB%B0%98%EA%B2%8C%EC%9E%84%EA%B2%BD%ED%97%98%ED%8F%89%EA%B0%80-%EA%B6%8C%EC%8A%B9%EC%A7%84</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/25/FacialExpression%EA%B8%B0%EB%B0%98%EA%B2%8C%EC%9E%84%EA%B2%BD%ED%97%98%ED%8F%89%EA%B0%80-%EA%B6%8C%EC%8A%B9%EC%A7%84.html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;최근 저희가 만든 nxFGT 얼굴 분석 엔진을 이용한 테스트가 진행되었습니다. &lt;br /&gt;
-가장 큰 목적은 게임을 플레이하면서 게임 테스터는 어떤 감정들을 얼굴로 표현할까? 에 초점을 맞춰진 테스트입니다. 그 감정의 변화가 일어나는 특별한 순간들을 캐치하고, 분석하는 것이 이 프로젝트의 목적입니다.&lt;br /&gt;
-이 테스트는 다음과 같은 15개의 게임 세션으로 구성되었습니다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;이름&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;세션수&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;플레이타임&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;FIFA Online 4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 25분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;플레이투게더&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 35분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;It takes two&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 82분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;타이탄폴2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 35분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;서든어택&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 12분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;클래시로얄&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 4분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ALTF4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 8분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;오버워치&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 8분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;리그 오브 레전드&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 22분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;던전 앤 파이터&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 10분&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;카트라이더&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;29&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 77분&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;카운팅&quot;&gt;카운팅&lt;/h2&gt;
-&lt;p&gt;기본적으로 사람이 컴퓨터 앞에 앉았을 때는 무표정입니다. 그리고 게임 속 어떤 변화가 일어날때마다 사람은 웃거나, 화를 내거나 하는 특별한 감정이 얼굴로 나타납니다.
-집계된 감정을 카운트로 보면 다음과 같습니다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;이름&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;세션수&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;플레이타임&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;긍정반응&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;부정반응&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;FIFA Online 4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 25분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;플레이투게더&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 35분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;59&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;It takes two&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 82분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3980&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;75&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;타이탄폴2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 35분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;6&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;서든어택&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 12분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;135&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;클래시로얄&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 4분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ALTF4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 8분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;11&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;오버워치&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 8분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;리그 오브 레전드&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 22분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;64&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;던전 앤 파이터&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 10분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;95&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;카트라이더&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;29&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;약 77분&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3770&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;42&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Stacked Bar Chart로 본 표입니다.
-&lt;img src=&quot;https://solution-userstats.s3.amazonaws.com/techblogs/seungjin/2021-05-26-FE/1.png&quot; alt=&quot;Stacked Bar Chart&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;플레이타임이 긴 It takes two, 카트라이더를 빼고 본 표입니다.
-&lt;img src=&quot;https://solution-userstats.s3.amazonaws.com/techblogs/seungjin/2021-05-26-FE/2.png&quot; alt=&quot;Stacked Bar Chart2&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이를 통해 감정의 발생량과 각각 긍정, 부정량을 파악할 수 있습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;카트라이더-감정-발생-비율&quot;&gt;카트라이더 감정 발생 비율&lt;/h2&gt;
-&lt;p&gt;카트라이더의 경우가 장르 특성상 가장 다양한 감정이 발생했기 때문에 각각 감정의 발생량을 비율로 표현해봤습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://solution-userstats.s3.amazonaws.com/techblogs/seungjin/2021-05-26-FE/3.png&quot; alt=&quot;Stacked Bar Chart2&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;세션별-시계열-누적&quot;&gt;세션별 시계열 누적&lt;/h2&gt;
-&lt;p&gt;게임 세션에서 시간이 흐름에 따라 감정량이 어떻게 누적되어가는지를 추적하는 그래프입니다.
-세션의 초반, 중반, 후반 중 어디서 집중적으로 테스트 참가자의 감정 변화가 발생했는지 알 수 있습니다.&lt;br /&gt;
-&lt;img src=&quot;https://solution-userstats.s3.amazonaws.com/techblogs/seungjin/2021-05-26-FE/4.png&quot; alt=&quot;Acc Chart&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;대표-감정&quot;&gt;대표 감정&lt;/h2&gt;
-&lt;p&gt;특정 게임마다 많이 일어나는 감정이 각각 다른지를 분석해봤습니다. 현재는 테스트라 숫자가 적지만, 차후 대량 플레이 데이터 삽입 시 특정 게임마다, 특정 게임의 구간마다 대표 반응을 알 수 있는 메트릭이 될 것입니다. 
-현재는 게임 타이틀로 구분하여 나타냈습니다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;이름&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;대표 반응&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;FIFA Online 4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;플레이투게더&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;It takes two&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;타이탄폴2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;서든어택&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;클래시로얄&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;무표정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ALTF4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;화남&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;오버워치&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;무표정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;리그 오브 레전드&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;던전 앤 파이터&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;카트라이더&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;웃음&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;ALTF4의 경우가 특이한데, 실제로 유저를 열받게 하면서 몰입하게 만든다는 평가를 받는 게임입니다. 육안 분석결과도 해당 플레이동안 테스트 참가자가 자주 화내는 모습을 관찰할 수 있었습니다.
-참조:&lt;a href=&quot;https://namu.wiki/w/ALTF4&quot;&gt;나무위키 ALTF4&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;결론&quot;&gt;결론&lt;/h2&gt;
-&lt;p&gt;이번 테스트로 게임 테스트 시 얼굴에서 발생하는 감정을 어떤 식으로 가공할 것인지에 대해 많은 고민을 해볼 수 있었습니다. 적은 량이지만 게임의 특성과 사용자의 감정 반응의 연관성을 발견할 수도 있었습니다. 현재는 게임을 카테고리로 묶어서 결과를 냈지만 테스트 세션의 수가 늘어날수록, 각 게임에서도 세부 구간별로 특성을 정의하여 결과를 도출할수 있다고 생각됩니다.&lt;/p&gt;</content><author><name>권승진</name></author><category term="computervision" /><category term="facialexpressionrecognition" /><summary type="html">Facial Expression 기반의 게임 경험 평가</summary></entry><entry><title type="html">AWS DynamoDB 연동하기</title><link href="http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html" rel="alternate" type="text/html" title="AWS DynamoDB 연동하기" /><published>2021-05-16T10:00:00-05:00</published><updated>2021-05-16T10:00:00-05:00</updated><id>http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8</id><content type="html" xml:base="http://0.0.0.0:4000/2021/05/16/DynamoDB-%EC%A0%84%EC%A7%80%ED%98%B8.html">&lt;h1 id=&quot;python으로-aws-dynamodb-연동하기&quot;&gt;Python으로 AWS DynamoDB 연동하기&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Python을 사용하여 AWS DynamoDB 데이터 쿼리&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;boto3-설치&quot;&gt;boto3 설치&lt;/h2&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;설치된 python 패키지 매니저로 boto3를 설치합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;boto3client-사용&quot;&gt;boto3.client 사용&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dynamodb = boto3.client('dynamodb', aws_access_key_id='본인의 Access ID', aws_secret_access_key='본인의 Secret Access Key', region_name='리전 입력')
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;boto3로 dynamoDB에 접근하는 방식은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.resource&lt;/code&gt; 와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.client&lt;/code&gt; 두 가지 방법이 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.resource&lt;/code&gt;의 방식이 AWS의 공식 문서에 샘플로 등장하지만, 사용이 좀 더 간편한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boto3.client&lt;/code&gt; 방식을 소개하겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;parameter-설정&quot;&gt;Parameter 설정&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dynamoDB를 사용할 때는 각 row의 column에 해당하는 type을 명시해야 데이터 조작이 가능합니다.&lt;/p&gt;
-
-&lt;p&gt;자주 사용하는 type은 다음과 같습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;S: 문자열
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &quot;S&quot;: &quot;Hello&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;N: 문자열
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &quot;N&quot;: &quot;11.0&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;SS: 문자열 리스트
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &quot;SS&quot;: [ &quot;Hello&quot;, &quot;Jiho&quot; ]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;NS: 숫자 문자열 리스트
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &quot;NS&quot;: [ &quot;11.0&quot;, &quot;123.45&quot; ]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;M: key-value 형태의 Map
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &quot;M&quot;: {&quot;Name&quot;: {&quot;S&quot;: &quot;Joe&quot;}, &quot;Age&quot;: {&quot;N&quot;: &quot;35&quot;}}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;L: 다양한 타입의 List
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &quot;L&quot;: [ {&quot;S&quot;: &quot;Hello&quot;}, {&quot;S&quot;: &quot;Hello&quot;}, {&quot;S&quot;: &quot;Hello&quot;} ]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;insert&quot;&gt;Insert&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;response = dynamodb.put_item(
-    TableName='테이블 명', 
-    Item={ 
-            'column1':{ 
-                'S': 'value1' 
-            }, 
-            'column2':{
-                'S': 'value2' 
-            }
-        }
-    )
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;select&quot;&gt;Select&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;response = dynamodb.get_item(
-    TableName='string',
-    Key={
-            'column1':{ 
-                'S': 'value1'
-            }
-        }
-    )
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>전지호</name></author><category term="aws" /><category term="python" /><summary type="html">AWS에서 사용하는 대표적인 NoSQL 데이터베이스인 DynamoDB의 데이터를 Python을 사용하여 가져오는 것을 알아봅시다.</summary></entry></feed>
+&lt;p&gt;👉 &lt;a href=&quot;https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/setup-kubernetes.html&quot;&gt;zero-to-jupyterhub-on-k8s&lt;/a&gt;&lt;/p&gt;</content><author><name>전지호</name></author><category term="docker" /><category term="kubernetes" /><category term="jupyter" /><category term="aws" /><summary type="html">JupyterHub를 구축했다면 사용자 별 환경과 리소스를 구분하기 위한 설정방법을 알아봅시다.</summary></entry></feed>

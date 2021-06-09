@@ -3,7 +3,7 @@ layout: post
 title: Facial Expression 기반의 게임 경험 평가
 date: 2021-05-26 00:00:00 +0900
 author: 권승진
-tags: computervision facialexpressionrecognition
+tags: computervision
 excerpt: Facial Expression 기반의 게임 경험 평가
 use_math: false
 toc: true
